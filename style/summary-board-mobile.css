@@ -1,0 +1,105 @@
+/* Summary Mobile Components */
+.task-dashboard-mobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  background: white;
+  z-index: 1;
+  opacity: 0;
+  margin: auto;
+}
+
+.task-tile-urgent-mobile {
+  justify-content: center;
+  color: white;
+  background-color: var(--main-color);
+  border-radius: 30px;
+  display: flex;
+  gap: 16px;
+  width: 396px;
+  height: 150px;
+}
+
+.task-tile-todo-mobile {
+  background-color: var(--navi-buttons-bg);
+  gap: 12px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+  display: flex;
+  justify-content: unset;
+  align-items: center;
+  width: 396px;
+  height: 106px;
+}
+
+.task-tile-todo-mobile h5 {
+  color: var(--main-color);
+  font-weight: 400;
+}
+
+.task-tile-board-top-row-mobile {
+  display: flex;
+  justify-content: space-between;
+  width: 396px;
+  height: 152px;
+}
+
+.task-tile-board-overview-mobile {
+  gap: 7px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+  width: 186px;
+  height: 152px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.task-tile-in-progress-mobile {
+  gap: 7px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+  width: 186px;
+  height: 152px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.task-tile-board-bottom-row-mobile {
+  display: flex;
+  justify-content: space-between;
+  width: 396px;
+  height: 152px;
+}
+
+.task-tile-awaiting-feedback-mobile {
+  gap: 7px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+  width: 186px;
+  height: 152px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.task-tile-done-mobile {
+  gap: 7px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+  width: 186px;
+  height: 152px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.task-tile-urgent-title-mobile {
+  font-size: 19px;
+}

@@ -1,0 +1,376 @@
+.page-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #4589ff;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.page-wrapper.bg-white {
+  background-color: #fff;
+}
+
+.main-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1920px;
+  height: 100%;
+  max-height: 1440px;
+  pointer-events: none;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+main {
+  overflow-y: auto;
+}
+
+/* display main */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.logo-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 265px;
+  height: 323.1px;
+  transform: translate(-50%, -50%);
+  animation: moveLogo 0.3s ease-in-out forwards;
+  animation-delay: 0.5s;
+  z-index: 2;
+}
+
+/* moving logo */
+@keyframes moveLogo {
+  to {
+    top: calc((100vh - min(100vh, 1440px)) / 2 + -20px);
+    left: calc((100vw - min(100vw, 1920px)) / 2 + -5px);
+    transform: translate(0, 0) scale(0.38);
+  }
+}
+
+.logo-blue {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  animation: fadeInBlue 0.3s ease-in-out forwards;
+  animation-delay: 0.5s;
+  z-index: 1;
+}
+
+/* change logo color */
+@keyframes fadeInBlue {
+  to {
+    opacity: 1;
+  }
+}
+
+.logo-white {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+  opacity: 1;
+  z-index: 2;
+}
+
+.top-section, .bottom-section {
+  display: flex;
+  width: 100%;
+  height: 115px;
+}
+
+.top-section {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.main-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.bottom-section {
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.spacer-box {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-up-button-box, .sign-up-bottom-box {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.sign-up-button-box {
+  margin-right: 86px;
+}
+
+.sign-up-bottom-box {
+  height: 43px;
+}
+
+.sign-up-bottom-box-mobile {
+  display: none;
+  gap: 35px;
+  align-items: center;
+  height: 43px;
+  font-size: 19px;
+}
+
+.sign-up-bottom-box, .sign-up-bottom-box button {
+  font-size: 19px;
+}
+
+.login-box, .sign-up-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 39px;
+  background-color: #fff;
+  width: 652px;
+  height: 448px;
+  border-radius: 30px;
+  box-shadow: rgb(0, 0, 0, 0.08) 0px 0px 10px 3px;
+}
+
+.sign-up-box {
+  position: relative; /* Important, please keep it in */
+  height: 607px;
+}
+
+.back-arrow {
+  position: absolute;
+  top: 64px;
+  left: 48px;
+  cursor: pointer;
+}
+
+.back-arrow:hover {
+  height: 32px;
+  width: 32px;
+  content: url(../assets/icons/login/back_arrow_hover.svg);
+}
+
+.login-title-box {
+  display: flex;
+  flex-direction: column;
+ align-items: center;
+  width: 100%;
+  height: auto
+}
+
+.login-title {
+  text-align: center;
+  height: 58px;
+  font-size: 48px;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.title-border {
+  width: 150px;
+  height: 3px;
+  background-color: #4589ff;
+  border-radius: 3px;
+}
+
+.input-wrapper-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 422px;
+  transition: 0.1s;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 90%;
+  padding: 12px 21px;
+  border-bottom: 1px solid var(--style-color);
+  transition: border-color 0.2s;
+}
+
+.input-wrapper input {
+  border: none;
+  width: 100%;
+  font-size: 19px;
+}
+
+.input-wrapper:has(input:hover) {
+  border-color: var(--main-color);
+}
+
+.input-wrapper:has(input:focus) {
+  border-color: var(--main-color);
+}
+
+.input-wrapper input:focus {
+  border: none;
+  outline: none;
+}
+
+.input-wrapper input::placeholder {
+  color: var(--style-color);
+}
+
+.input-wrapper img {
+  height: 24px;
+  width: 24px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.filler {
+  height: 28px;
+  width: 100%;
+}
+
+.login-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  width: 422px;
+}
+
+.login-button-wrapper button {
+  padding: 10px 35px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.error-message {
+  justify-self: flex-start;
+  color: var(--error-color);
+  font-family: inter;
+  font-size: 18px;
+  font-weight: 400;
+  height: 24px;
+  width: 90%;
+  padding-top: 8px;
+}
+
+.links {
+  display: flex;
+  gap: 35px;
+  height: 35px;
+  align-items: center;
+  margin-bottom: 42.7px;
+}
+
+.links a {
+  color: var(--menu-color);
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: var(--main-color);
+}
+
+.page-wrapper.bg-blue .links a {
+  color: #fff;
+  transition: 0.5s;
+}
+.page-wrapper.bg-blue .links a:hover {
+  color: var(--light-blue);
+  transition: 0.1s;
+}
+
+.page-wrapper.bg-white .links a {
+  color: var(--menu-color);
+  transition: 0.1s;
+}
+.page-wrapper.bg-white .links a:hover {
+  color: var(--main-color);
+  transition: 0.1s;
+}
+
+.confirm-box {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  font-size: 16px;
+  color: var(--menu-color);
+  cursor: pointer;
+}
+
+.confirm-box img {
+  height: 24px;
+  width: 24px;
+  transition: content 0.2s ease-in-out;
+} 
+
+.confirm-box img {
+  content: url(../assets/icons/login/checkbox_default.svg);
+}
+
+.confirm-box:hover img {
+  content: url(../assets/icons/login/checkbox_hover.svg);
+}
+
+.confirm-box.checked img {
+  content: url(../assets/icons/login/checkbox_checked.svg);
+}
+
+.confirm-box.checked:hover img {
+  content: url(../assets/icons/login/check_hover_checked.svg);
+}
+
+.confirm-box a {
+  font-size: 16px;
+  text-decoration: none;
+  color: var(--light-blue);
+}
+
+.slide-in-banner {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  padding: 23px;
+  gap: 16px;
+  background-color: var(--main-color);
+  border-radius: 20px;
+  opacity: 0;
+  transition: bottom 0.5s ease, opacity 0.5s ease;
+  z-index: 3;
+}
+
+.slide-in-banner.visible {
+  bottom: 50%;  
+  opacity: 1;
+  z-index: 10;
+}
+

@@ -1,0 +1,333 @@
+/* Task Overlay */
+.task-overlay-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.task-overlay {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  gap: 24px;
+  background-color: #fff;
+  bottom: -100%;
+  left: 50%;
+  max-height: 90vh;
+  transform: translate(-50%, 50%);
+  width: 528px;
+  max-width: 90vw;
+  border-radius: 30px;
+  box-shadow: rgb(0, 0, 0, 0.16) 0px 0px 4px 0px;
+  overflow: hidden;
+}
+
+.task-overlay-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+  padding: 48px 40px;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.task-overlay.animate-in {
+  animation: showTaskOverlay 0.3s ease-in-out forwards;
+}
+
+@keyframes showTaskOverlay {
+  from {
+    bottom: -100%;
+  }
+
+  to {
+    bottom: 50%;
+  }
+}
+
+.task-overlay.animate-out {
+  animation: hideTaskOverlay 0.3s ease-in-out forwards;
+}
+
+@keyframes hideTaskOverlay {
+  from {
+    bottom: 50%;
+  }
+
+  to {
+    bottom: -100%;
+  }
+}
+
+.label-exit-box {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.label-exit-box span {
+  padding: 4px 24px;
+  border-radius: 8px;
+  font-size: 23px;
+  color: #fff;
+}
+
+.overlay-exit-button {
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+}
+
+.overlay-exit-button:hover {
+  content: url(../assets/icons/board/exit_hover.svg);
+}
+
+.task-overlay-title {
+  font-size: 48px;
+  font-weight: 700;
+  word-wrap: break-word;
+  flex-shrink: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  min-height: 75px;
+}
+
+.task-text {
+  min-height: 30px;
+  max-height: 100px;
+  overflow: auto;
+}
+
+.due-date-box {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.due-date-box span,
+.priority-box span {
+  font-size: 21px;
+}
+
+b {
+  color: var(--menu-color);
+}
+
+.priority-box {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.priority {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.assigned-to {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.members {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+  gap: 12px;
+  min-height: 0;
+  overflow-y: auto;
+  flex: 0 1 auto;
+}
+
+.member {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  gap: 8px;
+}
+
+.member span {
+  color: var(--menu-color);
+}
+
+.subtasks-check-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.subtask {
+  display: flex;
+  align-items: center;
+  padding: 6px 16px;
+}
+
+.delete-edit-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.subtask label {
+  cursor: pointer;
+  display: flex;
+  gap: 16px;
+  font-size: 16px;
+}
+
+.subtask label:hover {
+  cursor: pointer;
+}
+
+
+.button-box-delete,
+.button-box-edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.button-box-delete {
+  width: 91px;
+}
+
+.button-box-edit {
+  width: 71px;
+}
+
+.icon-hover-filter {
+  transition: filter 0.2s ease;
+}
+
+#delete-task-btn:hover .icon-hover-filter,
+#edit-task-btn:hover .icon-hover-filter {
+  filter: drop-shadow(0 0 0.7px var(--light-blue));
+}
+
+#delete-task-btn:hover span,
+#edit-task-btn:hover span {
+  color: var(--light-blue);
+  font-weight: 700;
+}
+
+.subtasks-ckeck-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.subtasks-container {
+  max-height: 105px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.add-task-button {
+  display: flex;
+  height: 100px;
+  align-items: flex-end;
+}
+
+.edit-task-content {
+  /* take remaining height within the overlay */
+  flex: 1;
+  /* critical so the child can shrink and enable scrolling */
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.task-list {
+  scrollbar-width: none;
+}
+
+.task-list::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Global scrollbar styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #A8A8A8;
+  border-radius: 6px;
+  border: 2px solid #fff;
+}
+
+/* Hide scrollbars only for .task-list */
+.task-list::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.task-list {
+  scrollbar-width: none;
+}
+
+.addtask-wrapper {
+  height: 100%;
+}
+
+.edit-addtask {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.edit-close-btn {
+  display: flex;
+  padding: 24px 24px 0 0;
+  justify-content: flex-end;
+}
+
+.edit-close-btn img {
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+}
+
+.edit-close-btn img:hover {
+  content: url(../assets/icons/board/close_hover.svg);
+}
+
+.edit-addtask-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  align-items: space-between;
+}
+
+.ok-btn-box {
+  display: flex;
+  padding: 24px;
+  justify-content: end;
+}
+
+.ok-button {
+  display: flex;
+  width: 50px;
+}

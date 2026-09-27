@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
+    <title>Legal Notice</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/general_elements/icons/logo_blue_icon.svg"
+      type="image/x-icon"
+    />
+
+    <link rel="stylesheet" href="./style/sidebar.css" />
+    <link rel="stylesheet" href="./style/header.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style/legal-notice.css" />
+    <link rel="stylesheet" href="./style/footer-nav.css" />
+    <link rel="stylesheet" href="./style/responsiv.css" />
+    <link rel="stylesheet" href="./style/reponsiv-legal-notice.css" />
+    <link rel="prerender" href="/summary-board.html" />
+    <link rel="prerender" href="./board.html" />
+    <link rel="prerender" href="./addtask.html" />
+    <link rel="prerender" href="./contact.html" />
+
+    <script src="./script.js" defer></script>
+  </head>
+
+  <body>
+    <header>
+      <div class="header-box">
+        <a href="./index.html"
+          ><img src="./assets/icons/header/logo_white.svg"
+        /></a>
+        <nav>
+          <p>Kanban Project Management Tool</p>
+          <a href="help.html"
+            ><img
+              class="help"
+              src="./assets/icons/header/help.svg"
+              alt="Help Icon"
+          /></a>
+          <div id="person-icon-header" class="person-icon-header">
+            <svg
+              width="56"
+              height="56"
+              class="circle-badge"
+              onclick="event.stopPropagation(); toggleProfileNavbar()"
+            >
+              <circle cx="28" cy="28" r="26.5" class="circle-ring"></circle>
+              <circle cx="28" cy="28" r="23.06" class="circle-fill"></circle>
+              <text
+                id="person-icon-header-text"
+                x="28"
+                y="31"
+                class="circle-text"
+              >
+                
+              </text>
+            </svg>
+          </div>
+        </nav>
+        <div class="profile-navbar d-none" id="profile-navbar">
+          <div class="profile-navbar-box">
+            <a class="profile-navbar-help" href="./help.html">Help</a>
+            <a href="./legal-notice.html">Legal Notice</a>
+            <a href="./privacy-policy.html">Privacy Policy</a>
+            <a href="#" data-logout>Log out</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="sidebar">
+        <div class="nav-login-box">
+          <a href="./index.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/Menu Icons.svg"
+              alt="Button Summary Board"
+            />Log In</a
+          >
+        </div>
+        <div class="nav d-none">
+          <a href="./summary-board.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/summary.svg"
+              alt="Button Summary Board"
+          />Summary</a>
+          <a href="addtask.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/add task.svg"
+              alt="Button Add Task"
+          />Add Task</a>
+          <a href="board.html" class="nav-bg"
+            ><img src="./assets/icons/sidebar/board.svg" alt="Button-Board"
+          />Board</a>
+          <a href="contact.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/contacts.svg"
+              alt="Button Contact"
+          />Contacts</a>
+        </div>
+        <div class="sidebar-links">
+          <a href="./privacy-policy.html">Privacy Policy</a>
+          <a class="active" href="./legal-notice.html">Legal notice</a>
+        </div>
+      </section>
+
+      <section class="legal-wrapper">
+        <div class="legal-notice-content">
+          <div class="help-headline-container">
+            <h1>Legal Notice</h1>
+            <a
+              class="help-a-tag-back-button"
+              href="#"
+              onclick="history.back(); return false;"
+            >
+              <img src="./assets/general_elements/icons/arrow_left.svg" />
+            </a>
+          </div>
+
+          <h4 class="text-main-color">Imprint</h4>
+          <p>
+            David Eisenbarth, Dieter Foos<br />
+            Hauptstraße 1a<br />
+            37339 Berlingerode
+          </p>
+
+          <h4 class="text-main-color">Contact</h4>
+          <p>
+            Phone: 0151/22264080<br />
+            Email: davideisenbarth@gmail.com
+          </p>
+          <h4 class="text-main-color">Acceptance of Terms</h4>
+          <p>
+            By accessing and using
+            <a class="legal-notice-a-tag-style" href="./index.html">Join</a>
+            (Product), you acknowledge and agree to the following terms and
+            conditions, and any policies, guidelines, or amendments thereto that
+            may be presented to you from time to time. We, the listed students,
+            may update or change the terms and conditions from time to time
+            without notice.
+          </p>
+
+          <h4 class="text-main-color">Scope and Ownership of the Product</h4>
+          <p>
+            <a class="legal-notice-a-tag-style" href="./index.html">Join</a> has
+            been developed as part of a student group project in a web
+            development bootcamp at the
+            <a
+              class="legal-notice-a-tag-style"
+              href="https://developerakademie.com/"
+              target="_blank"
+              >Developer Akademie</a
+            >
+            GmbH. It has an educational purpose and is not intended for
+            extensive personal & business usage. As such, we cannot guarantee
+            consistent availability, reliability, accuracy, or any other aspect
+            of quality regarding this Product.
+          </p>
+          <p>
+            The design of
+            <a class="legal-notice-a-tag-style" href="./index.html">Join</a> is
+            owned by the
+            <a
+              class="legal-notice-a-tag-style"
+              href="https://developerakademie.com/"
+              target="_blank"
+              >Developer Akademie</a
+            >
+            GmbH. Unauthorized use, reproduction, modification, distribution, or
+            replication of the design is strictly prohibited.
+          </p>
+
+          <h4 class="text-main-color">Proprietary Rights</h4>
+          <p>
+            Aside from the design owned by
+            <a
+              class="legal-notice-a-tag-style"
+              href="https://developerakademie.com/"
+              target="_blank"
+              >Developer Akademie</a
+            >
+            GmbH, we, the listed students, retain all proprietary rights in
+            <a class="legal-notice-a-tag-style" href="./index.html">Join</a>,
+            including any associated copyrighted material, trademarks, and other
+            proprietary information.
+          </p>
+
+          <h4 class="text-main-color">Use of the Product</h4>
+          <p>
+            <a class="legal-notice-a-tag-style" href="./index.html">Join</a> is
+            intended to be used for lawful purposes only, in accordance with all
+            applicable laws and regulations. Any use of
+            <a class="legal-notice-a-tag-style" href="./index.html">Join</a> for
+            illegal activities, or to harass, harm, threaten, or intimidate
+            another person, is strictly prohibited. You are solely responsible
+            for your interactions with other users of
+            <a class="legal-notice-a-tag-style" href="./index.html">Join</a>.
+          </p>
+
+          <h4 class="text-main-color">
+            Disclaimer of Warranties and Limitation of Liability
+          </h4>
+          <p>
+            <a class="legal-notice-a-tag-style" href="./index.html">Join</a> is
+            provided "as is" without warranty of any kind, whether express or
+            implied, including but not limited to the implied warranties of
+            merchantability, fitness for a particular purpose, and
+            non-infringement. In no event will we, the listed students, or the
+            <a
+              class="legal-notice-a-tag-style"
+              href="https://developerakademie.com/"
+              target="_blank"
+              >Developer Akademie</a
+            >, be liable for any direct, indirect, incidental, special,
+            consequential or exemplary damages, including but not limited to,
+            damages for loss of profits, goodwill, use, data, or other
+            intangible losses, even if we have been advised of the possibility
+            of such damages, arising out of or in connection with the use or
+            performance of
+            <a class="legal-notice-a-tag-style" href="./index.html">Join</a>.
+          </p>
+
+          <h4 class="text-main-color">Indemnity</h4>
+          <p>
+            You agree to indemnify, defend and hold harmless us, the listed
+            students, the
+            <a
+              class="legal-notice-a-tag-style"
+              href="https://developerakademie.com/"
+              target="_blank"
+              >Developer Akademie</a
+            >, and our affiliates, partners, officers, directors, agents, and
+            employees, from and against any claim, demand, loss, damage, cost,
+            or liability (including reasonable legal fees) arising out of or
+            relating to your use of
+            <a class="legal-notice-a-tag-style" href="./index.html">Join</a>
+            and/or your breach of this Legal Notice.
+          </p>
+
+          <h4 class="text-main-color">Contact</h4>
+          <p>
+            For any questions or notices, please contact us at
+            <a class="legal-notice-a-tag-style" href="mailto:[Contact Email]"
+              >davideisenbarth@gmail.com</a
+            >.
+          </p>
+
+          <p><strong>Date:</strong> July 27, 2025</p>
+        </div>
+      </section>
+    </main>
+    <footer class="nav-mobile">
+      <div class="nav-box d-none">
+        <a href="./summary-board.html"
+          ><img
+            src="./assets/icons_mobile/summary_default.svg"
+            alt="Summary Board Icon"
+        /></a>
+        <a href="./addtask.html"
+          ><img
+            src="./assets/icons_mobile/add_taks_default.svg"
+            alt="Add Task Icon"
+        /></a>
+        <a href="./board.html"
+          ><img src="./assets/icons_mobile/board_default.svg" alt="Board Icon"
+        /></a>
+        <a href="./contact.html"
+          ><img
+            src="./assets/icons_mobile/contacts_default.svg"
+            alt="Contact Icon"
+        /></a>
+      </div>
+
+      <div class="nav-login-box-mobile">
+        <a href="./index.html" class="nav-bg"
+          ><img
+            src="./assets/icons/sidebar/Menu Icons.svg"
+            alt="Log In Button"
+          />Log In</a
+        >
+        <div class="sidebar-links">
+          <a href="./privacy-policy.html">Privacy Policy</a>
+          <a class="active" href="./legal-notice.html">Legal notice</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

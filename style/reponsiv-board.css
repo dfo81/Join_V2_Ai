@@ -1,0 +1,381 @@
+@media (max-width: 1450px) {
+    .input-button-box {
+        margin: 72px 20px;
+    }
+
+    .board-content {
+        padding: 0 20px;
+        justify-content: normal;
+        gap: 12px;
+    }
+
+    .bar {
+        padding: 18px 20px;
+        gap: 12px;
+    }
+}
+
+/* Board Overlay Media Queries */
+@media (max-width: 900px) {
+    .overlay-add-task {
+        height: calc(100vh - 207px);
+        position: absolute;
+        top: 100px;
+        left: 0;
+    }
+
+    .cancel-button {
+        display: flex;
+    }
+
+    .overlay-create-task {
+        justify-content: center;
+    }
+
+    .add-task-button {
+        height: auto;
+        flex-direction: unset;
+    }
+
+    .add-task-overlay-content {
+        height: calc(100vh - 207px);
+        width: 100vw;
+        animation: none;
+        position: absolute;
+        left: 0;
+        border-radius: 0;
+    }
+
+    .add-task-overlay-head {
+        display: none;
+    }
+
+    .addtask-wrapper {
+        padding: 20px 0 0 20px;
+    }
+
+    .addtask-main-content {
+        width: calc(100% - 20px);
+    }
+
+    .priority-wrapper,
+    .assigned-box,
+    .category-box,
+    .subtask-box {
+        width: calc(100% - 20px);
+    }
+
+    .description {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .addtask-aside-clone {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .addtask-main-content textarea {
+        width: 100%;
+    }
+}
+
+@media (max-width: 720px) {
+    .overlay-add-task {
+        top: 84px;
+        height: calc(100vh - 171px);
+    }
+
+    .add-task-overlay-content {
+        height: calc(100vh - 171px);
+    }
+}
+
+@media (max-width: 550px) {
+    .base-button {
+        font-size: 16px;
+    }
+
+    .overlay-add-task span {
+        font-size: 16px;
+    }
+
+    .overlay-add-task input {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 375px) {
+    .create-button {
+        padding: 8px 8px;
+    }
+
+    .cancel-button {
+        padding: 8px 8px;
+    }
+}
+
+@media (max-width: 1350px) {
+    .board-content {
+        transform: scale(0.92);
+        transform-origin: left top;
+    }
+
+    .bar {
+        transform: scale(0.92);
+        transform-origin: left top;
+    }
+}
+
+@media (min-width: 1250px) {
+    .column-title-mobile {
+        display: none;
+    }
+
+    .plus-minus-img {
+        display: none;
+    }
+}
+
+@media (max-width: 1250px) {
+    .board-content {
+        transform: scale(1);
+        transform-origin: center top;
+        flex-direction: column;
+        overflow-y: auto;
+        gap: 24px;
+    }
+
+    .bar {
+        display: none;
+    }
+
+    .column-title-mobile {
+        display: flex;
+    }
+
+    .column {
+        height: auto;
+    }
+
+    .board {
+        width: 100%;
+    }
+
+    .column {
+        width: 100%;
+    }
+
+
+    .column-title-mobile {
+        width: 100%;
+        padding: 0;
+    }
+
+    .column-title {
+        width: 100%;
+        padding: 0;
+    }
+
+    .no-tasks {
+        width: 100%;
+    }
+
+    .board {
+        width: calc(100vw - 232px);
+    }
+
+    .task-list {
+        flex-direction: row;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        padding: 8px;
+        width: 100%;
+        align-items: flex-start;
+        height: 100%;
+    }
+
+    .ticket {
+        flex-shrink: 0;
+        width: 252px;
+    }
+
+    .plus-minus-img {
+        display: flex;
+    }
+}
+
+@media (max-width: 1025px) {
+    .board {
+        width: calc(100vw - 150px);
+    }
+}
+
+@media (max-width: 900px) {
+    .board {
+        width: 100%;
+    }
+
+    .board-content {
+        width: 100%;
+        height: calc(100vh - 100px - 152px - 107px);
+    }
+
+    .input-button-box .button-blue {
+        display: none;
+    }
+
+    .input-wrapper {
+        width: 100%;
+    }
+
+    .input-button-box {
+        margin: 72px 20px 30px 20px;
+    }
+
+    .add-task-overlay-content {
+        height: calc(100vh - 207px);
+        width: 100vw;
+        animation: none;
+        position: absolute;
+        left: 0;
+        border-radius: 0;
+        overflow: auto;
+    }
+
+    .add-task-overlay-head {
+        display: none;
+    }
+
+    .addtask-wrapper {
+        padding: 20px 0 0 20px;
+    }
+
+    .addtask-main-content {
+        width: calc(100% - 20px);
+    }
+
+    .description {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .addtask-aside-clone {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .addtask-main-content textarea {
+        width: 100%;
+    }
+}
+
+@media (max-height: 900px) {
+    .user-story, .technical-task {
+        font-size: 16px;
+    }
+
+    .task-overlay-content span {
+        font-size: 16px;
+    }
+
+    .task-overlay-title {
+        font-size: 32px;
+    }
+
+    .task-text {
+        min-height: 52px;
+        scrollbar-width: thin;
+    }
+
+    .subtasks-container {
+        max-height: 60px;
+    }
+
+    .task-overlay-content {
+        padding: 30px;
+    }
+}
+
+@media (max-height: 755px) {
+    .input-button-box {
+        margin: 35px 20px 30px 20px;
+    }
+
+    .board-content {
+        height: calc(100vh - 49px - 152px - 87px);
+    }
+}
+
+@media (max-width: 720px) {
+    .add-task-overlay-content {
+        height: calc(100vh - 171px);
+    }
+
+    .board-content {
+        height: calc(100vh - 84px - 152px - 87px);
+    }
+    .prio-buttons {
+    gap: 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    .addtask-main-content textarea {
+        width: 100%;
+    }
+
+    .addtask-wrapper {
+        min-width: auto;
+    }
+
+    .task-overlay-title {
+        font-size: 36px;
+    }
+    .member span {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 550px) {
+    .overlay-add-task span {
+        font-size: 16px;
+    }
+
+    .overlay-add-task input {
+        font-size: 16px;
+    }
+    .addtask-title {
+        font-size: 20px !important;
+    }
+}
+
+@media (max-width: 470px) {
+    .user-story, .technical-task {
+        font-size: 16px;
+    }
+    .priority-button {
+        padding: 2px;
+        height: 40px;
+    }
+    .priority-button img {
+        height: 12px;
+        width:12px;
+    }
+    .priority-button.active {
+        font-size: 16px;
+        height: 41px;
+    }
+}
+
+@media (max-width: 375px) {
+    .cancel-button {
+        padding: 8px 8px;
+    }
+
+    .create-button {
+        padding: 8px 8px;
+    }
+}

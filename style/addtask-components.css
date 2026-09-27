@@ -1,0 +1,329 @@
+/* AddTask Interactive Components */
+.assigned-box, .category-box {
+  width: 440px;
+}
+
+.assigned-select-box {
+  display: flex;
+  cursor: pointer;
+  padding: 12px 16px;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--style-color);
+  scrollbar-width: 0px;
+}
+
+#contact-input::placeholder,
+#edit-contact-input::placeholder {
+  color: #000;
+}
+
+.assigned-select-box input {
+  border: none;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.assigned-select-box:hover,
+.assigned-select-box:has(input:focus) {
+  border-color: var(--main-color);
+}
+
+.arrow-down {
+  content: url(../assets/icons/add_task/arrow_down_default.svg);
+}
+.arrow-up {
+  content: url(../assets/icons/add_task/arrow_up_default.svg);
+}
+.arrow-down:hover {
+  content: url(../assets/icons/add_task/arrow_down_hover.svg);
+}
+.arrow-up:hover {
+  content: url(../assets/icons/add_task/arrow_up_hover.svg);
+}
+
+.contact-list-box {
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  overflow-y: auto;
+}
+
+li {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 16px;
+  border-radius: 10px;
+  color: #000;
+}
+
+li div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+li:hover {
+  background-color: var(--navi-buttons-bg);
+}
+
+li:active {
+  background-color: var(--light-blue);
+  color: #fff;
+}
+
+li.selected {
+  background-color: var(--main-color) !important;
+  color: white;
+}
+
+li.selected:hover {
+  background-color: var(--light-blue) !important;
+}
+
+.contact-initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  height: 40px;
+  color: #fff;
+  background-size: cover;
+  font-size: 14px;
+  flex-shrink: 0;
+  width: 40px;
+  border: 2px solid #fff;
+}
+
+.contact-initials {
+  display: flex;
+  gap: 8px;
+  max-height: 80px;
+  max-width: 100%;
+  margin-top: 12px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.assigned-plus-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: var(--main-color);
+  font-size: 16px;
+  border: 2px solid white;
+}
+
+.contact-initials-icon {
+  background-color: var(--main-color);
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+.category-select-box {
+  display: flex;
+  justify-content: space-between;
+  color: var(--style-color);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--style-color);
+  cursor: pointer;
+}
+
+#contact-list-box li img {
+  width: 24px;
+  height: 24px;
+  align-self: center;
+}
+ 
+span {
+  font-size: 19px;
+}
+
+.category-select-box span {
+  color: #000;
+}
+
+.category-select-box:hover {
+  border-bottom: 1px solid var(--main-color);
+}
+
+.subtask-box {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+}
+
+.subtask-select {
+  display: flex;
+  cursor: pointer;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--style-color);
+}
+
+.subtask-select:hover {
+  border-color: var(--main-color);
+}
+
+.subtask-select input {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.subtask-select ::placeholder {
+  color: var(--style-color);
+}
+
+.subtask-plus-box img:hover {
+  content: url(../assets/icons/add_task/add\ hover.svg);
+}
+
+.subtask-func-btn, .subtask-plus-box {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+} 
+
+.vertical-spacer {
+  border: 1px solid var(--style-color);
+  height: 18px;
+}
+
+.sub-clear:hover {
+  content: url(../assets/icons/add_task/sub_clear_hvr.svg);
+}
+
+.sub-check:hover {
+  content: url(../assets/icons/add_task/sub_check_hvr.svg);
+}
+
+.sub-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.subtask-edit-input {
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.subtask-edit-icon:hover {
+  content: url(../assets/icons/add_task/edit_hover.svg);
+}
+
+.subtask-delete-icon:hover {
+  content: url(../assets/icons/add_task/delete_hover.svg);
+}
+
+.subtask-save-icon:hover {
+  content: url(../assets/icons/add_task/sub_check_hvr.svg);
+}
+
+.subtask-edit-input.active {
+  background-color: white;
+  border: none;
+  outline: none;
+  width: 100%; 
+  box-sizing: border-box; /
+}
+
+.subtask-item.editing {
+  background-color: white;
+  border-radius: 0;
+  border-bottom: 1px solid var(--main-color);
+}
+
+.subtask-item.editing .subtask-func-btn {
+  display: flex;
+}
+
+.subtask-item:active {
+  background-color: #fff;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.date-input {
+  position: relative;
+  display: inline-block;
+}
+
+.date-input input[type="date"] {
+  padding-right: 30px; 
+}
+
+.date-input::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: url("../assets/icons/add_task/event.svg") no-repeat center;
+  background-size: contain;
+  pointer-events: none; 
+}
+
+/* Usage in HTML:
+   <div class="date-input" id="datepicker-wrapper" data-placeholder="dd/mm/yyyy">
+     <input type="date" id="datepicker" required />
+   </div>
+*/
+
+/* --- Date input: custom placeholder overlay (requires input[required]) --- */
+.date-input {
+  position: relative; /* ensure positioning context for ::before */
+}
+
+/* Show placeholder text pulled from wrapper attribute: data-placeholder="dd/mm/yyyy" */
+.date-input::before {
+  content: attr(data-placeholder);
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--style-color);
+  pointer-events: none; /* don't block clicks */
+  font-size: inherit;
+  line-height: 1;
+}
+
+/* Hide fake placeholder when focusing the input or when it has a valid value */
+.date-input:has(input[type="date"]:focus)::before,
+.date-input:has(input[type="date"]:valid)::before {
+  content: "";
+}
+
+/* Make the native date text transparent until a value is chosen, so placeholder is visible */
+.date-input input[type="date"] {
+  color: transparent;
+}
+.date-input input[type="date"]:focus,
+.date-input input[type="date"]:valid {
+  color: initial;
+}

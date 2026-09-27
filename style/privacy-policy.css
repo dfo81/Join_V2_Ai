@@ -1,0 +1,29 @@
+.policy-wrapper {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.privacy-policy-content {
+    padding: 72px 88px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 1440px;
+    overflow: auto;
+}
+
+h4 {
+    color: var(--main-color);
+}
+
+.help-a-tag-back-button {
+    display: none;
+    width: 37px;
+    height: 37px;
+}
+
+.help-a-tag-back-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

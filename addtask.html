@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
+    <title>Join - Add Task</title>
+
+    <link
+      rel="shortcut icon"
+      href="./assets/general_elements/icons/logo_blue_icon.svg"
+      type="image/x-icon"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style/login.css" />
+    <link rel="stylesheet" href="./style/responsiv-login.css" />
+    <link rel="stylesheet" href="./style/header.css" />
+    <link rel="stylesheet" href="./style/addtask-form.css" />
+    <link rel="stylesheet" href="./style/addtask-components.css" />
+    <link rel="stylesheet" href="./style/sidebar.css" />
+    <link rel="stylesheet" href="./style/footer-nav.css" />
+    <link rel="stylesheet" href="./style/responsiv.css" />
+    <link rel="stylesheet" href="./style/reponsiv-addtask.css" />
+    <link rel="prerender" href="/summary-board.html" />
+    <link rel="prerender" href="./board.html" />
+    <link rel="prerender" href="./addtask.html" />
+    <link rel="prerender" href="./contact.html" />
+    
+    <script src="./script.js"></script>
+    <script src="./scripts/addtask/addtask.module.js" type="module"></script>
+    <script src="./scripts//templates.js" defer></script>
+    <script src="./scripts/addtask/addtask.js" defer></script>
+    <script src="./scripts/addtask/addtask.subtasks.js"></script>
+    <script src="./scripts/addtask/addtask.contacts.js"></script>
+    <script src="./scripts/addtask/addtask.ui.js"></script>
+    <script src="./scripts/addtask/addtask.validation.js"></script>
+    <script src="./scripts/addtask/addtask.event.js"></script>
+</head>
+
+  <body onclick="closeProfileNavbar()">
+    <header>
+      <div class="header-box">
+        <a href="./index.html">
+          <img
+            src="./assets/general_elements/icons/logo_white_icon.svg"
+            alt="Logo Join"
+          />
+        </a>
+        <nav>
+          <p>Kanban Project Management Tool</p>
+          <a href="help.html">
+            <img
+              class="help"
+              src="./assets/icons/header/help.svg"
+              alt="Help Icon"
+            />
+          </a>
+          <div id="person-icon-header" class="person-icon-header">
+            <svg
+              width="56"
+              height="56"
+              class="circle-badge"
+              onclick="event.stopPropagation(); toggleProfileNavbar()"
+            >
+              <circle cx="28" cy="28" r="26.5" class="circle-ring"></circle>
+              <circle cx="28" cy="28" r="23.06" class="circle-fill"></circle>
+              <text
+                id="person-icon-header-text"
+                x="28"
+                y="31"
+                class="circle-text"
+              ></text>
+            </svg>
+          </div>
+        </nav>
+        <div class="profile-navbar d-none" id="profile-navbar">
+          <div class="profile-navbar-box">
+            <a class="profile-navbar-help" href="./help.html">Help</a>
+            <a href="./legal-notice.html">Legal Notice</a>
+            <a href="./privacy-policy.html">Privacy Policy</a>
+            <a href="#" data-logout>Log out</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <!-- section sidebar -->
+      <section class="sidebar">
+        <div class="nav">
+          <a href="./summary-board.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/summary.svg"
+              alt="Button Summary Board"
+            />Summary</a
+          >
+          <a href="addtask.html" class="nav-bg active"
+            ><img
+              src="./assets/icons/sidebar/add task.svg"
+              alt="Button Add Task"
+            />Add Task</a
+          >
+          <a href="board.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/board.svg"
+              alt="Button-Board"
+            />Board</a
+          >
+          <a href="contact.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/contacts.svg"
+              alt="Button Contact"
+            />Contacts</a
+          >
+        </div>
+        <div class="sidebar-links">
+          <a href="./privacy-policy.html">Privacy Policy</a>
+          <a href="./legal-notice.html">Legal notice</a>
+        </div>
+      </section>
+      <!-- section addtask -->
+
+      <section class="addtask-wrapper">
+        <!-- addtask template-->
+      </section>
+
+      <!-- section addtask buttons -->
+      <section class="section-addtask-buttons">
+        <div class="add-task-button">
+          <div
+            id="cancel-button"
+            class="cancel-button base-button button-hollow button-regular"
+          >
+            Clear
+            <img
+              src="./assets/icons/add_task/cancel_default.svg"
+              alt="Clear Icon"
+            />
+          </div>
+          <div
+            id="create-button"
+            class="create-button base-button button-blue button-regular"
+          >
+            Create task
+            <img
+              src="./assets/icons/add_task/check.svg"
+              alt="Create Task Icon"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- section footer -->
+    <footer class="nav-mobile">
+      <div class="nav-box">
+        <a href="./summary-board.html"
+          ><img
+            src="./assets/icons_mobile/summary_default.svg"
+            alt="Summary Board Icon"
+        /></a>
+        <a href="./addtask.html"
+          ><img
+            src="./assets/icons_mobile/add_task_active.svg"
+            alt="Add Task Icon"
+        /></a>
+        <a href="./board.html"
+          ><img src="./assets/icons_mobile/board_default.svg" alt="Board Icon"
+        /></a>
+        <a href="./contact.html"
+          ><img
+            src="./assets/icons_mobile/contacts_default.svg"
+            alt="Contact Icon"
+        /></a>
+      </div>
+    </footer>
+    <div class="overlay-bg" id="overlay-bg"></div>
+    <div id="slide-in-banner" class="slide-in-banner">
+      Task added to board
+      <img src="./assets/icons/add_task/board_white.svg" alt="Add Task Icon" />
+    </div>
+  </body>
+</html>

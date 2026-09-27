@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+  <meta http-equiv="Permissions-Policy" content="unload=*" />
+  
+  <title>Join App</title>
+  <link rel="shortcut icon" href="./assets/icons/login/logo_blue.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./style/login.css" />
+  <link rel="stylesheet" href="./style/responsiv-login.css" />
+  <link rel="prerender" href="/summary-board.html">
+  <link rel="prerender" href="./board.html">
+  <link rel="prerender" href="./addtask.html">
+  <link rel="prerender" href="./contact.html">
+
+  <script src="./scripts/login/login.js" defer></script>
+  <script src="./scripts/login/login.module.js" type="module"></script>
+</head>
+
+<body>
+  <div class="page-wrapper" id="layout">
+    <!-- logo box postion absolute -->
+    <div class="logo-wrapper" id="logo-wrapper">
+      <img id="logo-white" class="logo-white" src="./assets/icons/login/logo_white.svg" alt="Logo" />
+      <img id="logo-blue" class="logo-blue" src="./assets/icons/login/logo_blue.svg" alt="Logo" />
+    </div>
+
+    <!-- main page -->
+    <main class="main-page">
+      <!-- top section -->
+      <section class="top-section">
+        <div class="sign-up-button-box" id="sign-up-top-right-box">
+          Not a join user?
+          <button id="sign-up-page-button" class="base-button button-blue button-small">
+            Sign up
+          </button>
+        </div>
+      </section>
+
+      <!-- spacer -->
+      <div class="spacer-box"></div>
+
+      <section class="main-section">
+        <!-- Login box template -->
+        <div class="login-box" id="login-box">
+          <div class="login-title-box">
+            <div class="login-title">Log in</div>
+            <div class="title-border"></div>
+          </div>
+
+          <div class="input-wrapper-box">
+            <div class="input-wrapper">
+              <input type="email" placeholder="Email" id="login-email" />
+              <img src="./assets/icons/login/mail.svg" alt="Mail Icon" />
+            </div>
+
+            <div class="filler"></div>
+
+            <div class="input-wrapper">
+              <input type="password" placeholder="Password" id="login-password" />
+              <img id="togglePassword" src="./assets/icons/login/lock.svg" alt="Lock Icon" />
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+          </div>
+
+          <!-- Log in & Guest buttons-->
+          <div class="login-button-wrapper">
+            <button class="base-button button-blue button-small" id="login-button">
+              Log in
+            </button>
+            <button class="base-button button-hollow button-small" id="guest-button">
+              Guest log in
+            </button>
+          </div>
+        </div>
+
+        <!-- Sign up box template -->
+        <div class="sign-up-box d-none" id="sign-up-box">
+          <img id="go-back" class="back-arrow" src="./assets/icons/login/back_arrow_default.svg"
+            alt="Back Arrow Icon" />
+
+          <div class="login-title-box">
+            <div class="login-title">Sign up</div>
+            <div class="title-border"></div>
+          </div>
+
+          <div class="input-wrapper-box">
+            <div class="input-wrapper">
+              <input type="text" placeholder="Name" id="name" />
+              <img src="./assets/icons/login/person.svg" alt="Person Icon" />
+            </div>
+
+            <div class="filler"></div>
+
+            <div class="input-wrapper">
+              <input type="email" placeholder="Email" id="sign-up-email" />
+              <img src="./assets/icons/login/mail.svg" alt="Mail Icon" />
+            </div>
+
+            <div class="filler"></div>
+
+            <div class="input-wrapper">
+              <input id="sign-up-password" type="password" placeholder="Password" />
+              <img id="toggle-sign-up-password" src="./assets/icons/login/lock.svg" alt="Lock Icon" />
+            </div>
+
+            <div class="filler"></div>
+
+            <div class="input-wrapper">
+              <input id="confirm-password" type="password" placeholder="Confirm Password" />
+              <img id="toggle-confirm-password" src="./assets/icons/login/lock.svg" alt="Lock Icon" />
+            </div>
+
+            <div class="error-message" id="error-sign-up"></div>
+
+            <div class="confirm-box" id="confirm">
+              <img src="./assets/icons/login/checkbox_default.svg" alt="Check Box" />
+              I accept the
+              <a href="./privacy-policy.html"> Privacy policy </a>
+            </div>
+          </div>
+
+          <!-- Sign up button -->
+          <div class="login-button-wrapper">
+            <button class="sign-up-button base-button button-blue button-small" id="sign-up-button">
+              Sign up
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- spacer -->
+      <div class="spacer-box">
+        <!-- sig up button box mobile -->
+        <div class="sign-up-bottom-box-mobile" id="sign-up-bottom-box-mobile">
+          Not a join user?
+          <button class="base-button button-blue button-small" id="sign-up-bottom-button">
+            Sign up
+          </button>
+        </div>
+      </div>
+
+      <!-- bottom section -->
+      <section class="bottom-section">
+        <!-- links -->
+        <div class="links" id="links">
+          <a href="./privacy-policy.html">Privacy Policy</a>
+          <a href="./legal-notice.html">Legal Notice</a>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div id="slide-in-banner" class="slide-in-banner">
+    You Signed Up successfully
+  </div>
+</body>
+
+</html>

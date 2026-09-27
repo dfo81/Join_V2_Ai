@@ -1,0 +1,227 @@
+/* AddTask Form Components */
+.overlay-bg {
+  position: absolute;
+  top: 0;
+  left: 0;;
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 100vh;
+    width: 100%;
+  display: none;
+}
+
+.addtask-wrapper {
+  height: calc(100vh - 136px);
+  gap: 12px;
+  min-width: 472px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #fff;
+}
+
+.addtask-main-content {
+  box-sizing: border-box;
+  display: flex;
+  height: auto;
+  flex-direction: column;
+  width: 440px;
+}
+
+.addtask-title {
+  box-sizing: border-box;
+  font-size: 32px;
+  padding: 13px 16px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--style-color);
+  width: 100%;
+  gap: 4px;
+}
+
+* {
+  font-size: 19px;
+}
+
+.addtask-title:hover {
+  border-color: var(--main-color);
+}
+
+.addtask-main-content input:focus {
+  border-color: var(--main-color);
+}
+
+.addtask-error {
+  height: 16px;
+  font-family: inter;
+  font-size: 16px;
+  width: 100%;
+  color: var(--error-color);
+}
+
+.label-main {
+  font-weight: 700;
+  color: var(--menu-color);
+}
+
+.label-optional {
+  color: var(--style-color);
+}
+
+.due-date {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.date-input:hover {
+  border-color: var(--main-color);
+}
+
+.due-date img {
+  height: 24px;
+}
+
+.date-input {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--style-color);
+}
+
+.date-input input {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.addtask-main-content textarea {
+  width: 440px;
+  resize: vertical;
+  height: 103px;
+  padding: 16px;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  border: 1px solid var(--style-color);
+  border-radius: 0px 10px 10px 10px;
+  scrollbar-width: thin;
+}
+
+.addtask-main-content textarea:focus, textarea:hover {
+  border: 1px solid var(--main-color);
+}
+
+.priority-wrapper {
+  display: flex;
+  width: 440px;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.prio-buttons {
+  display: flex;
+  justify-content: space-around;
+  height: 51px;
+}
+
+.select-box {
+  height: 40px;
+  width: 100%;
+  color: #000;
+  border-bottom: 1px solid var(--style-color);
+}
+
+.select-box:hover {
+  cursor: pointer;
+}
+
+#subtask-list {
+  max-height: 90px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  border: 2px solid #fff;
+}
+
+.section-addtask-buttons {
+  display: flex;
+  padding: 55px 42px;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.add-task-button {
+  display: flex;
+  gap: 24px;
+}
+
+.cancel-button,
+.create-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+}
+
+.cancel-button {
+  width: 96px;
+}
+
+.button-toggle {
+  pointer-events: none;
+}
+
+.add-task-button img {
+  height: 24px;
+  width: 24px;
+}
+
+.cancel-button:hover img {
+  content: url(../assets/icons/add_task/cancel_hover.svg);
+}
+
+.create-button:hover img {
+  content: url(../assets/icons/add_task/check.svg);
+}
+
+.cancel-button:active img {
+  content: url(../assets/icons/add_task/cancel_active.svg);
+}
+
+.create-button:active img {
+  content: url(../assets/icons/add_task/check_blue.svg);
+}
+
+a,
+input[type="submit"],
+input[type="button"],
+input[type="checkbox"],
+input[type="radio"],
+input[type="text"],
+.addtask-title,
+select,
+textarea,
+.category-select-box,
+.assigned-select-box,
+li,
+div,
+.subtask-select {
+  transition: all 0.2s ease-in-out;
+}

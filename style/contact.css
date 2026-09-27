@@ -1,0 +1,326 @@
+/* ===== UTILITY CLASSES ===== */
+.d-none {
+    display: none !important;
+}
+
+/* ===== LAYOUT ===== */
+main,
+.contact-body {
+    overflow: hidden;
+}
+
+.contact-content {
+    display: flex;
+    height: calc(100vh - 100px);
+}
+
+/* ===== CONTACT LIST CONTAINER ===== */
+.contact-add-new-contact-container {
+    height: calc(100vh - 100px);
+    padding: 0 49.5px;
+    overflow-y: auto;
+    scrollbar-color: rgba(0, 0, 0, 0);
+    box-shadow: 4px 0 8px -2px rgba(0, 0, 0, 0.1);
+    margin-top: 4px;
+    width: 380px;
+}
+
+.button-add-new-contact-container {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    padding: 62px 0 10px 0;
+}
+
+.button-add-new-contact-box {
+    width: 100%;
+    gap: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.button-add-new-contact-container img {
+    margin-top: -2px;
+}
+
+/* ===== CONTACT LIST ITEMS ===== */
+.contact-abc-box {
+    padding: 17px 36px;
+    font-size: 18px;
+}
+
+.contact-placeholder {
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-placeholder img {
+    width: 100%;
+}
+
+.contact-person {
+    padding: 15px 24px;
+    display: flex;
+    gap: 35px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.contact-person:hover {
+    background-color: #D2E3FF;
+}
+
+.contact-person:active,
+.contact-person.active {
+    background-color: var(--main-color);
+    color: white;
+}
+
+.contact-person:active a,
+.contact-person.active a {
+    color: white;
+}
+
+/* ===== CONTACT PERSON ICON ===== */
+.contact-person-icon {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 42px;
+    width: 42px;
+    border: solid white;
+    border-radius: 45px;
+}
+
+.contact-person img {
+    height: 42px;
+    width: 42px;
+}
+
+.contact-person p {
+    margin-top: -30px;
+    font-size: 12px;
+    font-weight: 400;
+    color: white;
+}
+
+/* ===== CONTACT PERSON NAME ===== */
+.contact-person-name h5 {
+    font-weight: 400;
+}
+
+.contact-person-name a {
+    text-decoration: none;
+    color: var(--main-color);
+    font-size: 16px;
+}
+
+.contact-person-name a {
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+
+/* ===== CONTACT DETAILS SECTION ===== */
+.contact-single-person-content {
+    padding: 72px 62px;
+}
+
+.contact-single-person-content-head {
+    gap: 54px;
+    display: flex;
+    padding-bottom: 21px;
+}
+
+.contact-single-person-content-head-name h3 {
+    font-family: Inter;
+    padding-bottom: 8px;
+}
+
+/* ===== CONTACT ICON BIG ===== */
+.contact-person-icon-big {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    width: 120px;
+}
+
+.contact-person-icon-big h3 {
+    position: absolute;
+    color: white;
+    font-family: Inter;
+}
+
+.contact-person-icon-big img {
+    position: absolute;
+    height: 120px;
+    width: 120px;
+    border: 3px solid white;
+    border-radius: 70px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+}
+
+/* ===== ACTION BUTTONS ===== */
+.contact-single-person-content-head-edit-container {
+    display: flex;
+    gap: 16px;
+}
+
+/* Edit Button */
+.contact-single-person-content-head-edit-box {
+    gap: 6px;
+    display: flex;
+    padding-right: 10px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.contact-single-person-content-head-edit-box p {
+    font-size: 16px;
+    margin: 0;
+}
+
+.contact-single-person-content-head-edit-box img {
+    height: 24px;
+    width: 24px;
+}
+
+.contact-single-person-content-head-edit-box:hover p {
+    color: var(--light-blue);
+    font-weight: 700;
+}
+
+.contact-single-person-content-head-edit-box:hover img {
+    filter: brightness(0) saturate(100%) invert(12%) sepia(100%) saturate(7482%) hue-rotate(244deg) brightness(101%) contrast(101%);
+}
+
+/* Delete Button */
+.contact-single-person-content-head-trash-box {
+    gap: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.contact-single-person-content-head-trash-box p {
+    font-size: 16px;
+    margin: 0;
+}
+
+.contact-single-person-content-head-trash-box img {
+    height: 24px;
+    width: 24px;
+}
+
+.contact-single-person-content-head-trash-box:hover {
+    color: var(--light-blue);
+    font-weight: 700;
+}
+
+.contact-single-person-content-head-trash-box:hover img {
+    filter: brightness(0) saturate(100%) invert(12%) sepia(100%) saturate(7482%) hue-rotate(244deg) brightness(101%) contrast(101%);
+}
+
+/* ===== CONTACT INFO ===== */
+.contact-single-person-content-info {
+    gap: 22px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-single-person-content-info a {
+    font-size: 16px;
+    text-decoration: none;
+    color: var(--main-color);
+    cursor: default;
+}
+
+.contact-single-person-content-mobile-headline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.help-a-tag-back-button {
+    display: block;
+    width: 37px;
+    height: 37px;
+    position: relative;
+}
+
+.single-person-content-mobile-bottom {
+    height: 64px;
+    width: 64px;
+    position: fixed;
+    right: 23px;
+    bottom: 127px;
+    color: white;
+    background-color: var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    gap: 3px;
+}
+
+.white-point {
+    background-color: white;
+    border-radius: 50%;
+    height: 5px;
+    width: 5px;
+}
+
+.single-person-content-mobile-navbar {
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 116px;
+    height: 100px;
+    border-radius: 20px 20px 0 20px;
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.3), -4px 4px 8px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    animation: slideInRightNav 0.5s forwards;
+}
+
+.single-person-content-mobile-navbar img {
+    width: 24px;
+    height: 24px;
+}
+
+.single-person-content-mobile-navbar-content {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+}
+
+@keyframes slideInRightNav {
+    from {
+        right: -136px;
+    }
+
+    to {
+        right: 20px;
+    }
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 16px;
+    margin: 0;
+    height: 28px;
+}
+
+.error-input-placeholder{
+    background-color: red;
+}

@@ -1,0 +1,139 @@
+header {
+    background-color: var(--main-color);
+    box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.header-box {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--main-color);
+    min-height: 96px;
+    color: white;
+    padding-left: 39px;
+    padding-right: 39px;
+    isolation: isolate;
+    z-index: 50;
+    max-width: 1920px;
+}
+
+p {
+    font-size: 19px;
+}
+
+header img {
+    height: 56px;
+}
+
+header a {
+    display: flex;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    width: 433px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.help {
+    cursor: pointer;
+    height: 32px;
+}
+
+.help:hover {
+    content: url(../assets/icons/header/help_hover.svg);
+}
+
+/* Profile Navbar */
+
+.profile-navbar {
+    position: fixed;
+    top: 100px;
+    left: clamp(0px, calc(100vw - 185px), calc(1920px - 185px));
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), -4px 0 8px rgba(0, 0, 0, 0.3);
+    border-radius: 30px 0 30px 30px;
+    background-color: white;
+    width: 180px;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    gap: 8px;
+    z-index: 60;
+}
+
+.profile-navbar-box {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 8px;
+}
+
+.profile-navbar-box * {
+    font-size: 19px;
+}
+
+
+.profile-navbar a {
+    text-decoration: none;
+    color: var(--menu-color);
+    padding: 5px 10px;
+    width: 120px;
+    justify-content: end;
+    border-radius: 10px;
+}
+
+.profile-navbar a:hover {
+    background-color: var(--navi-buttons-bg);
+}
+
+.profile-navbar-help {
+    display: none;
+}
+
+.circle-badge {
+    cursor: pointer;
+}
+
+.circle-badge .circle-ring {
+    fill: none;
+    stroke: white;
+    stroke-width: 3;
+}
+
+
+.circle-badge .circle-fill {
+    fill: white;
+}
+
+.circle-badge .circle-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    fill: var(--light-blue);
+    text-anchor: middle;
+    dominant-baseline: middle;
+
+}
+
+.person-icon-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.circle-badge:hover .circle-fill {
+    fill: #b5dbff;
+}
+
+.circle-badge:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
+    <title>Help</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/general_elements/icons/logo_blue_icon.svg"
+      type="image/x-icon"
+    />
+
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./style/header.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style/help.css" />
+    <link rel="stylesheet" href="./style/sidebar.css" />
+    <link rel="stylesheet" href="./style/footer-nav.css" />
+    <link rel="stylesheet" href="./style/reponsiv-help.css" />
+    <link rel="stylesheet" href="./style/responsiv.css" />
+    <link rel="prerender" href="/summary-board.html" />
+    <link rel="prerender" href="./board.html" />
+    <link rel="prerender" href="./addtask.html" />
+    <link rel="prerender" href="./contact.html" />
+  </head>
+
+  <body onclick="closeProfileNavbar()">
+    <header>
+      <div class="header-box">
+        <a href="./index.html"
+          ><img
+            src="./assets/general_elements/icons/logo_white_icon.svg"
+            alt="Logo Join"
+        /></a>
+        <nav>
+          <p>Kanban Project Management Tool</p>
+          <a href="help.html"
+            ><img
+              class="help"
+              src="./assets/icons/header/help.svg"
+              alt="Help Icon"
+          /></a>
+          <div id="person-icon-header" class="person-icon-header">
+            <svg
+              width="56"
+              height="56"
+              class="circle-badge"
+              onclick="event.stopPropagation(); toggleProfileNavbar()"
+            >
+              <circle cx="28" cy="28" r="26.5" class="circle-ring"></circle>
+              <circle cx="28" cy="28" r="23.06" class="circle-fill"></circle>
+              <text
+                id="person-icon-header-text"
+                x="28"
+                y="31"
+                class="circle-text"
+              >
+                
+              </text>
+            </svg>
+          </div>
+        </nav>
+        <div class="profile-navbar d-none" id="profile-navbar">
+          <div class="profile-navbar-box">
+            <a class="profile-navbar-help" href="./help.html">Help</a>
+            <a href="./legal-notice.html">Legal Notice</a>
+            <a href="./privacy-policy.html">Privacy Policy</a>
+            <a href="#" data-logout>Log out</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="sidebar">
+        <div class="nav-login-box">
+          <a href="./index.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/Menu Icons.svg"
+              alt="Button Summary Board"
+            />Log In</a
+          >
+        </div>
+        <div class="nav d-none">
+          <a href="./summary-board.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/summary.svg"
+              alt="Button Summary Board"
+          />Summary</a>
+          <a href="addtask.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/add task.svg"
+              alt="Button Add Task"
+          />Add Task</a>
+          <a href="board.html" class="nav-bg"
+            ><img src="./assets/icons/sidebar/board.svg" alt="Button-Board"
+          />Board</a>
+          <a href="contact.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/contacts.svg"
+              alt="Button Contact"
+          />Contacts</a>
+        </div>
+        <div class="sidebar-links">
+          <a href="./privacy-policy.html">Privacy Policy</a>
+          <a href="./legal-notice.html">Legal notice</a>
+        </div>
+      </section>
+
+      <section class="help-wrapper">
+        <div class="help-content">
+          <div class="help-headline-container">
+            <h1>Help</h1>
+            <a
+              class="help-a-tag-back-button"
+              href="#"
+              onclick="history.back(); return false;"
+            >
+              <img
+                class="regular-image"
+                src="./assets/general_elements/icons/arrow_left.svg"
+              />
+              <img
+                class="hover-image"
+                src="./assets/general_elements/icons/arrow_left_hover.svg"
+              />
+            </a>
+          </div>
+          <span>
+            Welcome to the help page for
+            <a class="help-a-tag-style" href="./index.html">Join</a>, your guide
+            to using our kanban project management tool. Here, we'll provide an
+            overview of what
+            <a class="help-a-tag-style" href="./index.html">Join</a> is, how it
+            can benefit you, and how to use it.
+          </span>
+          <h4 class="text-main-color">What is Join?</h4>
+          <span
+            ><a class="help-a-tag-style" href="./index.html">Join</a> is a
+            kanban-based project management tool designed and built by a group
+            of dedicated students as part of their web development bootcamp at
+            the Developer Akademie. Kanban, a Japanese term meaning "billboard",
+            is a highly effective method to visualize work, limit
+            work-in-progress, and maximize efficiency (or flow).
+            <a class="help-a-tag-style" href="./index.html">Join</a> leverages
+            the principles of kanban to help users manage their tasks and
+            projects in an intuitive, visual interface. It is important to note
+            that Join is designed as an educational exercise and is not intended
+            for extensive business usage. While we strive to ensure the best
+            possible user experience, we cannot guarantee consistent
+            availability, reliability, accuracy, or other aspects of quality
+            regarding <a class="help-a-tag-style" href="./index.html">Join</a>.
+          </span>
+          <h4 class="text-main-color">How to use it</h4>
+          <span
+            >is a step-by-step guide on how to use
+            <a class="help-a-tag-style" href="./index.html">Join</a>:</span
+          >
+          <div class="help-how-to-use-it-box">
+            <h4 class="text-light-color">1.</h4>
+            <div class="padding-top-help-how-to-use-it-block">
+              <h5 class="text-light-color">Exploring the Board</h5>
+              <span
+                >When you log in to
+                <a class="help-a-tag-style" href="./index.html">Join</a>, you'll
+                find a default board. This board represents your project and
+                contains four default lists: "To Do", "In Progress", “Await
+                feedback” and "Done".</span
+              >
+            </div>
+          </div>
+          <div class="help-how-to-use-it-box">
+            <h4 class="text-light-color">2.</h4>
+            <div class="padding-top-help-how-to-use-it-block">
+              <h5 class="text-light-color">Creating Contacts</h5>
+              <span
+                >In <a class="help-a-tag-style" href="./index.html">Join</a>,
+                you can add contacts to collaborate on your projects. Go to the
+                "Contacts" section, click on "New contact", and fill in the
+                required information. Once added, these contacts can be assigned
+                tasks and they can interact with the tasks on the board.
+              </span>
+            </div>
+          </div>
+          <div class="help-how-to-use-it-box">
+            <h4 class="text-light-color">3.</h4>
+            <div class="padding-top-help-how-to-use-it-block">
+              <h5 class="text-light-color">Adding Cards</h5>
+              <span
+                >Now that you've added your contacts, you can start adding
+                cards. Cards represent individual tasks. Click the "+" button
+                under the appropriate list to create a new card. Fill in the
+                task details in the card, like task name, description, due date,
+                assignees, etc.#
+              </span>
+            </div>
+          </div>
+          <div class="help-how-to-use-it-box">
+            <h4 class="text-light-color">4.</h4>
+            <div class="padding-top-help-how-to-use-it-block">
+              <h5 class="text-light-color">Moving Cards</h5>
+              <span
+                >As the task moves from one stage to another, you can reflect
+                that on the board by dragging and dropping the card from one
+                list to another.
+              </span>
+            </div>
+          </div>
+          <div class="help-how-to-use-it-box">
+            <h4 class="text-light-color">5.</h4>
+            <div class="padding-top-help-how-to-use-it-block">
+              <h5 class="text-light-color">Deleting Cards</h5>
+              <span
+                >Once a task is completed, you can either move it to the "Done"
+                list or delete it. Deleting a card will permanently remove it
+                from the board. Please exercise caution when deleting cards, as
+                this action is irreversible.
+              </span>
+            </div>
+          </div>
+          <span
+            >Remember that using
+            <a class="help-a-tag-style" href="./index.html">Join</a> effectively
+            requires consistent updates from you and your team to ensure the
+            board reflects the current state of your project.</span
+          >
+
+          <span
+            >Have more questions about
+            <a class="help-a-tag-style" href="./index.html">Join</a>? Feel free
+            to contact us at [Your Contact Email]. We're here to help you!
+          </span>
+          <span>
+            Enjoy using
+            <a class="help-a-tag-style" href="./index.html">Join</a>!
+          </span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="nav-mobile">
+      <div class="nav-box d-none">
+        <a href="./summary-board.html"
+          ><img
+            src="./assets/icons_mobile/summary_default.svg"
+            alt="Summary Board Icon"
+        /></a>
+        <a href="./addtask.html"
+          ><img
+            src="./assets/icons_mobile/add_taks_default.svg"
+            alt="Add Task Icon"
+        /></a>
+        <a href="./board.html"
+          ><img src="./assets/icons_mobile/board_default.svg" alt="Board Icon"
+        /></a>
+        <a href="./contact.html"
+          ><img
+            src="./assets/icons_mobile/contacts_default.svg"
+            alt="Contact Icon"
+        /></a>
+      </div>
+
+      <div class="nav-login-box-mobile">
+        <a href="./index.html" class="nav-bg"
+          ><img
+            src="./assets/icons/sidebar/Menu Icons.svg"
+            alt="Log In Button"
+          />Log In</a
+        >
+        <div class="sidebar-links">
+          <a href="./privacy-policy.html">Privacy Policy</a>
+          <a href="./legal-notice.html">Legal notice</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

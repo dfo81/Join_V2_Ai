@@ -1,0 +1,132 @@
+/* Login Mobile Responsive Styles */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .logo-wrapper {
+    transform: translate(-50%, -50%) scale(0.69);
+    /* 1 + 0,38 / 2 = 0,69 */
+  }
+
+  @keyframes moveLogo {
+    to {
+      top: -52px;
+      /* -20 -85 / 2 = -52px */
+      left: -33px;
+      /* -5 -62 / 2 =  -33px */
+      transform: translate(0, 0) scale(0.31);
+    }
+  }
+}
+
+/* Mobile */
+@media (max-width: 720px) {
+  .logo-wrapper {
+    transform: translate(-50%, -50%) scale(0.38);
+  }
+
+  @keyframes moveLogo {
+    to {
+      top: -85px;
+      /* 78 / 323 = 0,24 * 323 - 323 = -245 / 2 = -122 + 37 = -85px */
+      left: -62px;
+      /* 64 / 265 = 0,24 * 265 - 265 = -201 / 2 = -100 + 38 = -62px */
+      transform: translate(0, 0) scale(0.24);
+    }
+  }
+
+  .login-box {
+    height: 469px;
+    width: 396px;
+  }
+
+  .title-border {
+    width: 88px;
+  }
+
+  .sign-up-box {
+    height: 580px;
+    width: 396px;
+  }
+
+  .sign-up-button-box {
+    display: none;
+  }
+  .sign-up-bottom-box-mobile {
+    display: flex;
+  }
+
+  .input-wrapper-box {
+    width: 364px;
+  }
+
+  .login-button-wrapper {
+    flex-direction: column;
+    width: 100%;
+    gap: 21px;
+  }
+
+  .login-button-wrapper button {
+    font-size: 19px;
+    width: 180px;
+  }
+
+  .back-arrow {
+    top: 45px;
+    left: 45px;
+  }
+
+  .links {
+    margin-bottom: 26px;
+  }
+}
+
+/* Mobile less 428px until 320px */
+@media (max-width: 428px) {
+
+  .login-box,
+  .sign-up-box {
+    width: 95%;
+  }
+
+  .back-arrow {
+    left: 20px;
+  }
+
+  .input-wrapper-box {
+    width: 90%;
+  }
+}
+
+@media (max-height: 830px) {
+  .top-section {
+    display: none;
+  }
+  .main-section {
+    margin-top: 10px;
+  }
+  .logo-wrapper {
+    display: none;
+  }
+  .bottom-section {
+    height: auto;
+  }
+}
+
+@media (max-height: 755px) {
+  @keyframes moveLogo {
+    to {
+      top: -110px;
+      /* 78 / 323 = 0,24 * 323 - 323 = -245 / 2 = -122 + 37 = -110px */
+      left: -82px;
+      /* 64 / 265 = 0,24 * 265 - 265 = -201 / 2 = -100 + 38 = -62px */
+      transform: translate(0, 0) scale(0.24);
+    }
+  }
+  .links {
+    margin-bottom: 10px;
+  }
+  .sign-up-bottom-box-mobile {
+    margin: 10px;
+  }
+}
+

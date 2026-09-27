@@ -1,0 +1,361 @@
+/* Summary Dashboard Desktop */
+h1 {
+  color: var(--main-color);
+  font-size: 64px;
+}
+
+h5 {
+  font-size: 23px;
+}
+
+.board-wrapper {
+  display: flex;
+  padding: 268px 100px;
+}
+
+.dashboard {
+  justify-content: center;
+  align-items: center;
+  gap: 72px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+}
+
+.dashboard-header h2 {
+  font-weight: 700;
+  font-size: 64px;
+}
+
+.dashboard p {
+  font-size: 23px;
+  margin: 0;
+}
+
+.dashboard h5 {
+  font-weight: 400;
+  text-align: center;
+}
+
+.task-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 912px;
+  height: 442px;
+}
+
+.task-dashboard-top-row {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  height: 221px;
+}
+
+.task-dashboard-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  height: 219px;
+}
+
+.task-tile-urgent {
+  justify-content: center;
+  color: white;
+  background-color: var(--main-color);
+  border-radius: 30px;
+  display: flex;
+  gap: 35px;
+  width: 672px;
+  height: 191px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.task-tile-urgent:hover {
+  width: 692px;
+  height: 221px;
+  background-color: white;
+  color: var(--main-color);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 0 30px 30px 30px;
+  margin-top: -10px;
+}
+
+.task-tile-urgent-content {
+  display: flex;
+  width: 100%;
+  gap: 35px;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-tile-urgent-left-section {
+  gap: 9px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-tile-urgent-icon-row {
+  gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-tile-urgent-divider {
+  height: 145px;
+  border: solid 1px white;
+  border-radius: 3px;
+  width: 1px;
+  background-color: white;
+}
+
+.task-tile-urgent-right-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 13px;
+  width: 320px;
+}
+
+.task-tile-board-overview {
+  gap: 7px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+  width: 208px;
+  height: 191px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.task-tile-board-overview:hover {
+  transform: scale(1.1);
+  transform-origin: top right;
+  color: white;
+  background-color: var(--light-blue);
+  border-radius: 0 30px 30px 30px;
+  margin-left: -50px;
+  width: 250px;
+  position: absolute;
+  right: 0;
+}
+
+.task-tile-board-overview:hover h5 {
+  color: white;
+}
+
+.task-tile-board-overview-content {
+  display: flex;
+  gap: 20px;
+}
+
+.task-tile-board-overview h5 {
+  color: var(--main-color);
+  font-weight: 400;
+}
+
+.task-tile-todo {
+  background-color: #e6f0ff;
+  gap: 7px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 204px;
+  height: 219px;
+  z-index: 1;
+}
+
+.task-tile-todo-content {
+  display: flex;
+  gap: 20px;
+}
+
+.task-tile-todo h5 {
+  color: var(--main-color);
+  font-weight: 400;
+}
+
+.task-tile-todo:hover {
+  transform: scale(1.02);
+  color: white;
+  background-color: white;
+  border-radius: 0 30px 30px 30px;
+  width: 250px;
+  height: 200px;
+  z-index: 10;
+}
+
+.task-tile-todo:hover h5,
+.task-tile-todo:hover h2 {
+  color: var(--light-blue);
+}
+
+.task-tile-in-progress {
+  gap: 7px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 204px;
+  height: 219px;
+  position: absolute;
+  left: 236px;
+  z-index: 1;
+}
+
+.task-tile-in-progress-content {
+  display: flex;
+  gap: 20px;
+}
+
+.task-tile-in-progress h5 {
+  color: var(--main-color);
+  font-weight: 400;
+  text-align: center;
+}
+
+.task-tile-in-progress:hover {
+  background-color: rgba(69, 137, 255, 1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 0 30px 30px 30px;
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+.task-tile-in-progress:hover h2,
+.task-tile-in-progress:hover h5 {
+  color: white;
+}
+
+.task-tile-awaiting-feedback {
+  gap: 7px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 204px;
+  height: 219px;
+  position: absolute;
+  left: 472px;
+  z-index: 1;
+}
+
+.task-tile-awaiting-feedback-content {
+  display: flex;
+  gap: 20px;
+}
+
+.task-tile-awaiting-feedback h5 {
+  color: var(--main-color);
+  font-weight: 400;
+  text-align: center;
+}
+
+.task-tile-awaiting-feedback:hover {
+  background-color: rgba(69, 137, 255, 1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 30px 30px 30px 0;
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+.task-tile-awaiting-feedback:hover h2,
+.task-tile-awaiting-feedback:hover h5 {
+  color: white;
+}
+
+.task-tile-done {
+  gap: 7px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 204px;
+  height: 219px;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}
+
+.task-tile-done-content {
+  display: flex;
+  gap: 20px;
+}
+
+.task-tile-done h5 {
+  color: var(--main-color);
+  font-weight: 400;
+  text-align: center;
+}
+
+.task-tile-done:hover {
+  background-color: rgba(69, 137, 255, 1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 30px 0 30px 30px;
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+.task-tile-done:hover h2,
+.task-tile-done:hover h5 {
+  color: white;
+}
+
+.task-tile-icon-container {
+  position: relative;
+  width: 76px;
+  height: 76px;
+}
+
+.task-tile-icon-container img {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 76px;
+  height: 76px;
+}
+
+.task-tile-icon-container svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 66px;
+  height: 66px;
+}
+

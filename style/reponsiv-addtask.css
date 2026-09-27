@@ -1,0 +1,128 @@
+@media (max-width: 1250px) {
+    .add-task-button {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .section-addtask-buttons {
+        justify-content: center;
+        padding: 0;
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    main {
+        flex-direction: column;
+    }
+
+    .add-task-button {
+        flex-direction: unset;
+    }
+
+    .addtask-wrapper {
+        justify-content: flex-start;
+        height: calc(100vh - 348px);
+    }
+
+    .section-addtask-buttons {
+        padding-top: 20px;
+    }
+
+    .addtask-main-content {
+        width: 100%;
+    }
+
+    .description {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .addtask-main-content textarea {
+        width: 100%;
+    }
+
+    .priority-wrapper {
+        width: 100%;
+    }
+
+    .assigned-box {
+        width: 100%;
+    }
+
+    .category-box {
+        width: 100%;
+    }
+
+    .subtask-box {
+        width: 100%;
+    }
+}
+
+@media (max-width: 720px) {
+    .prio-buttons {
+        gap: 8px;
+    }
+
+    .addtask-wrapper {
+        height: calc(100vh - 312px);
+        min-width: auto;
+    }
+}
+
+@media (max-width: 550px) {
+    span {
+        font-size: 16px;
+    }
+
+    input {
+        font-size: 16px;
+    }
+
+    textarea {
+        font-size: 16px;
+    }
+
+    .cancel-button {
+        font-size: 16px;
+    }
+
+    .create-button {
+        font-size: 16px;
+    }
+
+    .addtask-title {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 470px) {
+    .priority-button {
+        padding: 2px;
+        height: 40px;
+    }
+    .priority-button.active {
+        height: 40px;
+    }
+    .priority-button:hover {
+        height: 41px;
+    }
+    .priority-button img {
+        height: 12px;
+        width: 8px;
+    }
+    .prio-buttons {
+        font-size: 16px;
+        height: 41px;
+    }
+}
+
+@media (max-width: 375px) {
+    .cancel-button {
+        padding: 8px 8px;
+    }
+
+    .create-button {
+        padding: 8px 8px;
+    }
+}

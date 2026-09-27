@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
+    <link
+      rel="shortcut icon"
+      href="./assets/general_elements/icons/logo_blue_icon.svg"
+      type="image/x-icon"
+    />
+    <title>Summary Board</title>
+    <link rel="stylesheet" href="./style/summary-board.css" />
+    <link rel="stylesheet" href="./style/summary-board-mobile.css" />
+    <link rel="stylesheet" href="./style/sidebar.css" />
+    <link rel="stylesheet" href="./style/header.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style/footer-nav.css" />
+    <link rel="stylesheet" href="./style/responsiv.css" />
+    <link rel="stylesheet" href="./style/reponsiv-summary-board.css" />
+
+    <script src="./scripts/summary/summary.module.js" type="module"></script>
+    <script src="./script.js"></script>
+  </head>
+
+  <body onclick="closeProfileNavbar()">
+    <header>
+      <div class="header-box">
+        <a href="./index.html"
+          ><img
+            src="./assets/general_elements/icons/logo_white_icon.svg"
+            alt="Logo Join"
+        /></a>
+        <nav>
+          <p>Kanban Project Management Tool</p>
+          <a href="help.html"
+            ><img
+              class="help"
+              src="./assets/icons/header/help.svg"
+              alt="Help Icon"
+          /></a>
+          <div id="person-icon-header" class="person-icon-header">
+            <svg
+              width="56"
+              height="56"
+              class="circle-badge"
+              onclick="event.stopPropagation(); toggleProfileNavbar()"
+            >
+              <circle cx="28" cy="28" r="26.5" class="circle-ring"></circle>
+              <circle cx="28" cy="28" r="23.06" class="circle-fill"></circle>
+              <text
+                id="person-icon-header-text"
+                x="28"
+                y="31"
+                class="circle-text"
+              >
+                
+              </text>
+            </svg>
+          </div>
+        </nav>
+        <div class="profile-navbar d-none" id="profile-navbar">
+          <div class="profile-navbar-box">
+            <a class="profile-navbar-help" href="./help.html">Help</a>
+            <a href="./legal-notice.html">Legal Notice</a>
+            <a href="./privacy-policy.html">Privacy Policy</a>
+            <a href="#" data-logout>Log out</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="sidebar">
+        <div class="nav">
+          <a href="./summary-board.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/summary.svg"
+              alt="Button Summary Board"
+          />Summary</a>
+          <a href="addtask.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/add task.svg"
+              alt="Button Add Task"
+          />Add Task</a>
+          <a href="board.html" class="nav-bg"
+            ><img src="./assets/icons/sidebar/board.svg" alt="Button-Board"
+          />Board</a>
+          <a href="contact.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/contacts.svg"
+              alt="Button Contact"
+          />Contacts</a>
+        </div>
+        <div class="sidebar-links active">
+          <a href="./privacy-policy.html">Privacy Policy</a>
+          <a href="./legal-notice.html">Legal notice</a>
+        </div>
+      </section>
+
+      <section class="board-wrapper">
+        <div class="dashboard">
+          <div class="dashboard-header">
+            <h2 id="greeting">Good morning</h2>
+            <h1 id="username"></h1>
+          </div>
+
+          <div class="task-dashboard-container">
+            <div class="task-dashboard-top-row">
+              <div
+                class="task-tile-urgent"
+                onclick="location.href='board.html'"
+              >
+                <div class="task-tile-urgent-content">
+                  <div class="task-tile-urgent-left-section">
+                    <div class="task-tile-urgent-icon-row">
+                      <div class="task-tile-icon-container">
+                        <img
+                          src="./assets/summary/icons/urgent.svg"
+                          alt="Icon Task Urgent"
+                        />
+                        <svg viewBox="0 0 300 300">
+                          <circle
+                            cx="150"
+                            cy="150"
+                            r="140"
+                            fill="none"
+                            stroke="white"
+                            stroke-width="10"
+                          />
+                        </svg>
+                      </div>
+                      <h2 id="task-urgent-text">0</h2>
+                    </div>
+                    <p>Tasks Urgent</p>
+                  </div>
+                  <div class="task-tile-urgent-divider"></div>
+                  <div class="task-tile-urgent-right-section">
+                    <h4 id="urgent-deadline">Januar 01, 2000</h4>
+                    <h5>Upcoming Deadline</h5>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="task-tile-board-overview"
+                onclick="location.href='board.html'"
+                id="task-tile-board-overview"
+              >
+                <div class="task-tile-board-overview-content">
+                  <div class="task-tile-icon-container">
+                    <img
+                      src="./assets/summary/icons/default.svg"
+                      alt="Icon Task in Board"
+                    />
+                    <svg viewBox="0 0 300 300">
+                      <circle
+                        cx="150"
+                        cy="150"
+                        r="140"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="10"
+                      />
+                    </svg>
+                  </div>
+                  <h2 id="task-on-board-text">0</h2>
+                </div>
+                <h5>Task on Board</h5>
+              </div>
+            </div>
+
+            <div class="task-dashboard-bottom-row">
+              <div
+                class="task-tile-todo"
+                onclick="location.href='board.html'"
+                id="task-tile-todo"
+              >
+                <div class="task-tile-todo-content">
+                  <div class="task-tile-icon-container">
+                    <img
+                      src="./assets/summary/icons/todo.svg"
+                      alt="Icon Task Todo"
+                    />
+                    <svg viewBox="0 0 300 300">
+                      <circle
+                        cx="150"
+                        cy="150"
+                        r="140"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="10"
+                      />
+                    </svg>
+                  </div>
+                  <h2 id="task-to-do-text">0</h2>
+                </div>
+                <h5 cl>Task To-do</h5>
+              </div>
+
+              <div
+                class="task-tile-in-progress"
+                onclick="location.href='board.html'"
+              >
+                <div class="task-tile-in-progress-content">
+                  <div class="task-tile-icon-container">
+                    <img
+                      src="./assets/summary/icons/in_progress.svg"
+                      alt="Icon Task In Progress"
+                    />
+                    <svg viewBox="0 0 300 300">
+                      <circle
+                        cx="150"
+                        cy="150"
+                        r="140"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="10"
+                      />
+                    </svg>
+                  </div>
+                  <h2 id="task-in-progress-text">0</h2>
+                </div>
+                <h5>Task in<br />Progress</h5>
+              </div>
+
+              <div
+                class="task-tile-awaiting-feedback"
+                onclick="location.href='board.html'"
+              >
+                <div class="task-tile-awaiting-feedback-content">
+                  <div class="task-tile-icon-container">
+                    <img
+                      src="./assets/summary/icons/afeedback.svg"
+                      alt="Icon Task Awaiting Feedback"
+                    />
+                    <svg viewBox="0 0 300 300">
+                      <circle
+                        cx="150"
+                        cy="150"
+                        r="140"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="10"
+                      />
+                    </svg>
+                  </div>
+                  <h2 id="task-awaiting-feedback-text">0</h2>
+                </div>
+                <h5>Awaiting<br />Feedback</h5>
+              </div>
+
+              <div class="task-tile-done" onclick="location.href='board.html'">
+                <div class="task-tile-done-content">
+                  <div class="task-tile-icon-container">
+                    <img
+                      src="./assets/summary/icons/done.svg"
+                      alt="Icon Task Done"
+                    />
+                    <svg viewBox="0 0 300 300">
+                      <circle
+                        cx="150"
+                        cy="150"
+                        r="140"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="10"
+                      />
+                    </svg>
+                  </div>
+                  <h2 id="task-done-text">0</h2>
+                </div>
+                <h5>Task<br />Done</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="task-dashboard-mobile">
+        <div
+          class="task-tile-urgent-mobile"
+          onclick="location.href='board.html'"
+        >
+          <div class="task-tile-urgent-content">
+            <div class="task-tile-urgent-left-section">
+              <div class="task-tile-urgent-icon-row">
+                <div class="task-tile-icon-container">
+                  <img
+                    src="./assets/summary/icons/urgent.svg"
+                    alt="Icon Task Urgent"
+                  />
+                  <svg viewBox="0 0 300 300">
+                    <circle
+                      cx="150"
+                      cy="150"
+                      r="140"
+                      fill="none"
+                      stroke="white"
+                      stroke-width="10"
+                    />
+                  </svg>
+                </div>
+                <h2 id="task-urgent-text-mobile">0</h2>
+              </div>
+              <div class="task-tile-urgent-title-mobile">Tasks Urgent</div>
+            </div>
+            <div class="task-tile-urgent-divider"></div>
+            <div class="task-tile-urgent-right-section">
+              <h4 id="urgent-deadline-mobile">Nothing</h4>
+              <h5>Upcoming Deadline</h5>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="task-tile-todo-mobile"
+          onclick="location.href='board.html'"
+          id="task-tile-todo"
+        >
+          <div class="task-tile-todo-content">
+            <img src="./assets/summary/icons/todo.svg" alt="Icon Task Todo" />
+            <h2 id="task-to-do-text-mobile">0</h2>
+          </div>
+          <h5>Task To-do</h5>
+        </div>
+
+        <div class="task-tile-board-top-row-mobile">
+          <div
+            class="task-tile-board-overview-mobile"
+            onclick="location.href='board.html'"
+            id="task-tile-board-overview"
+          >
+            <div class="task-tile-board-overview-content">
+              <div class="task-tile-icon-container">
+                <img
+                  src="./assets/summary/icons/default.svg"
+                  alt="Icon Task in Board"
+                />
+                <svg viewBox="0 0 300 300">
+                  <circle
+                    cx="150"
+                    cy="150"
+                    r="140"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="10"
+                  />
+                </svg>
+              </div>
+              <h2 id="task-on-board-text-mobile">0</h2>
+            </div>
+            <h5>Task on<br />Board</h5>
+          </div>
+
+          <div
+            class="task-tile-in-progress-mobile"
+            onclick="location.href='board.html'"
+          >
+            <div class="task-tile-in-progress-content">
+              <div class="task-tile-icon-container">
+                <img
+                  src="./assets/summary/icons/in_progress.svg"
+                  alt="Icon Task In Progress"
+                />
+                <svg viewBox="0 0 300 300">
+                  <circle
+                    cx="150"
+                    cy="150"
+                    r="140"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="10"
+                  />
+                </svg>
+              </div>
+              <h2 id="task-in-progress-text-mobile">0</h2>
+            </div>
+            <h5>Task in<br />Progress</h5>
+          </div>
+        </div>
+
+        <div class="task-tile-board-bottom-row-mobile">
+          <div
+            class="task-tile-awaiting-feedback-mobile"
+            onclick="location.href='board.html'"
+          >
+            <div class="task-tile-awaiting-feedback-content">
+              <div class="task-tile-icon-container">
+                <img
+                  src="./assets/summary/icons/afeedback.svg"
+                  alt="Icon Task Awaiting Feedback"
+                />
+                <svg viewBox="0 0 300 300">
+                  <circle
+                    cx="150"
+                    cy="150"
+                    r="140"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="10"
+                  />
+                </svg>
+              </div>
+              <h2 id="task-awaiting-feedback-text-mobile">0</h2>
+            </div>
+            <h5>Awaiting<br />Feedback</h5>
+          </div>
+
+          <div
+            class="task-tile-done-mobile"
+            onclick="location.href='board.html'"
+          >
+            <div class="task-tile-done-content">
+              <div class="task-tile-icon-container">
+                <img
+                  src="./assets/summary/icons/done.svg"
+                  alt="Icon Task Done"
+                />
+                <svg viewBox="0 0 300 300">
+                  <circle
+                    cx="150"
+                    cy="150"
+                    r="140"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="10"
+                  />
+                </svg>
+              </div>
+              <h2 id="task-done-text-mobile">0</h2>
+            </div>
+            <h5>Task<br />Done</h5>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="nav-mobile">
+      <div class="nav-box">
+        <a href="./summary-board.html"
+          ><img
+            src="./assets/icons_mobile/summary_active.svg"
+            alt="Summary Board Icon"
+        /></a>
+        <a href="./addtask.html"
+          ><img
+            src="./assets/icons_mobile/add_taks_default.svg"
+            alt="Add Task Icon"
+        /></a>
+        <a href="./board.html"
+          ><img src="./assets/icons_mobile/board_default.svg" alt="Board Icon"
+        /></a>
+        <a href="./contact.html"
+          ><img
+            src="./assets/icons_mobile/contacts_default.svg"
+            alt="Contact Icon"
+        /></a>
+      </div>
+    </footer>
+  </body>
+</html>

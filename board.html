@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
+    <title>Join - Board</title>
+
+    <link
+      rel="shortcut icon"
+      href="./assets/general_elements/icons/logo_blue_icon.svg"
+      type="image/x-icon"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style/addtask-form.css" />
+    <link rel="stylesheet" href="./style/addtask-components.css" />
+    <link rel="stylesheet" href="./style/board.css" />
+    <link rel="stylesheet" href="./style/header.css" />
+    <link rel="stylesheet" href="./style/sidebar.css" />
+    <link rel="stylesheet" href="./style/footer-nav.css" />
+    <link rel="stylesheet" href="./style/responsiv.css" />
+    <link rel="stylesheet" href="./style/overlay-add-task-board.css" />
+    <link rel="stylesheet" href="./style/task-overlay.css" />
+    <link rel="stylesheet" href="./style/reponsiv-board.css" />
+
+    <link rel="prerender" href="/summary-board.html" />
+    <link rel="prerender" href="./board.html" />
+    <link rel="prerender" href="./addtask.html" />
+    <link rel="prerender" href="./contact.html" />
+
+    <script src="script.js" defer></script>
+    <script src="scripts/templates.js" defer></script>
+    <script type="module" src="./scripts/board/board.module.js"></script>
+    <script src="./scripts/board/board.dnd.js"></script>
+    <script src="./scripts/board/board.move.js"></script>
+    <script src="./scripts/board/board.render.js"></script>
+    <script src="./scripts/board/task.overlay.js"></script>
+    <script src="./scripts/board/board.event.js"></script>
+    <script src="./scripts/board/task-edit-overlay.js"></script>
+    
+    <script type="module" src="./scripts/addtask/addtask.module.js"></script>
+    <script src="./scripts/addtask/addtask.js" defer></script>
+    <script src="./scripts/addtask/addtask.subtasks.js"></script>
+    <script src="./scripts/addtask/addtask.contacts.js"></script>
+    <script src="./scripts/addtask/addtask.ui.js"></script>
+    <script src="./scripts/addtask/addtask.validation.js"></script>
+    <script src="./scripts/addtask/addtask.event.js"></script>
+    
+  </head>
+
+  <body onclick="closeProfileNavbar()">
+    <!-- Overlay Add Task  -->
+    <div class="overlay-add-task d-none" id="overlay-add-task" onclick="toggleAddTaskBoard(event)">
+      <div class="add-task-overlay-content" onclick="event.stopPropagation()">
+        <div class="add-task-overlay-head" onclick="event.stopPropagation()">
+          <div class="close-button" onclick="toggleAddTaskBoard()">
+            <img
+              class="regular-close-image"
+              src="./assets/icons/board/close_default.svg"
+              alt="Close Icon"
+            />
+            <img
+              class="hover-close-image"
+              src="./assets/icons/board/close_hover.svg"
+              alt="Close Icon Hover"
+            />
+          </div>
+          <h2 id="head-title">Add Task</h2>
+        </div>
+
+        <!-- addtask clone -->
+        <div class="addtask-aside-clone" onclick="event.stopPropagation()">
+          <section class="addtask-wrapper"></section>
+        </div>
+        <!-- Add task button -->
+        <section class="overlay-create-task" onclick="event.stopPropagation()">
+          <div class="add-task-button">
+            <div
+              id="cancel-button"
+              class="cancel-button base-button button-hollow button-regular"
+            >
+              Clear
+              <img
+                src="./assets/icons/add_task/cancel_default.svg"
+                alt="clear"
+              />
+            </div>
+            <div
+              id="create-button"
+              class="create-button base-button button-blue button-regular"
+            >
+              Create task
+              <img src="./assets/icons/add_task/check.svg" alt="create task" />
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <!-- Overlay Task -->
+    <div
+      onclick="hideOverlay()"
+      id="task-overlay-bg"
+      class="task-overlay-bg d-none"
+    >
+      <div
+        class="task-overlay"
+        id="task-overlay"
+        onclick="event.stopPropagation()"
+      >
+        <!-- task overlay content-->
+        <div
+          onclick="event.stopPropagation()"
+          class="task-overlay-content"
+          id="task-overlay-content"
+        >
+          <div class="label-exit-box">
+            <span id="overlay-user-story">User Story...</span>
+            <img
+              onclick="hideOverlay()"
+              id="task-overlay-exit-button"
+              class="overlay-exit-button"
+              src="./assets/icons/board/exit_default.svg"
+              alt="close overlay"
+            />
+          </div>
+          <div class="task-overlay-title" id="overlay-title">
+            Kochwelt Page & Recipe Recommender
+          </div>
+          <div class="task-text" id="overlay-description">
+            Build start page with recipe recommendation...
+          </div>
+          <div class="due-date-box">
+            <b>Due date:</b><span id="overlay-due-date">23/07/2025</span>
+          </div>
+          <div class="priority-box">
+            <b>Priority:</b>
+            <div class="priority">
+              <span id="overlay-priority-text">Urgent</span>
+              <img
+                id="overlay-priority-icon"
+                src="./assets/icons/board/urgent.svg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="assigned-to">
+            <b>Assigned to:</b>
+            <div id="overlay-members" class="members">
+              <div class="member">
+                <img
+                  src="./assets/icons/board/Profile badge.svg"
+                  alt="Icon Profile"
+                />
+                <span>Anton</span>
+              </div>
+              <div class="member">
+                <img
+                  src="./assets/icons/board/Profile badge (1).svg"
+                  alt="Icon Profile"
+                />
+                <span>Benedict</span>
+              </div>
+              <div class="member">
+                <img
+                  src="./assets/icons/board/Profile badge (2).svg"
+                  alt="Icon Profile"
+                />
+                <span>Claudia</span>
+              </div>
+            </div>
+          </div>
+          <div id="overlay-subtasks" class="subtasks-ckeck-box">
+            <b>Subtasks:</b>
+            <div class="subtasks-container">
+              <div class="subtask">
+                <input
+                  type="checkbox"
+                  id="subtask1"
+                  value="Create start page"
+                  style="display: none"
+                />
+                <label for="subtask1">
+                  <img
+                    src="./assets/icons/add_task/check_default.svg"
+                    alt="Icon Checkbox"
+                  />
+                  Create start page
+                </label>
+              </div>
+              <div class="subtask">
+                <input id="subtask2" style="display: none" />
+                <label for="subtask2">
+                  <img
+                    src="./assets/icons/add_task/check_default.svg"
+                    alt="Icon Checkbox check"
+                  />
+                  Implement recipe recommendation
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="delete-edit-box">
+            <div class="button-box-delete" id="delete-task-btn">
+              <img
+                class="icon-hover-filter"
+                src="./assets/icons/board/delete_default.svg"
+                alt="Delete"
+              />
+              <span>Delete</span>
+            </div>
+            <div class="vertical-spacer"></div>
+            <div
+              class="button-box-edit"
+              id="edit-task-btn"
+              data-task-id="${taskId}"
+            >
+              <img
+                class="icon-hover-filter"
+                src="./assets/icons/board/edit_default.svg"
+                alt="Edit"
+              />
+              <span>Edit</span>
+            </div>
+          </div>
+        </div>
+        <div class="edit-addtask-wrapper d-none">
+          <div class="edit-close-btn">
+            <img
+              src="./assets/icons/board/close_default.svg"
+              alt="Close Icon"
+              onclick="document.querySelector('.edit-addtask-wrapper')?.classList.add('d-none'); document.getElementById('task-overlay-content')?.classList.remove('d-none');"
+            />
+          </div>
+          <div class="edit-addtask">
+            <!-- edit addtask / addtask-wrapper template-->
+          </div>
+          <div class="ok-btn-box">
+            <div
+              class="base-button button-small button-blue ok-button"
+              id="edit-ok-button"
+            >
+              OK
+              <img src="./assets/icons/add_task/check.svg" alt="Icon Check" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Header -->
+    <header>
+      <div class="header-box">
+        <a href="./index.html"
+          ><img src="./assets/icons/header/logo_white.svg"
+        /></a>
+        <nav>
+          <p>Kanban Project Management Tool</p>
+          <a href="help.html"
+            ><img
+              class="help"
+              src="./assets/icons/header/help.svg"
+              alt="Help Icon"
+          /></a>
+          <div id="person-icon-header" class="person-icon-header">
+            <svg
+              width="56"
+              height="56"
+              class="circle-badge"
+              onclick="event.stopPropagation(); toggleProfileNavbar()"
+            >
+              <circle cx="28" cy="28" r="26.5" class="circle-ring"></circle>
+              <circle cx="28" cy="28" r="23.06" class="circle-fill"></circle>
+              <text
+                id="person-icon-header-text"
+                x="28"
+                y="31"
+                class="circle-text"
+              >
+                
+              </text>
+            </svg>
+          </div>
+        </nav>
+        <div class="profile-navbar d-none" id="profile-navbar">
+          <div class="profile-navbar-box">
+            <a class="profile-navbar-help" href="./help.html">Help</a>
+            <a href="./legal-notice.html">Legal Notice</a>
+            <a href="./privacy-policy.html">Privacy Policy</a>
+            <a href="#" data-logout>Log out</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="sidebar">
+        <div class="nav">
+          <a href="./summary-board.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/summary.svg"
+              alt="Button Summary Board"
+            />Summary</a
+          >
+          <a href="addtask.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/add task.svg"
+              alt="Button Add Task"
+            />Add Task</a
+          >
+          <a href="board.html" class="nav-bg active"
+            ><img
+              src="./assets/icons/sidebar/board.svg"
+              alt="Button-Board"
+            />Board</a
+          >
+          <a href="contact.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/contacts.svg"
+              alt="Button Contact"
+            />Contacts</a
+          >
+        </div>
+        <div class="sidebar-links">
+          <a href="./privacy-policy.html">Privacy Policy</a>
+          <a href="./legal-notice.html">Legal notice</a>
+        </div>
+      </section>
+
+      <!-- Board -->
+      <section class="board">
+        <div class="board-top">
+          <div class="input-button-box">
+            <div class="input-wrapper">
+              <input id="search-input" type="search" placeholder="Find Task" />
+              <div id="search-btn" class="search-button">
+                <img
+                  src="./assets/icons/board/serarch_default.svg"
+                  alt="Icon Search"
+                />
+              </div>
+            </div>
+            <button
+              class="base-button button-blue button-small"
+              onclick="toggleAddTaskBoard()"
+            >
+              Add Task +
+            </button>
+          </div>
+          <div class="bar">
+            <div class="column-title">
+              To do<img
+                src="./assets/icons/board/plus_default.svg"
+                alt="Plus Icon"
+                onclick="toggleAddTaskBoard()"
+              />
+            </div>
+            <div class="column-title">
+              In progressing
+              <img
+                src="./assets/icons/board/plus_default.svg"
+                alt="Plus Icon"
+                onclick="toggleAddTaskBoard()"
+              />
+            </div>
+            <div class="column-title">
+              Await feedback<img
+                src="./assets/icons/board/plus_default.svg"
+                alt="Plus Icon"
+                onclick="toggleAddTaskBoard()"
+              />
+            </div>
+            <div class="column-title">Done</div>
+          </div>
+        </div>
+        <!-- tasks templates -->
+        <div class="board-content">
+          <!-- to do tasks template -->
+          <div class="column">
+            <div class="column-title-mobile">
+              <div class="column-title">
+                To do<img
+                  src="./assets/icons/board/plus_default.svg"
+                  alt="Plus Icon"
+                  onclick="toggleAddTaskBoard()"
+                />
+              </div>
+            </div>
+            <div class="task-list" id="to-do-column">
+              <div class="no-tasks">No tasks to do</div>
+            </div>
+          </div>
+          <!-- in progressin tasks template -->
+          <div class="column">
+            <div class="column-title-mobile">
+              <div class="column-title">
+                In progressing
+                <img
+                  src="./assets/icons/board/plus_default.svg"
+                  alt="Plus Icon"
+                  onclick="toggleAddTaskBoard()"
+                />
+              </div>
+            </div>
+            <div class="task-list" id="in-progress-column">
+              <div class="no-tasks">No tasks in progressing</div>
+            </div>
+          </div>
+          <!-- await feedback tasks template -->
+          <div class="column">
+            <div class="column-title-mobile">
+              <div class="column-title">
+                Await feedback<img
+                  src="./assets/icons/board/plus_default.svg"
+                  alt="Plus Icon"
+                  onclick="toggleAddTaskBoard()"
+                />
+              </div>
+            </div>
+            <div class="task-list" id="await-feedback-column">
+              <div class="no-tasks">No tasks await feedback</div>
+            </div>
+          </div>
+          <!-- done tasks template -->
+          <div class="column">
+            <div class="column-title-mobile">
+              <div class="column-title">Done</div>
+            </div>
+            <div class="task-list" id="done-column">
+              <div class="no-tasks">No tasks done</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="nav-mobile">
+      <div class="nav-box">
+        <a href="./summary-board.html"
+          ><img
+            src="./assets/icons_mobile/summary_default.svg"
+            alt="Icon Summary"
+        /></a>
+        <a href="./addtask.html"
+          ><img
+            src="./assets/icons_mobile/add_taks_default.svg"
+            alt="Icon Add Task"
+        /></a>
+        <a href="./board.html"
+          ><img src="./assets/icons_mobile/board_active.svg" alt="Icon Board"
+        /></a>
+        <a href="./contact.html"
+          ><img
+            src="./assets/icons_mobile/contacts_default.svg"
+            alt="Icon Contact"
+        /></a>
+      </div>
+    </footer>
+  </body>
+</html>

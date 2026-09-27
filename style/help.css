@@ -1,0 +1,76 @@
+.hep-wrapper {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.help-content {
+    padding: 72px 88px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 1440px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.help-content p {
+    font-size: 16px;
+}
+
+.help-content a {
+    font-size: 16px;
+}
+
+.help-how-to-use-it-box {
+    display: flex;
+    gap: 12px;
+}
+
+.padding-top-help-how-to-use-it-block {
+    padding-top: 5px;
+}
+
+.help-a-tag-style {
+    text-decoration: none;
+    color: var(--main-color);
+}
+
+.help-headline-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.help-a-tag-back-button {
+    display: block;
+    width: 37px;
+    height: 37px;
+    position: relative;
+}
+
+.regular-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+}
+
+.help-a-tag-back-button:hover .regular-image {
+    opacity: 0;
+}
+
+.help-a-tag-back-button:hover .hover-image {
+    opacity: 1;
+}

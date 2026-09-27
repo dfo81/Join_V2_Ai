@@ -1,0 +1,199 @@
+/* ===== OVERLAY CONTAINER ===== */
+.overlay-edit-contact {
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 60;
+}
+
+/* ===== CLOSE ICON ===== */
+.contact-overlay-close-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.contact-overlay-close-icon img {
+    width: 32px;
+}
+
+.contact-overlay-close-icon img:first-child {
+    display: block;
+}
+
+.contact-overlay-close-icon img:last-child {
+    display: none;
+}
+
+.contact-overlay-close-icon:hover img:first-child {
+    display: none;
+}
+
+.contact-overlay-close-icon:hover img:last-child {
+    display: block;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes slideIn {
+    from { left: -580px; }
+    to { left: 0; }
+}
+
+/* ===== OVERLAY HEADER ===== */
+.contact-overlay-edit-head {
+    width: 580px;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    height: 300px;
+    background-color: var(--light-blue);
+    border-radius: 0 30px 0 0;
+    animation: slideIn 1s forwards;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+
+.contact-overlay-edit-head img {
+    width: 55px;
+}
+
+/* ===== OVERLAY CONTENT ===== */
+.contact-overlay-edit-content {
+    width: 579px;
+    height: calc(100vh - 300px);
+    background-color: white;
+    border-radius: 0 0 30px 30px;
+    position: absolute;
+    top: 300px;
+    left: 0;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    animation: slideIn 1s forwards;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* ===== CONTACT ICON ===== */
+.contact-overlay-person-icon-big {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    width: 120px;
+}
+
+.contact-overlay-person-icon-big h3 {
+    position: absolute;
+    color: white;
+    font-family: Inter;
+}
+
+.contact-overlay-person-icon-big img {
+    position: absolute;
+    height: 120px;
+    width: 120px;
+}
+
+/* ===== FORM ELEMENTS ===== */
+.contact-overlay-edit-content-details {
+    gap: 10px;
+    display: flex;
+    width: 380px;
+    flex-direction: column;
+}
+
+.contact-overlay-edit-content-name {
+    display: flex;
+    width: 95%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+}
+
+.contact-overlay-edit-content-name input {
+    font-size: 19px;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+/* ===== DIVIDERS ===== */
+.contact-placeholder-blue {
+    height: 0.5px;
+    width: 100%;
+    background-color: var(--light-blue);
+}
+
+.contact-overlay-placeholder {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* ===== ACTION BUTTONS ===== */
+.overlay-edit-contact-delete-save {
+    display: flex;
+    gap: 25px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Delete Button */
+.overlay-edit-contact-delete {
+    border: solid 1px #647188;
+    border-radius: 8px;
+    height: 60px;
+    width: 106px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.overlay-edit-contact-delete:hover {
+    box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.1);
+    border-color: var(--main-color);
+    color: var(--main-color);
+}
+
+/* Save Button */
+.overlay-edit-contact-save {
+    display: flex;
+    gap: 4px;
+    border-radius: 10px;
+    background-color: var(--main-color);
+    height: 60px;
+    width: 174px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+}
+
+.overlay-edit-contact-save p {
+    width: 126px;
+    display: flex;
+    justify-content: center;
+}
+
+.overlay-edit-contact-save img {
+    filter: brightness(0) saturate(100%) invert(100%);
+}
+
+.overlay-edit-contact-save:hover {
+    background-color: var(--light-blue);
+    box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.1);
+}

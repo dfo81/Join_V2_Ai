@@ -1,0 +1,148 @@
+@media (max-width: 1250px) {
+  .board-wrapper {
+    padding: 0;
+  }
+  
+  .dashboard {
+    width: calc(100vw - 234px);
+  }
+
+  .task-dashboard-container {
+    transform: scale(0.9);
+  }
+
+  .dashboard-header {
+    transform: scale(0.9);
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 1150px) {
+  .task-dashboard-container {
+    transform: scale(0.8);
+  }
+
+  .dashboard-header {
+    transform: scale(0.9);
+  }
+}
+
+@media (max-width: 1024px) {
+  .dashboard {
+    width: calc(100vw - 150px);
+    gap: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .task-dashboard-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard {
+    width: 100%;
+    height: calc(100vh - 207px);
+    position: absolute;
+    background-color: white;
+  }
+
+  .dashboard-header {
+    background: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dashboard-header h2 {
+    font-size: 33px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 47px;
+  }
+
+  .task-dashboard-container {
+    display: none;
+
+  }
+
+  .task-tile-urgent-right-section h4 {
+    font-size: 23px;
+  }
+
+  .task-tile-urgent-right-section h5 {
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .task-tile-urgent-right-section {
+    gap: 16px;
+    width: auto;
+    align-items: start;
+  }
+
+  .task-tile-urgent-left-section {
+    gap: 0;
+  }
+
+  .task-tile-urgent-icon-row {
+    gap: 0;
+    align-items: normal;
+  }
+
+  .task-tile-urgent-content {
+    gap: 16px;
+  }
+
+  .task-tile-urgent-divider {
+    height: 118px;
+  }
+
+  .task-tile-in-progress-mobile h5,
+  .task-tile-board-overview-mobile h5,
+  .task-tile-awaiting-feedback-mobile h5,
+  .task-tile-done-mobile h5 {
+    color: var(--main-color);
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .task-tile-todo-content img {
+    height: 76px;
+    width: 76px;
+  }
+
+  .task-tile-todo-content {
+    align-items: center;
+  }
+}
+
+@media (max-width: 720px) {
+  .dashboard {
+    height: calc(100vh - 171px);
+  }
+
+  main {
+    top: 84px;
+    height: calc(100vh - 171px);
+  }
+}
+
+@media (max-width: 450px) {
+  .dashboard-header {
+    zoom: 0.75;
+  }
+
+  .task-dashboard-mobile {
+    zoom: 0.75;
+  }
+}
+
+@media (max-height: 660px) {
+  main {
+    margin: 6px 0;
+    overflow: auto;
+  }
+}

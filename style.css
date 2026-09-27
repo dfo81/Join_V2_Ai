@@ -1,0 +1,257 @@
+:root {
+  --main-color: #4589ff;
+  --light-blue: #005dff;
+  --dark-blue: #091931;
+  --style-color: #D1D1D1;
+  --light-gray: #647188;
+  --menu-color: #42526e;
+  --icon-gray: #A8A8A8;
+  --no-task-gray: #E7E7E7;
+  --urgent-color: #ff3d00;
+  --medium-color: #ffa800;
+  --low-color: #7ae229;
+  --label-orange: #ff7a00;
+  --label-blue: #0038ff;
+  --error-color: #fa2828;
+  --progressbar-bg: #F4F4F4;
+  --navi-buttons-bg: #D2E3FF;
+}
+
+@font-face {
+  font-family: open-sans;
+  src: url(./assets/fonts/InterOpenSans/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf);
+}
+
+@font-face {
+  font-family: inter;
+  src: url(./assets/fonts/InterOpenSans/Inter/Inter-VariableFont_opsz\,wght.ttf);
+}
+
+* {
+  font-family: open-sans, sans-serif;
+  font-size: 23px;
+}
+
+html, body {
+  scroll-behavior: smooth;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+*::placeholder {
+  color: var(--style-color);
+}
+
+main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.nav-without-profil {
+  justify-content: end;
+}
+
+/*
+<button class="base-button button-blue button-small">Button</button>
+*/
+
+.base-button {
+  font-size: 23px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  animation: translate;
+  transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.button-small {
+  border-radius: 8px;
+  padding: 10px 18px;
+}
+
+.button-regular {
+  border-radius: 10px;
+  padding: 16px 10px;
+}
+
+.button-blue {
+  color: #fff;
+  background-color: var(--main-color);
+}
+
+.button-blue:hover {
+  background-color: var(--light-blue);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-blue:active {
+  background-color: #fff;
+  color: var(--main-color);
+}
+
+.button-hollow {
+  border: 1px solid var(--light-gray);
+  background-color: #fff;
+  color: var(--light-gray);
+}
+
+.button-hollow:hover {
+  color: var(--main-color);
+  border: 2px solid;
+  margin: -1px;
+  border-color: var(--main-color);
+  box-shadow: 0px 4px 8px #53535333;
+}
+
+.button-hollow:active {
+  border: 1px solid var(--light-blue);
+  margin: 0;
+  color: var(--light-blue);
+}
+
+
+/* priority button root */
+.priority-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 136px;
+  height: 49px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  transition: background-color 0.2s;
+  background-color: #fff;
+  color: black;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+}
+
+.priority-button img {
+  width: 20px;
+  height: auto;
+}
+
+/* Urgent button
+      <button class="priority-button urgent-button">
+        <span>Urgent</span>
+        <img src="urgent_arrow.svg" alt="urgent" />
+      </button>
+      */
+
+.urgent-button:hover {
+  border-bottom: 2px solid var(--urgent-color);
+  height: 51px;
+}
+
+.urgent-button.active {
+  background-color: var(--urgent-color);
+  color: #fff;
+  pointer-events: none;
+}
+
+.urgent-button.active img {
+  content: url("./assets/icons/add_task/urgent_default.svg");
+  width: 20px;
+}
+
+/* Medium button
+      <button class="priority-button medium-button">
+        <span>Medium</span>
+        <img src="priority_equal.svg" alt="medium" />
+      </button>
+      */
+
+.medium-button:hover {
+  border-bottom: 2px solid var(--medium-color);
+  height: 51px;
+}
+
+.medium-button.active {
+  background-color: var(--medium-color);
+  color: #fff;
+  pointer-events: none;
+}
+
+.medium-button.active img {
+  width: 20px;
+  content: url("./assets/icons/add_task/medium_default.svg");
+}
+
+/* Low button 
+      <button class="priority-button low-button">
+        <span>Low</span>
+        <img src="low_arrow.svg" alt="low" />
+      </button>
+      */
+
+.low-button:hover {
+  border-bottom: 2px solid var(--low-color);
+  height: 51px;
+}
+
+.low-button.active {
+  background-color: var(--low-color);
+  color: #fff;
+  pointer-events: none;
+}
+
+.low-button.active img {
+  width: 20px;
+  content: url("./assets/icons/add_task/low_default.svg");
+}
+
+h1 {
+  font-size: 61px;
+  font-weight: 700;
+  margin: 0;
+}
+
+h2 {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0;
+}
+
+h3 {
+  font-size: 47px;
+  font-weight: 500;
+  margin: 0;
+}
+
+h4 {
+  font-size: 33px;
+  font-weight: 700;
+  margin: 0;
+}
+
+h5 {
+  font-size: 19px;
+  margin: 0;
+}
+
+h6 {
+  font-size: 16px;
+  margin: 0;
+}
+
+span {
+  font-size: 16px;
+}
+
+

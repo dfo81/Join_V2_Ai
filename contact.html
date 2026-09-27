@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
+    <meta http-equiv="Permissions-Policy" content="unload=*" />
+    <title>Contact</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/general_elements/icons/logo_blue_icon.svg"
+      type="image/x-icon"
+    />
+
+    <link rel="stylesheet" href="./style/header.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style/contact.css" />
+    <link rel="stylesheet" href="./style/overlay-edit-contact.css" />
+    <link rel="stylesheet" href="./style/overlay-add-contact.css" />
+    <link rel="stylesheet" href="./style/sidebar.css" />
+    <link rel="stylesheet" href="./style/footer-nav.css" />
+    <link rel="stylesheet" href="./style/responsiv.css" />
+    <link rel="stylesheet" href="./style/reponsiv-contact.css" />
+    <link rel="prerender" href="/summary-board.html" />
+    <link rel="prerender" href="./board.html" />
+    <link rel="prerender" href="./addtask.html" />
+    <link rel="prerender" href="./contact.html" />
+
+    <script src="./script.js"></script>
+    <script src="./scripts/contacts/contact.ui.js"></script>
+    <script src="./scripts/contacts/contact.ui.navbar.js"></script>
+    <script src="./scripts/contacts/contact.data.js"></script>
+    <script src="./scripts/contacts/contact.add.js"></script>
+    <script src="./scripts/templates.js"></script>
+    <script type="module" src="./scripts/contacts/contact.module.js"></script>
+  </head>
+
+  <body
+    class="contact-body"
+    onclick="closeProfileNavbar(), removeDetailsMobileNavbar()"
+  >
+    <!-- Overlay Edit Contact  -->
+    <div
+      class="overlay-edit-contact d-none"
+      id="contact-overlay-close-edit"
+      onclick="toggleEditContact()"
+    >
+      <div class="contact-overlay-edit-head" onclick="toggleEditContact(event)">
+        <div class="contact-overlay-close-icon">
+          <img
+            src="./assets/general_elements/icons/close_white.svg"
+            alt="Close Icon"
+            onclick="toggleEditContact()"
+          />
+          <img
+            src="./assets/general_elements/icons/close_hover_white.svg"
+            alt="Close Icon Hover"
+            onclick="toggleEditContact()"
+          />
+        </div>
+        <img
+          src="./assets/general_elements/icons/logo_big_white.svg"
+          alt="Join Logo"
+        />
+        <h2>Edit contact</h2>
+      </div>
+
+      <div
+        class="contact-overlay-edit-content"
+        onclick="toggleEditContact(event)"
+      >
+        <div class="contact-overlay-person-icon-big" id="edit-contact-icon">
+          <img
+            src="./assets/general_elements/icons/color1.svg"
+            alt="Circle of Name"
+            id="edit-icon-img"
+          />
+          <h3 id="edit-icon-text">AM</h3>
+        </div>
+        <div class="contact-overlay-edit-content-details">
+          <div class="contact-overlay-edit-content-name">
+            <input
+              oninput="clearFieldError('edit-name-input')"
+              placeholder="Name"
+              contenteditable="true"
+              value="Anton Mayer"
+              id="edit-name-input"
+            />
+            <img src="./assets/contacts/icons/person.svg" alt="Icon Person" />
+          </div>
+
+          <div
+            class="contact-placeholder-blue"
+            id="edit-name-input-placeholder"
+          >
+            <div id="edit-name-input-box"></div>
+          </div>
+        </div>
+        <div class="contact-overlay-edit-content-details">
+          <div class="contact-overlay-edit-content-name">
+            <input
+              oninput="clearFieldError('edit-email-input')"
+              placeholder="E-Mail"
+              contenteditable="true"
+              value="antonm@gmail.com"
+              id="edit-email-input"
+            />
+
+            <img src="./assets/contacts/icons/mail.svg" alt="Icon Person" />
+          </div>
+          <div
+            class="contact-overlay-placeholder"
+            id="edit-email-input-placeholder"
+          >
+            <div id="edit-email-input-box"></div>
+          </div>
+        </div>
+        <div class="contact-overlay-edit-content-details">
+          <div class="contact-overlay-edit-content-name">
+            <input
+              oninput="clearFieldError('edit-phone-input')"
+              placeholder="Phone"
+              contenteditable="true"
+              value="+00 0000 000 00 0"
+              type="tel"
+              id="edit-phone-input"
+            />
+
+            <img src="./assets/contacts/icons/call.svg" alt="Icon Person" />
+          </div>
+          <div
+            class="contact-overlay-placeholder"
+            id="edit-phone-input-placeholder"
+          >
+            <div id="edit-phone-input-box"></div>
+          </div>
+        </div>
+
+        <div class="overlay-edit-contact-delete-save">
+          <p
+            class="overlay-edit-contact-delete"
+            onclick="deleteContact(), toggleEditContact()"
+          >
+            Delete
+          </p>
+          <div class="overlay-edit-contact-save" onclick="saveEditedContact()">
+            <p>Save</p>
+            <img src="./assets/icons/contact/check.svg" alt="^Check Icon" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Overlay Add Contact  -->
+    <div
+      class="overlay-add-contact d-none"
+      id="contact-overlay-close-add"
+      onclick="closeAddContact()"
+    >
+      <div class="contact-overlay-add-head" onclick="closeAddContact(event)">
+        <div class="contact-overlay-close-icon" onclick="closeAddContact()">
+          <img
+            src="./assets/general_elements/icons/close_white.svg"
+            alt="Close Icon"
+          />
+          <img
+            src="./assets/general_elements/icons/close_hover_white.svg"
+            alt="Close Icon Hover"
+          />
+        </div>
+        <img
+          src="./assets/general_elements/icons/logo_big_white.svg"
+          alt="Join Logo"
+        />
+        <h2>Add contact</h2>
+        <p>Tasks are better with a team!</p>
+      </div>
+      <div
+        class="contact-overlay-add-content"
+        onclick="event.stopPropagation()"
+      >
+        <div class="contact-overlay-person-icon-big">
+          <img
+            src="./assets/contacts/img/person-new.svg"
+            alt="Circle of New Person"
+          />
+        </div>
+        <div class="contact-overlay-add-content-details">
+          <div class="contact-overlay-add-content-name">
+            <input
+              oninput="clearFieldError('name-new-contact')"
+              placeholder="Name"
+              type="text"
+              id="name-new-contact"
+            />
+            <img src="./assets/contacts/icons/person.svg" alt="Icon Person" />
+          </div>
+          <div
+            class="contact-placeholder-blue"
+            id="name-new-contact-placeholder"
+          >
+            <div id="name-new-contact-box"></div>
+          </div>
+        </div>
+        <div class="contact-overlay-add-content-details">
+          <div class="contact-overlay-add-content-name">
+            <input
+              oninput="clearFieldError('email-new-contact')"
+              placeholder="Mail"
+              type="email"
+              id="email-new-contact"
+            />
+            <img src="./assets/contacts/icons/mail.svg" alt="Icon Mail" />
+          </div>
+          <div
+            class="contact-overlay-placeholder"
+            id="email-new-contact-placeholder"
+          >
+            <div id="email-new-contact-box"></div>
+          </div>
+        </div>
+        <div class="contact-overlay-add-content-details">
+          <div class="contact-overlay-add-content-name">
+            <input
+              oninput="clearFieldError('phone-new-contact')"
+              placeholder="Phone"
+              type="tel"
+              id="phone-new-contact"
+            />
+            <img src="./assets/contacts/icons/call.svg" alt="Icon Phone" />
+          </div>
+          <div
+            class="contact-overlay-placeholder"
+            id="phone-new-contact-placeholder"
+          >
+            <div id="phone-new-contact-box"></div>
+          </div>
+        </div>
+        <div class="overlay-add-contact-cancel-save">
+          <p class="overlay-add-contact-cancel" onclick="closeAddContact()">
+            Cancel
+          </p>
+          <div class="overlay-add-create-contact" onclick="dataSave()">
+            <p>Create contact</p>
+            <img src="./assets/icons/contact/check.svg" alt="Check Icon" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="check-status-add-contact button-regular d-none"
+      id="check-status-add-contact"
+    >
+      Contact successfully created
+    </div>
+
+    <header>
+      <div class="header-box">
+        <a href="./index.html"
+          ><img
+            src="./assets/general_elements/icons/logo_white_icon.svg"
+            alt="Logo Join"
+        /></a>
+        <nav>
+          <p>Kanban Project Management Tool</p>
+          <a href="help.html"
+            ><img
+              class="help"
+              src="./assets/icons/header/help.svg"
+              alt="Help Icon"
+          /></a>
+          <div id="person-icon-header" class="person-icon-header">
+            <svg
+              width="56"
+              height="56"
+              class="circle-badge"
+              onclick="event.stopPropagation(); toggleProfileNavbar()"
+            >
+              <circle cx="28" cy="28" r="26.5" class="circle-ring"></circle>
+              <circle cx="28" cy="28" r="23.06" class="circle-fill"></circle>
+              <text
+                id="person-icon-header-text"
+                x="28"
+                y="31"
+                class="circle-text"
+              >
+                
+              </text>
+            </svg>
+          </div>
+        </nav>
+        <div class="profile-navbar d-none" id="profile-navbar">
+          <div class="profile-navbar-box">
+            <a class="profile-navbar-help" href="./help.html">Help</a>
+            <a href="./legal-notice.html">Legal Notice</a>
+            <a href="./privacy-policy.html">Privacy Policy</a>
+            <a href="#" data-logout>Log out</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="contact-content">
+     <section class="sidebar">
+        <div class="nav">
+          <a href="./summary-board.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/summary.svg"
+              alt="Button Summary Board"
+            />Summary</a
+          >
+          <a href="addtask.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/add task.svg"
+              alt="Button Add Task"
+            />Add Task</a
+          >
+          <a href="board.html" class="nav-bg"
+            ><img
+              src="./assets/icons/sidebar/board.svg"
+              alt="Button-Board"
+            />Board</a
+          >
+          <a href="contact.html" class="nav-bg active"
+            ><img
+              src="./assets/icons/sidebar/contacts.svg"
+              alt="Button Contact"
+            />Contacts</a
+          >
+        </div>
+        <div class="sidebar-links">
+          <a href="./privacy-policy.html">Privacy Policy</a>
+          <a href="./legal-notice.html">Legal notice</a>
+        </div>
+      </section>
+
+      <section
+        class="contact-add-new-contact-container"
+        id="add-new-contact-container"
+      >
+        <div class="button-add-new-contact-container">
+          <button
+            onclick="openAddContact()"
+            class="button-regular button-blue base-button button-add-new-contact-box"
+          >
+            Add new contact <img src="./assets/contacts/icons/person_add.svg" />
+          </button>
+        </div>
+
+        <div class="contact-book" id="all-contacts"></div>
+
+        <button
+          class="d-none button-mobile-add-new-contact"
+          onclick="openAddContact()"
+        >
+          <img
+            src="./assets/contacts/icons/person_add.svg"
+            alt="Button Add New Contact"
+          />
+        </button>
+      </section>
+
+      <section
+        class="contact-single-person-content"
+        id="contact-details"
+      ></section>
+    </main>
+
+    <footer class="nav-mobile">
+      <div class="nav-box">
+        <a href="./summary-board.html"
+          ><img
+            src="./assets/icons_mobile/summary_default.svg"
+            alt="Summary Board Icon"
+        /></a>
+        <a href="./addtask.html"
+          ><img
+            src="./assets/icons_mobile/add_taks_default.svg"
+            alt="Add Task Icon"
+        /></a>
+        <a href="./board.html"
+          ><img src="./assets/icons_mobile/board_default.svg" alt="Board Icon"
+        /></a>
+        <a href="./contact.html"
+          ><img
+            src="./assets/icons_mobile/contacts_active.svg"
+            alt="Contact Icon"
+        /></a>
+      </div>
+    </footer>
+  </body>
+</html>
