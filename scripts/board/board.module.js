@@ -208,6 +208,7 @@ window.onTaskColumnChanged = function (taskId, targetLogical) {
 window.fillTaskOverlay = function fillTaskOverlay(task) {
   renderCategory(task.category);
   renderTitleDescDate(task);
+  renderCreator(task);
   renderPriority(task.priority);
   renderAssignedContacts(task);
   renderSubtasks(task);

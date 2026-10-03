@@ -130,6 +130,18 @@
           <div class="task-text" id="overlay-description">
             Build start page with recipe recommendation...
           </div>
+          <div class="creator-box" id="overlay-creator-box">
+            <b>Creator:</b>
+            <img id="overlay-creator-badge" class="creator-badge" src="./assets/icons/board/member.svg" alt="Member" />
+            <span id="overlay-creator-name" class="creator-name"></span>
+            <button type="button" id="overlay-creator-button" class="creator-button" onclick="toggleCreatorCard(event)">
+              <img id="overlay-creator-button-icon" src="./assets/icons/board/See profile.svg" alt="Profil" />
+            </button>
+            <div id="overlay-creator-card" class="creator-card d-none">
+              <span id="overlay-creator-card-name" class="creator-card-name"></span>
+              <a id="overlay-creator-card-email" class="creator-card-email" href="#"></a>
+            </div>
+          </div>
           <div class="due-date-box">
             <b>Due date:</b><span id="overlay-due-date">23/07/2025</span>
           </div>
@@ -347,43 +359,28 @@
             </button>
           </div>
           <div class="bar">
-            <div class="column-title">
-              To do<img
-                src="./assets/icons/board/plus_default.svg"
-                alt="Plus Icon"
-                onclick="toggleAddTaskBoard()"
-              />
-            </div>
-            <div class="column-title">
-              In progressing
-              <img
-                src="./assets/icons/board/plus_default.svg"
-                alt="Plus Icon"
-                onclick="toggleAddTaskBoard()"
-              />
-            </div>
-            <div class="column-title">
-              Await feedback<img
-                src="./assets/icons/board/plus_default.svg"
-                alt="Plus Icon"
-                onclick="toggleAddTaskBoard()"
-              />
-            </div>
+            <div class="column-title">Triage</div>
+            <div class="column-title">To do</div>
+            <div class="column-title">In progressing</div>
+            <div class="column-title">Await feedback</div>
             <div class="column-title">Done</div>
           </div>
         </div>
         <!-- tasks templates -->
         <div class="board-content">
+          <!-- triage tasks template -->
+          <div class="column">
+            <div class="column-title-mobile">
+              <div class="column-title">Triage</div>
+            </div>
+            <div class="task-list" id="triage-column">
+              <div class="no-tasks">No tasks in triage</div>
+            </div>
+          </div>
           <!-- to do tasks template -->
           <div class="column">
             <div class="column-title-mobile">
-              <div class="column-title">
-                To do<img
-                  src="./assets/icons/board/plus_default.svg"
-                  alt="Plus Icon"
-                  onclick="toggleAddTaskBoard()"
-                />
-              </div>
+              <div class="column-title">To do</div>
             </div>
             <div class="task-list" id="to-do-column">
               <div class="no-tasks">No tasks to do</div>
@@ -392,14 +389,7 @@
           <!-- in progressin tasks template -->
           <div class="column">
             <div class="column-title-mobile">
-              <div class="column-title">
-                In progressing
-                <img
-                  src="./assets/icons/board/plus_default.svg"
-                  alt="Plus Icon"
-                  onclick="toggleAddTaskBoard()"
-                />
-              </div>
+              <div class="column-title">In progressing</div>
             </div>
             <div class="task-list" id="in-progress-column">
               <div class="no-tasks">No tasks in progressing</div>
@@ -408,13 +398,7 @@
           <!-- await feedback tasks template -->
           <div class="column">
             <div class="column-title-mobile">
-              <div class="column-title">
-                Await feedback<img
-                  src="./assets/icons/board/plus_default.svg"
-                  alt="Plus Icon"
-                  onclick="toggleAddTaskBoard()"
-                />
-              </div>
+              <div class="column-title">Await feedback</div>
             </div>
             <div class="task-list" id="await-feedback-column">
               <div class="no-tasks">No tasks await feedback</div>

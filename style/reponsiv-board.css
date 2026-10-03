@@ -116,19 +116,7 @@
     }
 }
 
-@media (max-width: 1350px) {
-    .board-content {
-        transform: scale(0.92);
-        transform-origin: left top;
-    }
-
-    .bar {
-        transform: scale(0.92);
-        transform-origin: left top;
-    }
-}
-
-@media (min-width: 1250px) {
+@media (min-width: 1560px) {
     .column-title-mobile {
         display: none;
     }
@@ -138,7 +126,7 @@
     }
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1559px) {
     .board-content {
         transform: scale(1);
         transform-origin: center top;
@@ -164,6 +152,7 @@
     }
 
     .column {
+        flex: none;
         width: 100%;
     }
 
@@ -174,12 +163,16 @@
     }
 
     .column-title {
+        flex: none;
         width: 100%;
         padding: 0;
     }
 
     .no-tasks {
-        width: 100%;
+        flex-shrink: 0;
+        box-sizing: border-box;
+        width: 252px;
+        max-width: 100%;
     }
 
     .board {
@@ -188,12 +181,24 @@
 
     .task-list {
         flex-direction: row;
-        overflow-x: scroll;
+        overflow-x: auto;
         overflow-y: hidden;
         padding: 8px;
         width: 100%;
+        box-sizing: border-box;
         align-items: flex-start;
         height: 100%;
+        scrollbar-width: thin;
+        scrollbar-color: var(--icon-gray) transparent;
+    }
+
+    .task-list::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .task-list::-webkit-scrollbar-thumb {
+        background-color: var(--icon-gray);
+        border-radius: 4px;
     }
 
     .ticket {
@@ -203,6 +208,17 @@
 
     .plus-minus-img {
         display: flex;
+    }
+}
+
+/* touch devices: slide without scrollbar */
+@media (max-width: 1559px) and (hover: none) and (pointer: coarse) {
+    .task-list {
+        scrollbar-width: none;
+    }
+
+    .task-list::-webkit-scrollbar {
+        height: 0;
     }
 }
 

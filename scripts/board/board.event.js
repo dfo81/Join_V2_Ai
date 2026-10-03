@@ -6,6 +6,7 @@ let MIN_SEARCH_CHARS = 3;
 let currentSearchTerm = "";
 
 let LOGICAL_TO_DOM = {
+  triage: "triage-column",
   todo: "to-do-column",
   inProgress: "in-progress-column",
   awaitFeedback: "await-feedback-column",
@@ -14,6 +15,7 @@ let LOGICAL_TO_DOM = {
 };
 
 let DOM_TO_LOGICAL = {
+  "triage-column": "triage",
   "to-do-column": "todo",
   "in-progress-column": "inProgress",
   "await-feedback-column": "awaitFeedback",
@@ -39,6 +41,7 @@ function debounce(fn, wait = 200) {
  * @type {Object.<string, string>}
  */
 let columnMap = {
+  triage: "triage-column",
   todo: "to-do-column",
   inProgress: "in-progress-column",
   awaitFeedback: "await-feedback-column",

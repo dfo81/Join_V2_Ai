@@ -48,7 +48,7 @@
  */
 
 import { getDatabase, ref, get, onValue, push, set, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-import { app } from "../firebase.js";
+import { app, auth } from "../firebase.js";
 let db = getDatabase(app);
 
 /** @type {import("https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js").Database} */
@@ -91,6 +91,17 @@ window.mapContact = function mapContact(id) {
 }
 
 /**
+ * Builds the creator info of the logged-in user who creates a task.
+ * @returns {{uid: string, name: string, email: string}}
+ */
+function getCreator() {
+  let user = auth.currentUser;
+  if (!user) return { uid: "", name: "Unknown", email: "" };
+  let name = user.displayName || (user.isAnonymous ? "Guest" : user.email) || "Unknown";
+  return { uid: user.uid, name, email: user.email || "" };
+}
+
+/**
  * Creates a new task in Firebase under the `tasks` collection.
  * @param {TaskData} taskData - Data to persist.
  * @returns {Promise<string>} Resolves with the generated task key.
@@ -98,7 +109,7 @@ window.mapContact = function mapContact(id) {
 window.createTask = async function createTask(taskData) {
   tasksRef = ref(db, "tasks");
   newRef = push(tasksRef);
-  payload = { ...taskData, createdAt: new Date().toISOString() };
+  payload = { ...taskData, createdBy: getCreator(), createdAt: new Date().toISOString() };
   await set(newRef, payload);
   return newRef.key;
 }

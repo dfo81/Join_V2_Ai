@@ -1,3 +1,13 @@
+/** Escapes text for safe use in HTML content and attributes (task data can come from external emails). */
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 /** Returns HTML for the mobile To-do task tile. */
 function getMobileTaskTodo() {
   document.getElementById("mobile-task-to-do").innerHTML = `
@@ -149,8 +159,8 @@ function getSubtasksTemplate() {
 function getSubtaskItemTemplate(subtask, index) {
   return `
       <li class="subtask-item" data-index="${index}">
-        <span class="subtask-text">${subtask}</span>
-        <input class="subtask-edit-input d-none" type="text" id="sub${index}" value="${subtask}" />
+        <span class="subtask-text">${escapeHtml(subtask)}</span>
+        <input class="subtask-edit-input d-none" type="text" id="sub${index}" value="${escapeHtml(subtask)}" />
         <div class="subtask-func-btn d-none">
           <img class="subtask-edit-icon" src="./assets/icons/add_task/edit_default.svg" alt="Edit"/>
           <div class="vertical-spacer first-spacer"></div>
@@ -177,14 +187,14 @@ function buildTicketFrame(title, description) {
   let truncated = truncateForCard(description || "", 50);
   return `
     <div class="frame">
-      <div class="ticket-title">${title ?? ""}</div>
-      <div class="ticket-text">${truncated}</div>
+      <div class="ticket-title">${escapeHtml(title)}</div>
+      <div class="ticket-text">${escapeHtml(truncated)}</div>
     </div>`;
 }
 
 /** Returns the ticket priority icon HTML. */
 function buildTicketPriority(priority) {
-  return `<img src="./assets/icons/board/${priority}.svg" alt="${priority}">`;
+  return `<img src="./assets/icons/board/${escapeHtml(priority)}.svg" alt="${escapeHtml(priority)}">`;
 }
 
 /** Returns the main ticket template with all parts assembled. */
@@ -229,7 +239,7 @@ function buildTicketLabel(category) {
   let labelClass = getLabelClass(category);
   return `
     <div class="label-box">
-      <div class="label ${labelClass}">${category ?? ""}</div>
+      <div class="label ${labelClass}">${escapeHtml(category)}</div>
       <img class="plus-minus-img" src="./assets/icons/board/plusminus.svg" alt="plus/minus" draggable="false" role="button" aria-label="Weitere Optionen">
     </div>`;
 }
@@ -272,7 +282,7 @@ function subtaskItemTemplate(s, i, prefix){
   return `
     <div class="subtask" data-subtask-index="${i}">
       <input type="checkbox" id="${id}" ${chk} style="display:none"/>
-      <label for="${id}" class="${cls}"> <img src="${icon}" />${s.name}</label>
+      <label for="${id}" class="${cls}"> <img src="${icon}" />${escapeHtml(s.name)}</label>
     </div>`;
 }
 

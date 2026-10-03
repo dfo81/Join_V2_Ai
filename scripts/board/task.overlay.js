@@ -95,9 +95,83 @@ function getLabelClass(category) {
  * @param {{title?:string, description?:string, dueDate?:any}} task
  */
 function renderTitleDescDate(task) {
-  document.getElementById("overlay-title").innerHTML = task.title || "";
+  document.getElementById("overlay-title").textContent = task.title || "";
   document.getElementById("overlay-description").textContent = task.description || "";
   document.getElementById("overlay-due-date").textContent = formatDueDateDisplay(task.dueDate);
+}
+
+/**
+ * Resolve who created a task: an external email requester or a logged-in member.
+ * @param {Object} task
+ * @returns {{external: boolean, name: string, email: string}|null} null for tasks without creator info.
+ */
+function getTaskCreator(task) {
+  if (task.source === "email") {
+    let email = String(task.requester || "");
+    return { external: true, name: String(task.requesterName || email || "Unknown"), email };
+  }
+  if (task.createdBy) {
+    return { external: false, name: String(task.createdBy.name || "Unknown"), email: String(task.createdBy.email || "") };
+  }
+  return null;
+}
+
+/**
+ * Render the creator row (badge, name, button) and its info card in the overlay.
+ * @param {Object} task
+ */
+function renderCreator(task) {
+  let box = document.getElementById("overlay-creator-box");
+  let creator = getTaskCreator(task);
+  box.classList.toggle("d-none", !creator);
+  closeCreatorCard();
+  if (!creator) return;
+  let badge = document.getElementById("overlay-creator-badge");
+  badge.src = creator.external ? "./assets/icons/board/extern.svg" : "./assets/icons/board/member.svg";
+  badge.alt = creator.external ? "Extern" : "Member";
+  document.getElementById("overlay-creator-name").textContent = creator.name;
+  let buttonIcon = document.getElementById("overlay-creator-button-icon");
+  buttonIcon.src = creator.external ? "./assets/icons/board/Send email.svg" : "./assets/icons/board/See profile.svg";
+  buttonIcon.alt = creator.external ? "E-mail" : "Profil";
+  renderCreatorCard(creator);
+}
+
+/**
+ * Fill the creator info card with name and email (as mailto link).
+ * @param {{name: string, email: string}} creator
+ */
+function renderCreatorCard(creator) {
+  document.getElementById("overlay-creator-card-name").textContent = creator.name;
+  let mail = document.getElementById("overlay-creator-card-email");
+  mail.textContent = creator.email || "No email";
+  if (creator.email) mail.href = "mailto:" + encodeURIComponent(creator.email).replace("%40", "@");
+  else mail.removeAttribute("href");
+}
+
+/** Click listener that closes the creator card on outside clicks, while the card is open. */
+let creatorCardOutsideClick = null;
+
+/**
+ * Show/hide the creator info card.
+ * @param {MouseEvent} event
+ */
+function toggleCreatorCard(event) {
+  event.stopPropagation();
+  let card = document.getElementById("overlay-creator-card");
+  let button = document.getElementById("overlay-creator-button");
+  if (!card.classList.contains("d-none")) return closeCreatorCard();
+  card.classList.remove("d-none");
+  creatorCardOutsideClick = (e) => {
+    if (!card.contains(e.target) && !button.contains(e.target)) closeCreatorCard();
+  };
+  document.addEventListener("click", creatorCardOutsideClick, true);
+}
+
+/** Hide the creator info card and remove its outside-click listener. */
+function closeCreatorCard() {
+  document.getElementById("overlay-creator-card")?.classList.add("d-none");
+  if (creatorCardOutsideClick) document.removeEventListener("click", creatorCardOutsideClick, true);
+  creatorCardOutsideClick = null;
 }
 
 /**

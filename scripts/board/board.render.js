@@ -104,7 +104,7 @@ function buildTicketParts(task) {
  * @returns {string}
  */
 function buildTicketPriority(priority) {
-  return `<img src="./assets/icons/board/${priority}.svg" alt="${priority}">`;
+  return `<img src="./assets/icons/board/${escapeHtml(priority)}.svg" alt="${escapeHtml(priority)}">`;
 }
 
 /**
@@ -283,6 +283,7 @@ function updatePlaceholderForColumn(columnId) {
  * Static placeholder messages per column DOM id.
  */
 let placeholderTexts = {
+  "triage-column": "No tasks in triage",
   "to-do-column": "No tasks to do",
   "in-progress-column": "No tasks in progressing",
   "await-feedback-column": "No tasks await feedback",

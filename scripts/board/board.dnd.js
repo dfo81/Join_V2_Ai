@@ -159,6 +159,7 @@ function getDomToLogical() {
     } catch {}
   }
   return {
+    "triage-column": "triage",
     "to-do-column": "todo",
     "in-progress-column": "inProgress",
     "await-feedback-column": "awaitFeedback",

@@ -51,7 +51,7 @@ function createMoveOverlay(taskId, currentColumn){
   overlay.className = "move-overlay";
   overlay.setAttribute("role","menu");
   overlay.dataset.taskId = taskId;
-  let order={todo:0,inProgress:1,awaitFeedback:2,done:3};
+  let order={triage:0,todo:1,inProgress:2,awaitFeedback:3,done:4};
   let norm=normalizeColumnName(currentColumn);
   let targets=getMoveTargetsFor(currentColumn);
   let body=[`<div class="move-overlay__title">Move to</div>`].concat(targets.map(t=>{
@@ -200,6 +200,7 @@ function findTargetContainer(targetColumn){
  */
 function normalizeColumnName(raw){
   if(!raw) return ""; let v=String(raw).toLowerCase().replace(/\s+/g,"");
+  if(v==="triage"||v.includes("triage-column")) return "triage";
   if(v==="todo"||v.includes("to-do-column")) return "todo";
   if(v==="inprogress"||v.includes("in-progress-column")) return "inProgress";
   if(v.startsWith("await")||v.includes("review")||v.includes("await-feedback-column")) return "awaitFeedback";
@@ -212,8 +213,9 @@ function normalizeColumnName(raw){
  * @returns {{label:string,col:string}[]}
  */
 function getMoveTargetsFor(currentColumn){
-  let map={ todo:[{label:"progress",col:"inProgress"}], inProgress:[{label:"to-do",col:"todo"},{label:"awaiting",col:"awaitFeedback"}], awaitFeedback:[{label:"progress",col:"inProgress"},{label:"done",col:"done"}], done:[{label:"awaiting",col:"awaitFeedback"}] };
-  return map[normalizeColumnName(currentColumn)]||[];
+  let all=[{label:"triage",col:"triage"},{label:"to-do",col:"todo"},{label:"progress",col:"inProgress"},{label:"awaiting",col:"awaitFeedback"},{label:"done",col:"done"}];
+  let norm=normalizeColumnName(currentColumn);
+  return all.filter(t=>t.col!==norm);
 }
 
 /**
