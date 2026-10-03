@@ -199,7 +199,7 @@ function resetInitials(el) {
  */
 function redirectIfNotPublic() {
   let p = location.pathname.replace(/\/+$/, "").toLowerCase();
-  let isPublic = /(?:^|\/)(index|privacy-policy|legal-notice|help)(?:\.html)?$/.test(p) || p === "";
+  let isPublic = /(?:^|\/)(index|login|stakeholder|privacy-policy|legal-notice|help)(?:\.html)?$/.test(p) || p === "";
   if (!isPublic) location.replace("index.html");
 }
 
@@ -283,7 +283,7 @@ function onUserUnauthenticated() {
     el.style.opacity = "0";
   }
   let p = location.pathname.replace(/\/+$/, "").toLowerCase();
-  let isPublic = /(?:^|\/)(index|privacy-policy|legal-notice|help)(?:\.html)?$/.test(p) || p === "";
+  let isPublic = /(?:^|\/)(index|login|stakeholder|privacy-policy|legal-notice|help)(?:\.html)?$/.test(p) || p === "";
   if (!isPublic) location.replace("index.html");
 }
 

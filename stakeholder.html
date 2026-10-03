@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Join App</title>
+  <link rel="shortcut icon" href="./assets/icons/login/logo_blue.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./style/welcome.css" />
+  <link rel="stylesheet" href="./style/stakeholder.css" />
+
+  <script src="./scripts/stakeholder/stakeholder.module.js" type="module"></script>
+</head>
+
+<body>
+  <!-- header -->
+  <header class="stakeholder-header">
+    <a href="./index.html">
+      <img class="stakeholder-logo" src="./assets/general_elements/icons/logo_white_icon.svg" alt="Logo Join" />
+    </a>
+    <nav class="stakeholder-nav">
+      <p>Kanban Project Management Tool</p>
+      <a href="./help.html">
+        <img class="stakeholder-help" src="./assets/icons/header/help.svg" alt="Help Icon" />
+      </a>
+    </nav>
+  </header>
+
+  <main class="stakeholder-main">
+    <div class="stakeholder-content">
+      <!-- back arrow & request counter -->
+      <div class="stakeholder-top-row">
+        <a href="./index.html" class="stakeholder-back" aria-label="Back to welcome page">
+          <img src="./assets/general_elements/icons/arrow_left.svg" alt="" />
+        </a>
+        <div class="request-counter" id="request-counter">
+          <b id="request-count">0</b> of <b id="request-limit">10</b>&nbsp; requests used today
+        </div>
+      </div>
+
+      <h1 class="stakeholder-greeting" id="greeting">Good morning</h1>
+
+      <!-- limit reached banner -->
+      <div class="limit-banner d-none" id="limit-banner">
+        <img src="./assets/stakeholder/megaphone.svg" alt="" />
+        <p>That's all for today! The daily 10-request limit has been reached. Need more? Check back tomorrow to
+          continue.</p>
+      </div>
+
+      <!-- default: requests available -->
+      <section class="stakeholder-info" id="info-default">
+        <div class="stakeholder-text">
+          <p class="stakeholder-lead">Easily create a ticket by sending an email — no extra steps needed.</p>
+          <p>
+            On this platform, you can submit your feature requests via email. Our AI system will automatically
+            generate a ticket with a deadline and priority level.
+          </p>
+          <p>
+            A total of 10 requests can be created per day. After this limit, emails can still be sent, but they
+            will be manually reviewed by our team instead of generating AI tickets.
+          </p>
+        </div>
+        <img class="stakeholder-illustration" src="./assets/stakeholder/email_to_board.svg"
+          alt="Illustration: an email becomes a ticket on the board" />
+      </section>
+
+      <!-- limit reached -->
+      <section class="stakeholder-info d-none" id="info-limit">
+        <div class="stakeholder-text">
+          <p class="stakeholder-lead">Easily create a ticket by sending an email — no extra steps needed.</p>
+          <p>
+            The daily limit of 10 requests has been reached. No worries — you can still send emails, but our team
+            will review them manually instead of using AI to create tickets.
+          </p>
+        </div>
+        <img class="stakeholder-illustration" src="./assets/stakeholder/manual_review.svg"
+          alt="Illustration: a team member reviews emails manually" />
+      </section>
+
+      <a class="base-button button-small welcome-button-blue stakeholder-mail-button" id="mail-button" href="#">
+        <span id="mail-button-text">Create Email Request</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
+        </svg>
+      </a>
+    </div>
+  </main>
+
+  <footer class="stakeholder-footer">
+    <a href="./privacy-policy.html">Privacy Policy</a>
+    <a href="./legal-notice.html">Legal Notice</a>
+  </footer>
+</body>
+
+</html>

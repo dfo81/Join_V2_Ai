@@ -1,0 +1,46 @@
+<svg width="480" height="320" viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="480" height="320" rx="10" fill="#A7D3FB"/>
+  <!-- browser window -->
+  <rect x="50" y="28" width="410" height="250" rx="6" fill="#E3F1FE"/>
+  <path d="M50 34a6 6 0 0 1 6-6h398a6 6 0 0 1 6 6v18H50z" fill="#1F5FAD"/>
+  <circle cx="418" cy="40" r="4" fill="#A7D3FB"/>
+  <circle cx="432" cy="40" r="4" fill="#A7D3FB"/>
+  <circle cx="446" cy="40" r="4" fill="#A7D3FB"/>
+  <!-- email panel -->
+  <rect x="78" y="74" width="170" height="182" rx="6" fill="#B9DCFC"/>
+  <rect x="134" y="98" width="56" height="40" rx="3" fill="#E3F1FE" stroke="#1F4E8C" stroke-width="4"/>
+  <path d="M136 101l26 20 26-20" stroke="#1F4E8C" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="120" y="156" width="84" height="14" rx="3" fill="#fff" stroke="#1F4E8C" stroke-width="3"/>
+  <rect x="120" y="180" width="84" height="14" rx="3" fill="#fff" stroke="#1F4E8C" stroke-width="3"/>
+  <!-- arrow -->
+  <path d="M232 150h26v-12l24 20-24 20v-12h-26z" fill="#1F4E8C"/>
+  <!-- board -->
+  <rect x="296" y="74" width="140" height="182" rx="6" fill="#B9DCFC"/>
+  <g fill="#7FB6EE">
+    <rect x="306" y="82" width="36" height="160" rx="3"/>
+    <rect x="348" y="82" width="36" height="160" rx="3"/>
+    <rect x="390" y="82" width="36" height="160" rx="3"/>
+  </g>
+  <g fill="#1F5FAD">
+    <rect x="306" y="82" width="36" height="10" rx="2"/>
+    <rect x="348" y="82" width="36" height="10" rx="2"/>
+    <rect x="390" y="82" width="36" height="10" rx="2"/>
+  </g>
+  <g fill="#fff">
+    <rect x="310" y="100" width="28" height="22" rx="2"/>
+    <rect x="352" y="100" width="28" height="22" rx="2"/>
+    <rect x="394" y="100" width="28" height="22" rx="2"/>
+    <rect x="310" y="130" width="28" height="22" rx="2"/>
+    <rect x="394" y="130" width="28" height="22" rx="2"/>
+    <rect x="394" y="160" width="28" height="22" rx="2"/>
+  </g>
+  <rect x="350" y="138" width="32" height="26" rx="3" fill="#fff" stroke="#1F4E8C" stroke-width="3"/>
+  <g stroke="#1F5FAD" stroke-width="3" stroke-linecap="round">
+    <path d="M315 108h16M315 115h10M357 108h16M357 115h10M399 108h16M399 115h10M315 138h16M315 145h10M399 138h16M399 145h10M399 168h16M399 175h10M356 147h16M356 154h10"/>
+  </g>
+  <!-- person -->
+  <path d="M40 320c0-60 18-110 58-112 26-1 40 18 44 34l22-24c6-6 14 2 10 8l-32 46c-6 8-16 8-22 2v46z" fill="#1F5FAD"/>
+  <path d="M166 186c4-6 12-6 12 0l-6 12-8-2z" fill="#F2B8A0"/>
+  <circle cx="98" cy="176" r="22" fill="#F2B8A0"/>
+  <path d="M76 176c-6-22 8-40 26-38 16 2 22 14 18 24-10-2-18-8-22-14-2 10-8 18-14 22-2 8-4 22-12 30-8-6-2-16 4-24z" fill="#173E75"/>
+</svg>

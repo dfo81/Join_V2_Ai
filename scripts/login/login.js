@@ -84,6 +84,7 @@ function onDomReady() {
   initUIState();
   bindPrimaryHandlers();
   bindConfirmToggle();
+  if (location.hash === "#signup") showSignUpForm();
 }
 
 document.addEventListener("DOMContentLoaded", onDomReady);

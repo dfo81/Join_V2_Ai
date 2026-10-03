@@ -1,0 +1,306 @@
+:root {
+  --v2-main-color: #1268ff;
+  --v2-main-color-hover: #0050e0;
+  --v2-text-dark: #2a3647;
+}
+
+.welcome-page {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--v2-main-color);
+}
+
+.welcome-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1920px;
+  min-height: min(100vh, 1440px);
+  box-sizing: border-box;
+  padding: 56px 46px 32px 56px;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  animation: welcomeFadeIn 0.3s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+/* display content */
+@keyframes welcomeFadeIn {
+  to {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* logo box, same animation as login page */
+.welcome-logo-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 265px;
+  height: 323.1px;
+  transform: translate(-50%, -50%);
+  animation: welcomeMoveLogo 0.3s ease-in-out forwards;
+  animation-delay: 0.5s;
+  z-index: 2;
+}
+
+/* moving logo */
+@keyframes welcomeMoveLogo {
+  to {
+    top: calc((100vh - min(100vh, 1440px)) / 2 + -20px);
+    left: calc((100vw - min(100vw, 1920px)) / 2 + -5px);
+    transform: translate(0, 0) scale(0.38);
+  }
+}
+
+/* top section */
+.welcome-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.welcome-logo {
+  width: 100%;
+  height: auto;
+}
+
+/* reserves the space of the moved logo (bottom edge of logo minus wrapper padding) */
+.welcome-logo-space {
+  height: 147px;
+}
+
+.welcome-sign-up {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 16px;
+}
+
+.welcome-sign-up a {
+  color: #fff;
+  font-size: 20px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.welcome-sign-up a:hover {
+  opacity: 0.8;
+}
+
+/* main section */
+.welcome-main {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 0;
+  overflow: visible;
+}
+
+.welcome-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 787px;
+  padding: 48px 70px;
+  border-radius: 30px;
+  background-color: #fff;
+  color: var(--v2-text-dark);
+  box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+}
+
+.welcome-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: fit-content;
+}
+
+.welcome-title {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.welcome-title-border {
+  height: 3px;
+  background-color: var(--v2-main-color);
+  border-radius: 2px;
+}
+
+.welcome-text {
+  margin: 8px 0;
+  font-size: 23px;
+  line-height: 1.2;
+}
+
+.welcome-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.welcome-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.welcome-option-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--v2-main-color);
+}
+
+.welcome-option-label svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--v2-main-color);
+}
+
+.welcome-button-blue {
+  border: 1px solid var(--v2-main-color);
+  color: #fff;
+  background-color: var(--v2-main-color);
+}
+
+.welcome-button-blue:hover {
+  background-color: var(--v2-main-color-hover);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-button-hollow {
+  border: 1px solid var(--light-gray);
+  background-color: #fff;
+  color: var(--light-gray);
+}
+
+.welcome-button-hollow:hover {
+  color: var(--v2-main-color);
+  border-color: var(--v2-main-color);
+  box-shadow: 0px 4px 8px #53535333;
+}
+
+/* bottom section */
+.welcome-footer {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.welcome-footer a {
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.welcome-footer a:hover {
+  text-decoration: underline;
+}
+
+/* tablet */
+@media (max-width: 1024px) {
+  .welcome-logo-wrapper {
+    transform: translate(-50%, -50%) scale(0.69);
+  }
+
+  @keyframes welcomeMoveLogo {
+    to {
+      top: -52px;
+      left: -33px;
+      transform: translate(0, 0) scale(0.31);
+    }
+  }
+
+  .welcome-logo-space {
+    height: 103px;
+  }
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .welcome-wrapper {
+    padding: 24px 14px;
+  }
+
+  .welcome-logo-wrapper {
+    transform: translate(-50%, -50%) scale(0.38);
+  }
+
+  @keyframes welcomeMoveLogo {
+    to {
+      top: -85px;
+      left: -62px;
+      transform: translate(0, 0) scale(0.24);
+    }
+  }
+
+  .welcome-logo-space {
+    height: 52px;
+  }
+
+  .welcome-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+  }
+
+  .welcome-sign-up {
+    justify-content: center;
+  }
+
+  .welcome-main {
+    align-items: flex-start;
+    padding: 20px 0 48px;
+  }
+
+  .welcome-card {
+    align-items: center;
+    gap: 32px;
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  .welcome-title-box {
+    align-items: center;
+  }
+
+  .welcome-title {
+    font-size: 47px;
+  }
+
+  .welcome-title-border {
+    width: 150px;
+  }
+
+  .welcome-text {
+    font-size: 18px;
+  }
+
+  .welcome-options {
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .welcome-option {
+    align-items: center;
+  }
+
+  .welcome-option-label {
+    font-size: 19px;
+  }
+
+  .welcome-footer a {
+    font-size: 19px;
+  }
+}
