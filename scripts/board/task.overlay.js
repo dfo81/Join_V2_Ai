@@ -77,6 +77,14 @@ function renderCategory(category) {
 }
 
 /**
+ * Show the "Ai-generated ticket" badge for tasks created from emails.
+ * @param {Object} task
+ */
+function renderAiBadge(task) {
+  document.getElementById("overlay-ai-badge").classList.toggle("d-none", task.source !== "email");
+}
+
+/**
  * Map a category string to a label CSS class.
  * @param {string} category
  * @returns {string}
@@ -95,7 +103,11 @@ function getLabelClass(category) {
  * @param {{title?:string, description?:string, dueDate?:any}} task
  */
 function renderTitleDescDate(task) {
-  document.getElementById("overlay-title").textContent = task.title || "";
+  let titleEl = document.getElementById("overlay-title");
+  let title = task.title || "";
+  titleEl.textContent = title;
+  titleEl.classList.toggle("medium-title", title.length > 25 && title.length <= 50);
+  titleEl.classList.toggle("long-title", title.length > 50);
   document.getElementById("overlay-description").textContent = task.description || "";
   document.getElementById("overlay-due-date").textContent = formatDueDateDisplay(task.dueDate);
 }
@@ -108,16 +120,26 @@ function renderTitleDescDate(task) {
 function getTaskCreator(task) {
   if (task.source === "email") {
     let email = String(task.requester || "");
-    return { external: true, name: String(task.requesterName || email || "Unknown"), email };
+    return { external: true, uid: "", name: String(task.requesterName || email || "Unknown"), email };
   }
   if (task.createdBy) {
-    return { external: false, name: String(task.createdBy.name || "Unknown"), email: String(task.createdBy.email || "") };
+    let c = task.createdBy;
+    return { external: false, uid: String(c.uid || ""), name: String(c.name || "Unknown"), email: String(c.email || "") };
   }
   return null;
 }
 
 /**
- * Render the creator row (badge, name, button) and its info card in the overlay.
+ * Build a mailto link for an email address.
+ * @param {string} email
+ * @returns {string}
+ */
+function mailtoHref(email) {
+  return "mailto:" + encodeURIComponent(email).replace("%40", "@");
+}
+
+/**
+ * Render the creator row (badge, name with "(You)" tag, button) and its info card in the overlay.
  * @param {Object} task
  */
 function renderCreator(task) {
@@ -129,7 +151,9 @@ function renderCreator(task) {
   let badge = document.getElementById("overlay-creator-badge");
   badge.src = creator.external ? "./assets/icons/board/extern.svg" : "./assets/icons/board/member.svg";
   badge.alt = creator.external ? "Extern" : "Member";
+  currentCreator = creator;
   document.getElementById("overlay-creator-name").textContent = creator.name;
+  document.getElementById("overlay-creator-you").innerHTML = youTag(creator.name, creator.email, creator.uid);
   let buttonIcon = document.getElementById("overlay-creator-button-icon");
   buttonIcon.src = creator.external ? "./assets/icons/board/Send email.svg" : "./assets/icons/board/See profile.svg";
   buttonIcon.alt = creator.external ? "E-mail" : "Profil";
@@ -144,19 +168,55 @@ function renderCreatorCard(creator) {
   document.getElementById("overlay-creator-card-name").textContent = creator.name;
   let mail = document.getElementById("overlay-creator-card-email");
   mail.textContent = creator.email || "No email";
-  if (creator.email) mail.href = "mailto:" + encodeURIComponent(creator.email).replace("%40", "@");
+  if (creator.email) mail.href = mailtoHref(creator.email);
   else mail.removeAttribute("href");
 }
 
 /** Click listener that closes the creator card on outside clicks, while the card is open. */
 let creatorCardOutsideClick = null;
 
+/** Creator of the task currently shown in the overlay. */
+let currentCreator = null;
+
 /**
- * Show/hide the creator info card.
+ * Show the "Open contact" link in the creator card when the creator is one of the contacts.
+ */
+function renderCreatorContactLink() {
+  let link = document.getElementById("overlay-creator-card-contact");
+  let contactId = currentCreator ? findCreatorContactId(currentCreator) : null;
+  link.classList.toggle("d-none", !contactId);
+  if (contactId) link.href = "./contact.html#" + encodeURIComponent(contactId);
+}
+
+/**
+ * Find the contact id of a member creator (by email, or by name for contacts with another email).
+ * @param {{name: string, email: string}} creator
+ * @returns {string|null}
+ */
+function findCreatorContactId(creator) {
+  let email = normalizeForCompare(creator.email), name = normalizeForCompare(creator.name);
+  let entries = Object.entries(window.loadedContacts || {});
+  let match = entries.find(([, c]) => email && normalizeForCompare(c.email) === email)
+    || entries.find(([, c]) => name && normalizeForCompare(c.name) === name);
+  return match ? match[0] : null;
+}
+
+/**
+ * Creator button: external requesters are contacted directly by email, members show their info card.
  * @param {MouseEvent} event
  */
-function toggleCreatorCard(event) {
+function onCreatorButtonClick(event) {
   event.stopPropagation();
+  if (currentCreator?.external && currentCreator.email) {
+    location.href = mailtoHref(currentCreator.email);
+    return;
+  }
+  toggleCreatorCard();
+}
+
+/** Show/hide the creator info card (with "Open contact" link when the creator is a contact). */
+function toggleCreatorCard() {
+  renderCreatorContactLink();
   let card = document.getElementById("overlay-creator-card");
   let button = document.getElementById("overlay-creator-button");
   if (!card.classList.contains("d-none")) return closeCreatorCard();
@@ -333,7 +393,7 @@ function contactMemberTemplate(c){
   let idx = Number.isFinite(c?.colorIndex)?c.colorIndex:0;
   let initials = c?.initials||"";
   let name = c?.name||initials;
-  return `<div class="member"><div class="initial-circle" style="background-image:url(../assets/icons/contact/color${idx}.svg)">${initials}</div><span>${name}</span></div>`;
+  return `<div class="member"><div class="initial-circle" style="background-image:url(../assets/icons/contact/color${idx}.svg)">${initials}</div><span>${name}${youTag(name, c?.email)}</span></div>`;
 }
 
 /**

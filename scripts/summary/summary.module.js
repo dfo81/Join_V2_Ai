@@ -74,6 +74,7 @@ function initializeCounts() {
     awaitFeedback: 0,
     done: 0,
     urgent: 0,
+    email: 0,
     total: 0
   };
 }
@@ -103,6 +104,7 @@ function incrementCountsForTask(task, counts) {
   if (task.column === 'awaitFeedback') counts.awaitFeedback++;
   if (task.column === 'done') counts.done++;
   if (task.priority === 'urgent') counts.urgent++;
+  if (task.source === 'email') counts.email++;
 }
 
 /**
@@ -195,6 +197,7 @@ function getTaskCountElements() {
     awaitFeedback: document.getElementById("task-awaiting-feedback-text"),
     done: document.getElementById("task-done-text"),
     urgent: document.getElementById("task-urgent-text"),
+    email: document.getElementById("task-email-text"),
     total: document.getElementById("task-on-board-text")
   };
 }
@@ -210,6 +213,7 @@ function getMobileTaskCountElements() {
     awaitFeedback: document.getElementById("task-awaiting-feedback-text-mobile"),
     done: document.getElementById("task-done-text-mobile"),
     urgent: document.getElementById("task-urgent-text-mobile"),
+    email: document.getElementById("task-email-text-mobile"),
     total: document.getElementById("task-on-board-text-mobile")
   };
 }

@@ -2,7 +2,6 @@
   flex: 1;
   min-width: 0;
   max-width: 1508px;
-  background-color: #eeeeee;
 }
 
 .board-top {
@@ -145,7 +144,6 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 196px;
-  max-height: 263px;
   gap: 24px;
   width: 100%;
   box-sizing: border-box;
@@ -187,17 +185,27 @@
 .frame {
   display: flex;
   flex-direction: column;
-  height: 84px;
+  min-height: 84px;
   gap: 8px;
 }
 
-.ticket-title {
+/* long titles/descriptions are cut after two lines, the overlay shows the full text */
+.ticket-title,
+.ticket-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
   font-size: 16px;
+}
+
+.ticket-title {
   color: var(--main-color);
 }
 
 .ticket-text {
-  font-size: 16px;
   color: var(--icon-gray);
 }
 
@@ -298,6 +306,27 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+}
+
+.label-ai-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* card: only the wand of the "Ai-generated ticket" badge */
+.ai-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  overflow: hidden;
+}
+
+.ai-icon img {
+  width: auto;
+  max-width: none;
+  height: 22px;
 }
 
 .move-overlay {

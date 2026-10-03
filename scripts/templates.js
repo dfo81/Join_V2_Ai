@@ -8,6 +8,11 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
+/** Returns a hidden "(You)" tag for a person; script.js shows it when the person is the logged-in user. */
+function youTag(name, email, uid = "") {
+  return `<span class="you-tag" data-you-name="${escapeHtml(name)}" data-you-email="${escapeHtml(email)}" data-you-uid="${escapeHtml(uid)}">(You)</span>`;
+}
+
 /** Returns HTML for the mobile To-do task tile. */
 function getMobileTaskTodo() {
   document.getElementById("mobile-task-to-do").innerHTML = `
@@ -177,7 +182,7 @@ function defaultContactListItemTemplate(contact){
             <div class="contact-initial" style="background-image: url(../assets/icons/contact/color${contact.colorIndex}.svg)">
               ${contact.initials}
             </div>
-              ${contact.name}
+              ${contact.name}${youTag(contact.name, contact.email)}
           </div>
             <img src="./assets/icons/add_task/check_default.svg" alt="checkbox" />`;
 }
@@ -234,12 +239,17 @@ function ticketContentTemplate(parts) {
     </div>`;
 }
 
-/** Returns the ticket label HTML for a category. */
-function buildTicketLabel(category) {
+/** Returns the ticket label HTML for a category, with the AI icon for tickets created from emails. */
+function buildTicketLabel(category, aiGenerated) {
   let labelClass = getLabelClass(category);
+  let aiIcon = aiGenerated
+    ? `<span class="ai-icon" title="Ai-generated ticket"><img src="./assets/icons/board/ai-generated.svg" alt="Ai-generated ticket"></span>`
+    : "";
   return `
     <div class="label-box">
-      <div class="label ${labelClass}">${escapeHtml(category)}</div>
+      <div class="label-ai-box">
+        <div class="label ${labelClass}">${escapeHtml(category)}</div>${aiIcon}
+      </div>
       <img class="plus-minus-img" src="./assets/icons/board/plusminus.svg" alt="plus/minus" draggable="false" role="button" aria-label="Weitere Optionen">
     </div>`;
 }
@@ -376,7 +386,7 @@ function contactPersonTemplate({ name, email, phone, colorIndex, initials, id })
                 <p>${initials}</p>
             </div>
             <div class="contact-person-name">
-                <h5>${name}</h5>
+                <h5>${name}${youTag(name, email)}</h5>
                 <a>${email}</a>
             </div>
         </div>`;

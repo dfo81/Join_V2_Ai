@@ -1,4 +1,4 @@
-let MIN_SEARCH_CHARS = 3;
+let MIN_SEARCH_CHARS = 1;
 /**
  * Holds the current search term used for filtering tasks.
  * @type {string}

@@ -90,7 +90,7 @@ function buildTicketHTML(task, taskId) {
  * @returns {{labelHTML:string, frameHTML:string, subtasksHTML:string, initialsHTML:string, priorityHTML:string}}
  */
 function buildTicketParts(task) {
-  let labelHTML = buildTicketLabel(task.category);
+  let labelHTML = buildTicketLabel(task.category, task.source === "email");
   let frameHTML = buildTicketFrame(task.title, task.description);
   let subtasksHTML = task.subtasks?.length ? renderSubtaskProgress(task.subtasks) : "";
   let initialsHTML = renderAssignedInitials(task.assignedContacts || []);

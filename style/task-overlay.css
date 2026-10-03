@@ -40,6 +40,11 @@
   scrollbar-width: thin;
 }
 
+/* nothing gets squeezed or overlaps; the whole content scrolls instead */
+.task-overlay-content > * {
+  flex-shrink: 0;
+}
+
 .task-overlay.animate-in {
   animation: showTaskOverlay 0.3s ease-in-out forwards;
 }
@@ -74,6 +79,11 @@
   justify-content: space-between;
 }
 
+.ai-badge {
+  flex-shrink: 0;
+  height: 22px;
+}
+
 .label-exit-box span {
   padding: 4px 24px;
   border-radius: 8px;
@@ -94,11 +104,26 @@
 .task-overlay-title {
   font-size: 48px;
   font-weight: 700;
-  word-wrap: break-word;
-  flex-shrink: 0;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  min-height: 75px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.task-overlay-title.medium-title {
+  font-size: 36px;
+}
+
+.task-overlay-title.long-title {
+  font-size: 26px;
+}
+
+@media (max-height: 900px), (max-width: 600px) {
+  .task-overlay-title.medium-title {
+    font-size: 28px;
+  }
+
+  .task-overlay-title.long-title {
+    font-size: 22px;
+  }
 }
 
 .task-text {
@@ -111,19 +136,31 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .creator-badge {
   height: 22px;
 }
 
+.creator-name-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 6px;
+  min-width: 0;
+}
+
 .creator-name {
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 21px;
+  overflow-wrap: anywhere;
+  font-size: 19px;
+}
+
+.creator-name-box .you-tag {
+  flex-shrink: 0;
+  margin-left: 0;
+  font-size: 16px;
 }
 
 .creator-button {
@@ -163,6 +200,18 @@
 .creator-card-name {
   font-size: 16px;
   font-weight: 700;
+}
+
+.creator-card-contact {
+  margin-top: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--main-color);
+  text-decoration: none;
+}
+
+.creator-card-contact:hover {
+  text-decoration: underline;
 }
 
 .creator-card-email {

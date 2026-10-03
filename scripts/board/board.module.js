@@ -207,6 +207,7 @@ window.onTaskColumnChanged = function (taskId, targetLogical) {
  */
 window.fillTaskOverlay = function fillTaskOverlay(task) {
   renderCategory(task.category);
+  renderAiBadge(task);
   renderTitleDescDate(task);
   renderCreator(task);
   renderPriority(task.priority);

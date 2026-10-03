@@ -115,7 +115,10 @@
           id="task-overlay-content"
         >
           <div class="label-exit-box">
-            <span id="overlay-user-story">User Story...</span>
+            <div class="label-ai-box">
+              <span id="overlay-user-story">User Story...</span>
+              <img id="overlay-ai-badge" class="ai-badge d-none" src="./assets/icons/board/ai-generated.svg" alt="Ai-generated ticket" />
+            </div>
             <img
               onclick="hideOverlay()"
               id="task-overlay-exit-button"
@@ -133,13 +136,17 @@
           <div class="creator-box" id="overlay-creator-box">
             <b>Creator:</b>
             <img id="overlay-creator-badge" class="creator-badge" src="./assets/icons/board/member.svg" alt="Member" />
-            <span id="overlay-creator-name" class="creator-name"></span>
-            <button type="button" id="overlay-creator-button" class="creator-button" onclick="toggleCreatorCard(event)">
+            <span class="creator-name-box">
+              <span id="overlay-creator-name" class="creator-name"></span>
+              <span id="overlay-creator-you"></span>
+            </span>
+            <button type="button" id="overlay-creator-button" class="creator-button" onclick="onCreatorButtonClick(event)">
               <img id="overlay-creator-button-icon" src="./assets/icons/board/See profile.svg" alt="Profil" />
             </button>
             <div id="overlay-creator-card" class="creator-card d-none">
               <span id="overlay-creator-card-name" class="creator-card-name"></span>
               <a id="overlay-creator-card-email" class="creator-card-email" href="#"></a>
+              <a id="overlay-creator-card-contact" class="creator-card-contact d-none" href="#">Open contact</a>
             </div>
           </div>
           <div class="due-date-box">

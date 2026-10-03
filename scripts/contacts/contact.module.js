@@ -112,6 +112,24 @@ function renderContactList(data, container) {
 function processContactData(data) {
   let container = initializeContactContainer(data);
   if (container) renderContactList((data), container);
+  openContactFromHash(data);
+}
+
+/** Whether the contact from the URL hash was already opened (only on first load). */
+let hashContactOpened = false;
+
+/**
+ * Open the contact given in the URL hash (e.g. contact.html#<id> from the task overlay "Profil" button).
+ * @param {Object|null} data - Contacts keyed by id.
+ */
+function openContactFromHash(data) {
+  if (hashContactOpened || !data) return;
+  let id = decodeURIComponent(location.hash.slice(1));
+  let c = id && data[id];
+  if (!c) return;
+  hashContactOpened = true;
+  showContactDetails(c.name, c.email, c.phone, c.colorIndex, id);
+  document.querySelector(`.contact-person[onclick*="'${CSS.escape(id)}'"]`)?.scrollIntoView({ block: "center" });
 }
 
 /**

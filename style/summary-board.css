@@ -54,7 +54,6 @@ h5 {
 
 .task-dashboard-top-row {
   display: flex;
-  justify-content: space-between;
   position: relative;
   height: 221px;
 }
@@ -73,7 +72,7 @@ h5 {
   border-radius: 30px;
   display: flex;
   gap: 35px;
-  width: 672px;
+  width: 440px;
   height: 191px;
   transition: all 0.3s ease;
   flex-shrink: 0;
@@ -82,7 +81,8 @@ h5 {
 }
 
 .task-tile-urgent:hover {
-  width: 692px;
+  width: 460px;
+  margin-right: -20px;
   height: 221px;
   background-color: white;
   color: var(--main-color);
@@ -94,7 +94,7 @@ h5 {
 .task-tile-urgent-content {
   display: flex;
   width: 100%;
-  gap: 35px;
+  gap: 24px;
   justify-content: center;
   align-items: center;
 }
@@ -128,10 +128,19 @@ h5 {
   align-items: center;
   flex-direction: column;
   gap: 13px;
-  width: 320px;
+}
+
+.task-tile-urgent-right-section h4 {
+  font-size: 26px;
+  white-space: nowrap;
+}
+
+.task-tile-urgent-left-section p {
+  white-space: nowrap;
 }
 
 .task-tile-board-overview {
+  margin-left: auto;
   gap: 7px;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
   border-radius: 30px;
@@ -359,3 +368,97 @@ h5 {
   height: 66px;
 }
 
+
+/* Email Requests tile (tasks created from emails) */
+.svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.task-tile-email {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  width: 204px;
+  height: 191px;
+  margin-left: 32px;
+  border-radius: 30px;
+  background: white;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.task-tile-email-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.email-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 66px;
+  height: 66px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #9327ff, #2ea1dc) border-box;
+}
+
+.email-wand {
+  width: 36px;
+  height: 36px;
+  fill: white;
+}
+
+.task-tile-email h2 {
+  background: linear-gradient(135deg, #9327ff, #2ea1dc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.task-tile-email h5 {
+  color: var(--main-color);
+  font-weight: 400;
+  text-align: center;
+}
+
+/* hover: gradient tile, white text, white icon with gradient wand */
+.task-tile-email:hover:not(:active) {
+  background: linear-gradient(135deg, #9327ff, #2ea1dc);
+  border-radius: 30px 30px 30px 0;
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+.task-tile-email:hover:not(:active) .email-icon {
+  background: white;
+}
+
+.task-tile-email:hover .email-wand {
+  fill: url(#email-gradient);
+}
+
+.task-tile-email:hover:not(:active) h2 {
+  background: none;
+  color: white;
+}
+
+.task-tile-email:hover:not(:active) h5 {
+  color: white;
+}
+
+/* pressed: light blue tile, white icon with gradient ring */
+.task-tile-email:active {
+  background: #e6f0ff;
+}
+
+.task-tile-email:active .email-icon {
+  background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #9327ff, #2ea1dc) border-box;
+}

@@ -117,6 +117,15 @@
   .task-tile-todo-content {
     align-items: center;
   }
+
+  /* four tile rows on mobile: let the summary scroll instead of cutting the last row */
+  main {
+    overflow-y: auto;
+  }
+
+  .task-dashboard-mobile {
+    padding: 16px 0;
+  }
 }
 
 @media (max-width: 720px) {

@@ -209,6 +209,7 @@ function redirectIfNotPublic() {
  * @returns {void}
  */
 function handleAuthChange(user) {
+  setYouUser(user);
   let el = getInitialsEl();
   if (user) {
     window.updateUserInitials?.(user);
@@ -370,3 +371,75 @@ function applyHeaderNavByAuth(user) {
   navLoginBox?.classList.toggle("d-none", showNav);
   navLoginBoxMobile?.classList.toggle("d-none", showNav);
 }
+
+
+/* =================== (YOU) MARKER =================== */
+
+/**
+ * Logged-in user whose own name gets a "(You)" behind it.
+ * @type {{uid: string, name: string, email: string}|null}
+ */
+let youUser = null;
+
+/**
+ * Store the logged-in user and update all "(You)" tags.
+ * @param {User|null} user
+ * @returns {void}
+ */
+function setYouUser(user) {
+  youUser = user
+    ? { uid: user.uid, name: normalizeForCompare(user.displayName), email: normalizeForCompare(user.email) }
+    : null;
+  markYouTags();
+}
+
+/**
+ * Lowercase and trim a name/email for comparison.
+ * @param {string|null|undefined} value
+ * @returns {string}
+ */
+function normalizeForCompare(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+/**
+ * Check whether a person is the logged-in user: by uid when known,
+ * otherwise by email, or by name for contacts with another email.
+ * @param {string} name
+ * @param {string} email
+ * @param {string} [uid]
+ * @returns {boolean}
+ */
+function isYou(name, email, uid) {
+  if (!youUser) return false;
+  if (uid) return uid === youUser.uid;
+  let e = normalizeForCompare(email), n = normalizeForCompare(name);
+  return (!!e && e === youUser.email) || (!!n && n === youUser.name);
+}
+
+/**
+ * Show the "(You)" tags that belong to the logged-in user, hide all others.
+ * @returns {void}
+ */
+function markYouTags() {
+  document.querySelectorAll(".you-tag").forEach((tag) => {
+    let { youName, youEmail, youUid } = tag.dataset;
+    tag.classList.toggle("is-you", isYou(youName, youEmail, youUid));
+  });
+}
+
+/**
+ * Re-check "(You)" tags whenever content is rendered later (contacts, overlays, lists).
+ * @returns {void}
+ */
+function observeYouTags() {
+  let scheduled = false;
+  new MutationObserver(() => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => { scheduled = false; markYouTags(); });
+  }).observe(document.body, { childList: true, subtree: true });
+}
+
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", observeYouTags);
+else observeYouTags();

@@ -23,14 +23,21 @@
 
 .task-tile-todo-mobile {
   background-color: var(--navi-buttons-bg);
-  gap: 12px;
+  gap: 7px;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
   border-radius: 30px;
   display: flex;
-  justify-content: unset;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 396px;
-  height: 106px;
+  width: 186px;
+  height: 152px;
+}
+
+.task-tile-email-mobile {
+  width: 186px;
+  height: 152px;
+  margin-left: 0;
 }
 
 .task-tile-todo-mobile h5 {
