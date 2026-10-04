@@ -1,0 +1,11 @@
+# Editor
+.vscode
+
+# Firebase config (API keys)
+firebase.js
+
+# n8n data (credentials, encryption key)
+n8n/n8n_data/
+
+# macOS
+.DS_Store
