@@ -8,6 +8,11 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
+/** Encodes values as JS literals for an inline onclick attribute, so quotes in names cannot break out. */
+function jsArgs(...values) {
+  return values.map((v) => escapeHtml(JSON.stringify(v ?? ""))).join(", ");
+}
+
 /** Returns a hidden "(You)" tag for a person; script.js shows it when the person is the logged-in user. */
 function youTag(name, email, uid = "") {
   return `<span class="you-tag" data-you-name="${escapeHtml(name)}" data-you-email="${escapeHtml(email)}" data-you-uid="${escapeHtml(uid)}">(You)</span>`;
@@ -302,11 +307,11 @@ function getContactDetails(name, email, phone, colorIndex, detailSection, id) {
   detailSection.innerHTML = `
         <div class="contact-single-person-content-head">
             <div class="contact-person-icon-big">
-                <img src="./assets/general_elements/icons/color${colorIndex}.svg" />
-                <h3>${getInitials(name)}</h3>
+                <img src="./assets/general_elements/icons/color${escapeHtml(colorIndex)}.svg" />
+                <h3>${escapeHtml(getInitials(name))}</h3>
             </div>
             <div class="contact-single-person-content-head-name">
-                <h3>${name}</h3>
+                <h3>${escapeHtml(name)}</h3>
                 <div class="contact-single-person-content-head-edit-container">
                     <div class="contact-single-person-content-head-edit-box" id="edit-contact-button" data-role="edit-contact-trigger" onclick="openEditContact(event)">
                         <img class="regular-image" src="./assets/contacts/icons/pen_thin.svg" />
@@ -322,9 +327,9 @@ function getContactDetails(name, email, phone, colorIndex, detailSection, id) {
         <div class="contact-single-person-content-info">
             <h4>Contact Information</h4>
             <h6>Email</h6>
-            <a>${email}</a>
+            <a>${escapeHtml(email)}</a>
             <h6>Phone</h6>
-            <span>${phone}</span>
+            <span>${escapeHtml(phone)}</span>
         </div>`;
 }
 
@@ -339,18 +344,18 @@ function getNewLayoutDetails(name, email, phone, colorIndex, detailSection) {
     </div>
     <div class="contact-single-person-content-head">
         <div class="contact-person-icon-big">
-            <img src="./assets/general_elements/icons/color${colorIndex}.svg" />
-            <h3>${getInitials(name)}</h3>
+            <img src="./assets/general_elements/icons/color${escapeHtml(colorIndex)}.svg" />
+            <h3>${escapeHtml(getInitials(name))}</h3>
         </div>
         <div class="contact-single-person-content-head-name">
-            <h4>${name}</h4>
+            <h4>${escapeHtml(name)}</h4>
         </div>
     </div>
     <div class="contact-single-person-content-info">
         <h6>Email</h6>
-        <a>${email}</a>
+        <a>${escapeHtml(email)}</a>
         <h6>Phone</h6>
-        <span>${phone}</span>
+        <span>${escapeHtml(phone)}</span>
     </div>
     <div class="single-person-content-mobile-bottom" onclick="addDetailsMobileNavbar(), removeDetailsMobileNavbar(event)">
         <div class="white-point"></div>
@@ -381,14 +386,14 @@ function contactPlaceholderTemplate() {
 /** Returns the template for a contact person entry. */
 function contactPersonTemplate({ name, email, phone, colorIndex, initials, id }) {
   return `
-        <div class="contact-person" onclick="showContactDetails('${name}', '${email}', '${phone}', ${colorIndex}, '${id}')">
+        <div class="contact-person" onclick="showContactDetails(${jsArgs(name, email, phone, colorIndex, id)})">
             <div class="contact-person-icon">
-                <img src="./assets/general_elements/icons/color${colorIndex}.svg" />
-                <p>${initials}</p>
+                <img src="./assets/general_elements/icons/color${escapeHtml(colorIndex)}.svg" />
+                <p>${escapeHtml(initials)}</p>
             </div>
             <div class="contact-person-name">
-                <h5>${name}${youTag(name, email)}</h5>
-                <a>${email}</a>
+                <h5>${escapeHtml(name)}${youTag(name, email)}</h5>
+                <a>${escapeHtml(email)}</a>
             </div>
         </div>`;
 }

@@ -7,7 +7,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { auth } from "../firebase.js";
+import { auth, db, ref, get, push } from "../firebase.js";
 
 /** External UI/validation helpers (global). */
 /** @type {(box:HTMLElement|null, ...els:(HTMLElement|null|undefined)[])=>void} */
@@ -106,7 +106,41 @@ function showSignUpSuccessUI() {
 }
 
 /**
- * Registers the user with Firebase and sets the display name.
+ * Builds initials from the first two words of a name.
+ * @param {string} name
+ * @returns {string}
+ */
+function initialsOf(name) {
+  return name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join("");
+}
+
+/**
+ * Adds a newly registered user to the contacts, unless a contact with that email already exists.
+ * A failure here is only logged, so the registration itself still succeeds.
+ * @param {string} name
+ * @param {string} email
+ * @returns {Promise<void>}
+ */
+async function addUserToContacts(name, email) {
+  try {
+    let contactsRef = ref(db, "contacts");
+    let contacts = (await get(contactsRef)).val() || {};
+    let known = Object.values(contacts).some((c) => String(c?.email || "").toLowerCase() === email.toLowerCase());
+    if (known) return;
+    await push(contactsRef, {
+      name,
+      email,
+      phone: "",
+      colorIndex: Math.floor(Math.random() * 15) + 1,
+      initials: initialsOf(name),
+    });
+  } catch (err) {
+    console.error("Could not add user to contacts:", err);
+  }
+}
+
+/**
+ * Registers the user with Firebase, sets the display name and adds the user to the contacts.
  * Global (no export).
  * @param {string} email
  * @param {string} password
@@ -116,6 +150,7 @@ window.registerUser = function (email, password) {
   let displayName = (nameInput?.value || "").trim();
   createUserWithEmailAndPassword(auth, email, password)
     .then((cred) => updateProfile(cred.user, { displayName }))
+    .then(() => addUserToContacts(displayName, email))
     .then(showSignUpSuccessUI)
     .catch((err) => showError?.(errorSignUpBox, err?.message || "Registration failed."));
 };
