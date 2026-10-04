@@ -1,21 +1,13 @@
 # n8n for the Join email-to-task workflow.
 # Runs permanently (e.g. on a NAS) and restarts automatically after reboots.
 # Data (workflows, credentials, encryption key) lives in ./n8n_data next to this file.
+# Note: ./n8n_data must belong to uid 1000 (the n8n user). On a fresh setup run once:
+#   docker run --rm -v "$(pwd)/n8n_data:/data" alpine:3.22 chown -R 1000:1000 /data
 services:
-  # Gives the data folder to the n8n user (uid 1000) before n8n starts, so no SSH is needed on the NAS.
-  n8n-permissions:
-    image: alpine:3.22
-    command: chown -R 1000:1000 /data
-    volumes:
-      - ./n8n_data:/data
-
   n8n:
     image: docker.n8n.io/n8nio/n8n:2.38.7
     container_name: n8n
     restart: unless-stopped
-    depends_on:
-      n8n-permissions:
-        condition: service_completed_successfully
     ports:
       - "5678:5678"
     environment:
