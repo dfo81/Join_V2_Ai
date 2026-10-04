@@ -15,10 +15,10 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        480,
-        0
+        -896,
+        112
       ],
-      "id": "ae3d2be3-780b-4303-ba69-5bd129ef5f6b",
+      "id": "822b0ef4-7958-4482-92ab-9eabe58c04af",
       "name": "Every Minute"
     },
     {
@@ -31,10 +31,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        704,
-        0
+        -672,
+        112
       ],
-      "id": "f8fc6251-8ac4-4503-a921-40127f6e8015",
+      "id": "a14c7c5b-a6c3-47f4-8a61-4e4328fb2b94",
       "name": "Get Tasks",
       "credentials": {
         "googleApi": {
@@ -50,10 +50,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        928,
-        0
+        -448,
+        112
       ],
-      "id": "03633218-759f-439d-aac6-a7d00728a2f0",
+      "id": "d3b61fb4-42aa-4a4e-8ea1-583241b595ed",
       "name": "Find Column Changes"
     },
     {
@@ -84,10 +84,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1152,
-        0
+        -224,
+        112
       ],
-      "id": "03efc433-13e6-4827-ac6c-6f41c034c4d9",
+      "id": "c2de2d6b-6943-4ba4-81b7-c44698a06377",
       "name": "Has Creator Email?"
     },
     {
@@ -103,21 +103,21 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        1376,
-        -112
+        0,
+        0
       ],
-      "id": "3bfb04e9-abf3-4fa3-8ee4-450e0af86b72",
+      "id": "a8bcc369-aa0c-4826-937f-f5628006efdc",
       "name": "Notify Creator",
       "webhookId": "a5fa6b67-0d96-49b1-8e4a-ae3c6f7fb656",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 3000,
       "credentials": {
         "gmailOAuth2": {
           "id": "brMUBdgqtzMuyzKq",
           "name": "Gmail account"
         }
       },
-      "retryOnFail": true,
-      "maxTries": 3,
-      "waitBetweenTries": 3000,
       "onError": "continueRegularOutput"
     },
     {
@@ -134,10 +134,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1600,
-        0
+        224,
+        112
       ],
-      "id": "5f8eb183-3394-4b52-93d8-de8d9210da65",
+      "id": "94638d93-744d-4c2c-ae72-8302c8c78f22",
       "name": "Save Notified Column",
       "credentials": {
         "googleApi": {
@@ -147,6 +147,7 @@
       }
     }
   ],
+  "pinData": {},
   "connections": {
     "Every Minute": {
       "main": [
@@ -211,12 +212,16 @@
       ]
     }
   },
-  "pinData": {},
+  "active": true,
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate"
   },
+  "versionId": "11a82cdb-d840-49d5-aa2e-6afe981aab3e",
   "meta": {
-    "templateCredsSetupCompleted": true
+    "instanceId": "71e3051648a7710dd5164bf8924438f8e53e2adbf3e6ea814a6faea74c33780d"
   },
+  "nodeGroups": [],
+  "id": "71dO76vaYoIbxqFs",
   "tags": []
 }
