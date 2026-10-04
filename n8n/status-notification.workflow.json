@@ -1,0 +1,222 @@
+{
+  "name": "Join – Status Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        480,
+        0
+      ],
+      "id": "ae3d2be3-780b-4303-ba69-5bd129ef5f6b",
+      "name": "Every Minute"
+    },
+    {
+      "parameters": {
+        "url": "https://mytest-27fda-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleApi",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        704,
+        0
+      ],
+      "id": "f8fc6251-8ac4-4503-a921-40127f6e8015",
+      "name": "Get Tasks",
+      "credentials": {
+        "googleApi": {
+          "id": "dNQs1WdpkQlHi8ag",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Finds tasks whose column changed since the creator was last notified.\n// Tasks seen for the first time are only marked, so nobody gets a mail for the initial column.\nconst LABELS = { triage: 'Triage', todo: 'To do', inProgress: 'In progress', awaitFeedback: 'Await feedback', done: 'Done' };\nconst tasks = $input.first().json || {};\n\n/** Returns name and email of the task creator (email requester or logged-in member). */\nfunction creatorOf(task) {\n  if (task.source === 'email') return { name: task.requesterName || '', email: task.requester || '' };\n  const c = task.createdBy || {};\n  return { name: c.name || '', email: c.email || '' };\n}\n\nreturn Object.entries(tasks)\n  .filter(([, task]) => task && typeof task === 'object' && task.column && task.column !== task.lastNotifiedColumn)\n  .map(([taskId, task]) => {\n    const creator = creatorOf(task);\n    const firstSeen = !task.lastNotifiedColumn;\n    return {\n      json: {\n        taskId,\n        title: String(task.title || 'Untitled task'),\n        column: task.column,\n        fromLabel: LABELS[task.lastNotifiedColumn] || task.lastNotifiedColumn || '',\n        toLabel: LABELS[task.column] || task.column,\n        name: creator.name,\n        email: firstSeen ? '' : creator.email,\n      },\n    };\n  });"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        928,
+        0
+      ],
+      "id": "03633218-759f-439d-aac6-a7d00728a2f0",
+      "name": "Find Column Changes"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2425550c-1ad8-4193-89d0-f164f25165eb",
+              "leftValue": "={{ $json.email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1152,
+        0
+      ],
+      "id": "03efc433-13e6-4827-ac6c-6f41c034c4d9",
+      "name": "Has Creator Email?"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "=Status update: {{ $json.title }}",
+        "emailType": "text",
+        "message": "=Hello{{ $json.name ? ' ' + $json.name : '' }},\n\nthe status of your ticket \"{{ $json.title }}\" has changed:\n\n{{ $json.fromLabel }} → {{ $json.toLabel }}\n\nBest regards\nThe Join team",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1376,
+        -112
+      ],
+      "id": "3bfb04e9-abf3-4fa3-8ee4-450e0af86b72",
+      "name": "Notify Creator",
+      "webhookId": "a5fa6b67-0d96-49b1-8e4a-ae3c6f7fb656",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "brMUBdgqtzMuyzKq",
+          "name": "Gmail account"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 3000,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://mytest-27fda-default-rtdb.europe-west1.firebasedatabase.app/tasks/{{ $('Find Column Changes').item.json.taskId }}.json",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ lastNotifiedColumn: $('Find Column Changes').item.json.column }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1600,
+        0
+      ],
+      "id": "5f8eb183-3394-4b52-93d8-de8d9210da65",
+      "name": "Save Notified Column",
+      "credentials": {
+        "googleApi": {
+          "id": "dNQs1WdpkQlHi8ag",
+          "name": "Google Service Account account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Every Minute": {
+      "main": [
+        [
+          {
+            "node": "Get Tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Tasks": {
+      "main": [
+        [
+          {
+            "node": "Find Column Changes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Column Changes": {
+      "main": [
+        [
+          {
+            "node": "Has Creator Email?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Creator Email?": {
+      "main": [
+        [
+          {
+            "node": "Notify Creator",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Save Notified Column",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Creator": {
+      "main": [
+        [
+          {
+            "node": "Save Notified Column",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": []
+}

@@ -19,7 +19,18 @@
 
 ## Über das Projekt
 
-**Join** ist ein Kanban-Board für Teams. Die V2 erweitert das Tool um einen KI-Workflow: Stakeholder schicken ihre Feature-Requests einfach per E-Mail, und eine KI erzeugt daraus automatisch ein Ticket mit Titel, Beschreibung, Deadline und Priorität. Das Ticket landet in der Spalte **Triage**, wo das Team es prüft und einplant.
+**Join** ist ein Kanban-Board für Teams. Die V2 erweitert das Tool um einen KI-Workflow: Stakeholder schicken ihre Feature-Requests einfach per E-Mail, und eine KI erzeugt daraus automatisch ein Ticket mit Titel, Beschreibung, Deadline und Priorität. Das Ticket landet in der Spalte **Triage**, wo das Team es prüft und einplant. Der Absender bekommt eine Bestätigung und wird später per E-Mail informiert, sobald sich der Status seines Tickets ändert.
+
+## Demo ausprobieren
+
+**Live:** [joinai.dieter-foos.de](https://joinai.dieter-foos.de)
+
+1. **Als Stakeholder:** Auf der Welcome-Seite *Create request* wählen. Die Stakeholder-Seite zeigt die E-Mail-Adresse und wie viele der 10 Requests heute noch frei sind.
+2. **E-Mail schicken:** Den Wunsch oder Fehler formlos beschreiben, gern mit Deadline („bis Freitag“) oder Dringlichkeit („dringend“). Nach etwa einer Minute kommt eine Bestätigung mit dem angelegten Ticket.
+3. **Als Team:** Über *Member log in* einloggen, z. B. per **Guest log in**. Auf dem **Board** steht das neue Ticket in **Triage**, mit KI-Badge, Kategorie, Priorität, Deadline und dem Absender als externem Ersteller.
+4. **Status ändern:** Das Ticket in eine andere Spalte ziehen. Der Absender bekommt innerhalb einer Minute eine E-Mail mit dem neuen Status.
+
+> Ist das Tageslimit erreicht, wird kein Ticket erstellt. Der Absender bekommt dann eine automatische Antwort, und die Mail wird vom Team manuell bearbeitet.
 
 ## Features
 
@@ -30,34 +41,47 @@
 | **Login / Sign-up** | Authentifizierung über Firebase Auth, inkl. Gast-Login |
 | **Summary** | Dashboard mit Kennzahlen (To do, Done, Urgent, nächste Deadline, E-Mail-Requests) |
 | **Board** | Kanban mit den Spalten *Triage → To do → In progress → Await feedback → Done*, Drag & Drop, Suche, Detail- und Edit-Overlay |
-| **Add Task** | Aufgaben mit Zuständigen, Fälligkeitsdatum, Priorität, Kategorie und Subtasks anlegen |
+| **Add Task** | Aufgaben mit Zuständigen, Fälligkeitsdatum, Priorität, Kategorie (User Story, Technical task, Bug) und Subtasks anlegen. Neue Tasks starten in Triage. |
 | **Contacts** | Kontakte anlegen, bearbeiten und löschen |
-| **KI-Badge** | Von der KI erstellte Tasks sind auf dem Board gekennzeichnet |
+| **KI-Badge** | Von der KI erstellte Tasks sind auf dem Board und im Beschreibungstext gekennzeichnet |
+| **Ersteller** | Jeder Task zeigt seinen Ersteller, unterschieden nach intern (Teammitglied) und extern (Stakeholder per E-Mail) |
 | **Responsive** | Eigene Layouts für Desktop und Mobile |
 
-## So funktioniert der E-Mail-Workflow
+## So funktionieren die n8n-Workflows
+
+Beide Workflows laufen in [n8n](https://n8n.io) und liegen als Export im Ordner [`n8n/`](n8n/). Die Exporte enthalten Verweise auf die Credentials, aber keine Schlüssel oder Tokens.
+
+### E-Mail → Ticket ([`email-to-task.workflow.json`](n8n/email-to-task.workflow.json))
 
 ```mermaid
 flowchart LR
     A[📧 Stakeholder<br/>schickt E-Mail] --> B[Gmail Trigger]
     B --> C{Tageslimit<br/>erreicht?}
     C -- nein --> D[🤖 Gemini<br/>extrahiert Task]
-    D --> E[(Firebase<br/>Realtime DB)]
-    E --> F[📋 Board<br/>Spalte Triage]
-    C -- ja --> G[👀 Manuelle<br/>Prüfung]
+    D --> E[(Firebase<br/>Spalte Triage)]
+    E --> F[✉️ Bestätigung<br/>Label „erledigt“]
+    C -- ja --> G[✉️ Limit-Hinweis<br/>Label „zu bearbeiten“]
+    D -. Fehler .-> H[✉️ Eingangsbestätigung<br/>Label „zu bearbeiten“]
+    E -. Fehler .-> H
 ```
 
-Der Workflow läuft in [n8n](https://n8n.io). Eine Sicherung des laufenden Workflows liegt unter [`n8n/email-to-task.workflow.json`](n8n/email-to-task.workflow.json). Sie enthält Verweise auf die Credentials, aber keine Schlüssel oder Tokens.
+1. **Gmail Trigger** – fragt jede Minute den Posteingang ab (eigene Mails werden ignoriert)
+2. **Prepare Email** – liest Absender, Betreff und Text aus und baut die KI-Anfrage
+3. **Get Request Counter / Check Limit / Within Limit?** – prüft das Tageslimit von 10 Requests
+4. **Gemini: Extract Task** – bestimmt Titel, Beschreibung, Kategorie (User Story, Technical task, Bug), Priorität und Deadline; bis zu 5 Versuche bei Überlastung
+5. **Build Task** – prüft die KI-Antwort, ergänzt den Hinweis *„This ticket was AI-generated.“* und setzt den Absender als Ersteller
+6. **Create Task in Firebase / Increment Request Counter** – legt den Task in **Triage** an und zählt den Request
+7. **Reply: Ticket Created → Label: erledigt** – Bestätigung an den Absender, Mail wird nach „erledigt“ verschoben
+8. **Reply: Limit Reached** bzw. bei Fehlern **Reply: Received → Label: zu bearbeiten** – Hinweis an den Absender, Mail wird nach „zu bearbeiten“ verschoben
 
-Der Ablauf:
+### Statusänderung → Benachrichtigung ([`status-notification.workflow.json`](n8n/status-notification.workflow.json))
 
-1. **Gmail Trigger** – reagiert auf neue E-Mails
-2. **Prepare Email** – bereitet Betreff und Inhalt auf
-3. **Get Request Counter / Check Limit** – prüft das Tageslimit
-4. **Gemini: Extract Task** – lässt die KI Titel, Beschreibung, Priorität und Deadline bestimmen
-5. **Build Task** – baut das Task-Objekt fürs Board
-6. **Create Task in Firebase** – speichert den Task in der Realtime Database
-7. **Increment Request Counter** – zählt den Request
+1. **Every Minute / Get Tasks** – liest jede Minute alle Tasks aus Firebase
+2. **Find Column Changes** – vergleicht die Spalte mit `lastNotifiedColumn` und findet verschobene Tasks
+3. **Notify Creator** – schickt dem Ersteller eine Mail mit altem und neuem Status
+4. **Save Notified Column** – merkt sich die Spalte, damit jede Änderung nur einmal gemeldet wird
+
+Dieser Weg braucht keinen öffentlich erreichbaren Webhook: n8n kann im Heimnetz bleiben, während die Webseite beim Hoster liegt.
 
 ## Tech Stack
 
@@ -88,7 +112,8 @@ JoinV2AI/
 ├── assets/                 # Icons, Bilder, Fonts
 └── n8n/
     ├── docker-compose.yml          # n8n-Setup (z. B. für ein NAS)
-    └── email-to-task.workflow.json # Sicherung des n8n-Workflows
+    ├── email-to-task.workflow.json        # Workflow: E-Mail → Ticket
+    └── status-notification.workflow.json  # Workflow: Statusänderung → Mail
 ```
 
 ## Loslegen
@@ -145,10 +170,14 @@ docker compose up -d
 
 - n8n unter `http://<host>:5678` öffnen
 - In `docker-compose.yml` `N8N_HOST` und `WEBHOOK_URL` auf die eigene Adresse anpassen
-- `email-to-task.workflow.json` importieren (**Workflows → Import from File**)
-- Credentials für **Gmail**, **Google Gemini** und **Firebase** hinterlegen
+- In Gmail die Labels **„erledigt“** und **„zu bearbeiten“** anlegen
+- Beide Workflows importieren (**Workflows → Import from File**)
+- Credentials für **Gmail**, **Google Gemini** (Header Auth) und **Firebase** (Google Service Account) hinterlegen
+- In den Nodes **„Label: erledigt“** und **„Label: zu bearbeiten“** das jeweilige Gmail-Label auswählen
 - Die Firebase-URLs in den HTTP-Nodes auf die eigene Datenbank ändern
-- Workflow aktivieren bzw. veröffentlichen. Er wird danach durch jede neue E-Mail im Postfach ausgelöst.
+- Beide Workflows aktivieren bzw. veröffentlichen
+
+> **Testen:** Mails, die das verbundene Gmail-Konto selbst verschickt, werden ignoriert (`-from:me`). So lösen die automatischen Antworten keine Schleife aus. Test-Requests deshalb von einer anderen Adresse schicken.
 
 > **Hinweis:** Die n8n-Daten (Credentials, Encryption Key) liegen in `n8n/n8n_data/` und werden nicht eingecheckt.
 

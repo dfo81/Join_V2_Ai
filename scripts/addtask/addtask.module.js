@@ -30,7 +30,7 @@
 /**
  * Payload used to create or update a task.
  * @typedef {Object} TaskData
- * @property {string} column - Column key (e.g. "todo", "inProgress", "done").
+ * @property {string} column - Column key (e.g. "triage", "todo", "inProgress", "done").
  * @property {string} title - Task title.
  * @property {string} description - Task description.
  * @property {string} dueDate - ISO date string for due date (YYYY-MM-DD or ISO).

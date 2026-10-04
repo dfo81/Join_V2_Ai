@@ -73,6 +73,18 @@ function render(used) {
   document.getElementById("info-limit").classList.toggle("d-none", !limitReached);
   document.getElementById("mail-button-text").textContent = limitReached ? "Send an email" : "Create Email Request";
   document.getElementById("mail-button").href = getMailLink();
+  renderRequestAddress();
+}
+
+/**
+ * Writes the request address into every visible address link.
+ * @returns {void}
+ */
+function renderRequestAddress() {
+  document.querySelectorAll(".request-email").forEach((link) => {
+    link.textContent = REQUEST_EMAIL;
+    link.href = getMailLink();
+  });
 }
 
 /**

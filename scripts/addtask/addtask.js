@@ -305,7 +305,7 @@ function baseTaskFromForm() {
   ));
 
   return {
-    column: "todo",
+    column: "triage",
     title: document.getElementById("addtask-title").value.trim(),
     description: document.getElementById("addtask-textarea").value.trim(),
     dueDate: document.getElementById("datepicker").value.trim(),

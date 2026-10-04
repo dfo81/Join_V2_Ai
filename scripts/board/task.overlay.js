@@ -94,6 +94,7 @@ function getLabelClass(category) {
     {
       "User Story": "user-story",
       "Technical task": "technical-task",
+      Bug: "bug",
     }[category] || ""
   );
 }

@@ -131,6 +131,7 @@ function getCategoryTemplate() {
       <div id="category-selection" class="category-selection d-none">
         <li data-value="Technical task">Technical task</li>
         <li data-value="User Story">User Story</li>
+        <li data-value="Bug">Bug</li>
       </div>
     </div>
   `;

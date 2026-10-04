@@ -182,6 +182,10 @@
   background-color: var(--label-blue);
 }
 
+.bug {
+  background-color: var(--label-red);
+}
+
 .frame {
   display: flex;
   flex-direction: column;
