@@ -47,12 +47,7 @@ flowchart LR
     C -- ja --> G[👀 Manuelle<br/>Prüfung]
 ```
 
-Der Workflow läuft in [n8n](https://n8n.io). Im Ordner [`n8n/`](n8n/) liegen zwei Exporte:
-
-| Datei | Inhalt |
-| --- | --- |
-| [`Join – Email to Task.json`](n8n/Join%20%E2%80%93%20Email%20to%20Task.json) | **Sicherung des laufenden Workflows** direkt aus n8n, inkl. Verweisen auf die Credentials (ohne Schlüssel oder Tokens) |
-| [`email-to-task.workflow.json`](n8n/email-to-task.workflow.json) | Neutrale Vorlage ohne Credential-Verweise, für ein frisches Setup |
+Der Workflow läuft in [n8n](https://n8n.io). Eine Sicherung des laufenden Workflows liegt unter [`n8n/email-to-task.workflow.json`](n8n/email-to-task.workflow.json). Sie enthält Verweise auf die Credentials, aber keine Schlüssel oder Tokens.
 
 Der Ablauf:
 
@@ -93,8 +88,7 @@ JoinV2AI/
 ├── assets/                 # Icons, Bilder, Fonts
 └── n8n/
     ├── docker-compose.yml          # n8n-Setup (z. B. für ein NAS)
-    ├── Join – Email to Task.json   # Sicherung des laufenden Workflows
-    └── email-to-task.workflow.json # Neutrale Workflow-Vorlage
+    └── email-to-task.workflow.json # Sicherung des n8n-Workflows
 ```
 
 ## Loslegen
@@ -151,9 +145,7 @@ docker compose up -d
 
 - n8n unter `http://<host>:5678` öffnen
 - In `docker-compose.yml` `N8N_HOST` und `WEBHOOK_URL` auf die eigene Adresse anpassen
-- Workflow importieren (**Workflows → Import from File**):
-  - `Join – Email to Task.json` zum Wiederherstellen der eigenen Instanz
-  - `email-to-task.workflow.json` für ein neues Setup
+- `email-to-task.workflow.json` importieren (**Workflows → Import from File**)
 - Credentials für **Gmail**, **Google Gemini** und **Firebase** hinterlegen
 - Die Firebase-URLs in den HTTP-Nodes auf die eigene Datenbank ändern
 - Workflow aktivieren bzw. veröffentlichen. Er wird danach durch jede neue E-Mail im Postfach ausgelöst.
