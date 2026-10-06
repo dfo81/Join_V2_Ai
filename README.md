@@ -32,6 +32,8 @@
 
 > Ist das Tageslimit erreicht, wird kein Ticket erstellt. Der Absender bekommt dann eine automatische Antwort, und die Mail wird vom Team manuell bearbeitet.
 
+> **Betrieb der Live-Demo:** Das Frontend liegt auf [joinai.dieter-foos.de](https://joinai.dieter-foos.de), die Daten in Firebase. Die n8n-Workflows laufen als Docker-Container auf meinem privaten NAS im Heimnetz ([`n8n/docker-compose.yml`](n8n/docker-compose.yml)). n8n braucht keinen offenen Port nach außen: Es fragt Gmail jede Minute ab und schreibt direkt in Firebase. Ist das NAS offline, kommen Mails erst nach dem Neustart an. Nicht verarbeitete Mails bleiben im Posteingang liegen und werden dann nachgeholt.
+
 ## Features
 
 | Bereich | Beschreibung |
@@ -87,7 +89,7 @@ Dieser Weg braucht keinen öffentlich erreichbaren Webhook: n8n kann im Heimnetz
 
 - **Frontend:** Vanilla HTML, CSS und JavaScript (ES-Module), kein Build-Schritt
 - **Backend:** Firebase Authentication und Realtime Database (SDK 10.12 per CDN)
-- **Automatisierung:** n8n (Docker) mit Gmail- und Claude-API-Anbindung
+- **Automatisierung:** n8n (Docker-Container auf einem privaten NAS) mit Gmail- und Claude-API-Anbindung
 - **Fonts:** Inter und Open Sans (lokal eingebunden)
 
 ## Projektstruktur
