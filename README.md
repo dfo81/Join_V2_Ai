@@ -11,7 +11,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=firebase&logoColor=black)
 ![n8n](https://img.shields.io/badge/n8n-EA4B71?style=flat&logo=n8n&logoColor=white)
-![Gemini](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=flat&logo=googlegemini&logoColor=white)
+![Claude](https://img.shields.io/badge/Claude-D97757?style=flat&logo=claude&logoColor=white)
 
 </div>
 
@@ -57,7 +57,7 @@ Beide Workflows laufen in [n8n](https://n8n.io) und liegen als Export im Ordner 
 flowchart LR
     A[📧 Stakeholder<br/>schickt E-Mail] --> B[Gmail Trigger]
     B --> C{Tageslimit<br/>erreicht?}
-    C -- nein --> D[🤖 Gemini<br/>extrahiert Task]
+    C -- nein --> D[🤖 Claude<br/>extrahiert Task]
     D --> E[(Firebase<br/>Spalte Triage)]
     E --> F[✉️ Bestätigung<br/>Label „erledigt“]
     C -- ja --> G[✉️ Limit-Hinweis<br/>Label „zu bearbeiten“]
@@ -68,7 +68,7 @@ flowchart LR
 1. **Gmail Trigger** – fragt jede Minute den Posteingang ab (eigene Mails werden ignoriert)
 2. **Prepare Email** – liest Absender, Betreff und Text aus und baut die KI-Anfrage
 3. **Get Request Counter / Check Limit / Within Limit?** – prüft das Tageslimit von 10 Requests
-4. **Gemini: Extract Task** – bestimmt Titel, Beschreibung, Kategorie (User Story, Technical task, Bug), Priorität und Deadline; bis zu 5 Versuche bei Überlastung
+4. **Claude: Extract Task** – bestimmt (Claude Haiku 4.5) Titel, Beschreibung, Kategorie (User Story, Technical task, Bug), Priorität und Deadline; bis zu 5 Versuche bei Überlastung
 5. **Build Task** – prüft die KI-Antwort, ergänzt den Hinweis *„This ticket was AI-generated.“* und setzt den Absender als Ersteller
 6. **Create Task in Firebase / Increment Request Counter** – legt den Task in **Triage** an und zählt den Request
 7. **Reply: Ticket Created → Label: erledigt** – Bestätigung an den Absender, Mail wird nach „erledigt“ verschoben
@@ -87,7 +87,7 @@ Dieser Weg braucht keinen öffentlich erreichbaren Webhook: n8n kann im Heimnetz
 
 - **Frontend:** Vanilla HTML, CSS und JavaScript (ES-Module), kein Build-Schritt
 - **Backend:** Firebase Authentication und Realtime Database (SDK 10.12 per CDN)
-- **Automatisierung:** n8n (Docker) mit Gmail- und Google-Gemini-Anbindung
+- **Automatisierung:** n8n (Docker) mit Gmail- und Claude-API-Anbindung
 - **Fonts:** Inter und Open Sans (lokal eingebunden)
 
 ## Projektstruktur
@@ -172,7 +172,7 @@ docker compose up -d
 - In `docker-compose.yml` `N8N_HOST` und `WEBHOOK_URL` auf die eigene Adresse anpassen
 - In Gmail die Labels **„erledigt“** und **„zu bearbeiten“** anlegen
 - Beide Workflows importieren (**Workflows → Import from File**)
-- Credentials für **Gmail**, **Google Gemini** (Header Auth) und **Firebase** (Google Service Account) hinterlegen
+- Credentials für **Gmail**, **Claude API** (Header Auth, Header-Name `x-api-key`, Key aus der Claude Console) und **Firebase** (Google Service Account) hinterlegen
 - In den Nodes **„Label: erledigt“** und **„Label: zu bearbeiten“** das jeweilige Gmail-Label auswählen
 - Die Firebase-URLs in den HTTP-Nodes auf die eigene Datenbank ändern
 - Beide Workflows aktivieren bzw. veröffentlichen
