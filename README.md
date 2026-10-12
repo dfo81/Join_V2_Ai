@@ -63,8 +63,9 @@ flowchart LR
     D --> E[(Firebase<br/>Spalte Triage)]
     E --> F[✉️ Bestätigung<br/>Label „erledigt“]
     C -- ja --> G[✉️ Limit-Hinweis<br/>Label „zu bearbeiten“]
-    D -. Fehler .-> H[✉️ Eingangsbestätigung<br/>Label „zu bearbeiten“]
-    E -. Fehler .-> H
+    D -. Fehler .-> L[(Firebase<br/>errorLog)]
+    E -. Fehler .-> L
+    L --> H[✉️ Eingangsbestätigung<br/>Label „zu bearbeiten“]
 ```
 
 1. **Gmail Trigger** – fragt jede Minute den Posteingang ab (eigene Mails werden ignoriert)
@@ -73,8 +74,9 @@ flowchart LR
 4. **Claude: Extract Task** – bestimmt (Claude Haiku 4.5) Titel, Beschreibung, Kategorie (User Story, Technical task, Bug), Priorität und Deadline; bis zu 5 Versuche bei Überlastung
 5. **Build Task** – prüft die KI-Antwort, ergänzt den Hinweis *„This ticket was AI-generated.“* und setzt den Absender als Ersteller
 6. **Create Task in Firebase / Increment Request Counter** – legt den Task in **Triage** an und zählt den Request
-7. **Reply: Ticket Created → Label: erledigt** – Bestätigung an den Absender, Mail wird nach „erledigt“ verschoben
-8. **Reply: Limit Reached** bzw. bei Fehlern **Reply: Received → Label: zu bearbeiten** – Hinweis an den Absender, Mail wird nach „zu bearbeiten“ verschoben
+7. **Reply: Ticket Created → Label: Done** – Bestätigung an den Absender, Mail wird nach „erledigt“ verschoben
+8. **Log Error** – schreibt Fehler der KI oder von Firebase mit Zeit, Schritt, HTTP-Status, Fehlermeldung, Absender und Betreff nach `/errorLog` in Firebase
+9. **Reply: Limit Reached** bzw. bei Fehlern **Reply: Received → Label: Manual Review** – Hinweis an den Absender, Mail wird nach „zu bearbeiten“ verschoben
 
 ### Statusänderung → Benachrichtigung ([`status-notification.workflow.json`](n8n/status-notification.workflow.json))
 
@@ -175,7 +177,7 @@ docker compose up -d
 - In Gmail die Labels **„erledigt“** und **„zu bearbeiten“** anlegen
 - Beide Workflows importieren (**Workflows → Import from File**)
 - Credentials für **Gmail**, **Claude API** (Header Auth, Header-Name `x-api-key`, Key aus der Claude Console) und **Firebase** (Google Service Account) hinterlegen
-- In den Nodes **„Label: erledigt“** und **„Label: zu bearbeiten“** das jeweilige Gmail-Label auswählen
+- In den Nodes **„Label: Done“** und **„Label: Manual Review“** das Gmail-Label **„erledigt“** bzw. **„zu bearbeiten“** auswählen
 - Die Firebase-URLs in den HTTP-Nodes auf die eigene Datenbank ändern
 - Beide Workflows aktivieren bzw. veröffentlichen
 
