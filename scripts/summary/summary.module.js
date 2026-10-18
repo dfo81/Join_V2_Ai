@@ -306,6 +306,71 @@ function updateHeaderForUser(user) {
   setUsernameElement(name);
   setGreetingElement(getGreeting(), name !== "User");
   setInitialsFromUser(user);
+  fitGreetingToTiles();
+}
+
+/**
+ * Keeps greeting and name on one line as long as they are not wider than the tile box,
+ * otherwise stacks them and shrinks a long name until it fits the tile box on one line.
+ * Runs again on resize, because tile size and font size change per breakpoint.
+ * @returns {void}
+ */
+function fitGreetingToTiles() {
+  const header = document.querySelector(".dashboard-header");
+  const tiles = getVisibleTileBox();
+  if (!header) return;
+  header.classList.remove("greeting-stacked");
+  const name = document.getElementById("username");
+  name.style.fontSize = "";
+  name.style.whiteSpace = "";
+  name.style.maxWidth = "";
+  if (!tiles) return;
+  const maxWidth = tiles.getBoundingClientRect().width;
+  if (getGreetingLineWidth() > maxWidth) {
+    header.classList.add("greeting-stacked");
+    shrinkNameToWidth(maxWidth);
+  }
+}
+
+/**
+ * Lowers the name's font size proportionally if it is wider than the given width,
+ * but not below 16px; if that is still too wide, the name may wrap.
+ * @param {number} maxWidth - Available width in pixels.
+ * @returns {void}
+ */
+function shrinkNameToWidth(maxWidth) {
+  const name = document.getElementById("username");
+  const width = name.getBoundingClientRect().width;
+  if (width <= maxWidth) return;
+  // the header may be scaled, so screen px and layout px differ
+  const scale = width / name.offsetWidth;
+  const fontSize = parseFloat(getComputedStyle(name).fontSize);
+  const fitted = Math.floor((fontSize * maxWidth) / width);
+  name.style.fontSize = `${Math.max(fitted, 16)}px`;
+  if (fitted >= 16) return;
+  // still too wide at 16px: wrap within the tile width
+  name.style.whiteSpace = "normal";
+  name.style.maxWidth = `${maxWidth / scale}px`;
+}
+
+/**
+ * Returns the tile box shown at the current width (desktop or mobile), if any.
+ * @returns {HTMLElement|undefined}
+ */
+function getVisibleTileBox() {
+  const boxes = document.querySelectorAll(".task-dashboard-container, .task-dashboard-mobile");
+  return [...boxes].find((box) => box.getClientRects().length > 0);
+}
+
+/**
+ * Measures greeting plus name while both sit in one row.
+ * @returns {number}
+ */
+function getGreetingLineWidth() {
+  const greeting = document.getElementById("greeting").getBoundingClientRect();
+  const name = document.getElementById("username").getBoundingClientRect();
+  const right = name.width > 0 ? name.right : greeting.right;
+  return right - greeting.left;
 }
 
 /**
@@ -367,6 +432,8 @@ document.addEventListener('DOMContentLoaded', onDomContentLoaded);
  * @returns {void}
  */
 function onDomContentLoaded() {
+  window.addEventListener("resize", fitGreetingToTiles);
+  document.fonts.ready.then(fitGreetingToTiles);
   initMobileAnimations();
   subscribeToTasks();
 }

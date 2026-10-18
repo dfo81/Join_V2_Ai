@@ -4,6 +4,8 @@ let OVERLAY_ID = "task-overlay";
 let OVERLAY_CONTENT_ID = "task-overlay-content";
 let OVERLAY_MEMBERS_ID = "overlay-members";
 let ADDTASK_ICON_PATH = "./assets/icons/add_task/";
+/** The overlay title is never shrunk below this size to keep whole words on one line. */
+let MIN_TITLE_FONT_SIZE = 16;
 
 /**
  * Show the overlay UI: reveals the backdrop and animates the overlay in.
@@ -12,8 +14,43 @@ function showOverlayUI() {
   let { bg, overlay } = getOverlayElements();
   if (!bg || !overlay) return;
   showElement(bg);
+  fitOverlayTitle();
   animateOverlayIn(overlay);
 }
+
+/**
+ * Shrinks the overlay title so its longest word fits on one line, but not below MIN_TITLE_FONT_SIZE.
+ * If that is still too wide, words may break anywhere again (stylesheet default).
+ */
+function fitOverlayTitle() {
+  let titleEl = document.getElementById("overlay-title");
+  if (!titleEl || !titleEl.getClientRects().length) return;
+  // the global transition would animate the reset size and spoil the measurement
+  titleEl.style.transition = "none";
+  titleEl.style.fontSize = "";
+  titleEl.style.overflowWrap = "normal";
+  if (titleEl.scrollWidth <= titleEl.clientWidth) return;
+  let fontSize = parseFloat(getComputedStyle(titleEl).fontSize);
+  let fitted = Math.floor((fontSize * titleEl.clientWidth) / titleEl.scrollWidth);
+  titleEl.style.fontSize = `${Math.max(fitted, MIN_TITLE_FONT_SIZE)}px`;
+  if (fitted < MIN_TITLE_FONT_SIZE) titleEl.style.overflowWrap = "";
+}
+
+/**
+ * Fits the title again whenever the overlay's width changes (window resize, incl. the width transition).
+ * Only width changes count, so the title's own height change doesn't trigger it again.
+ */
+let lastOverlayWidth = 0;
+let overlayWidthObserver = new ResizeObserver((entries) => {
+  let width = entries[0].contentRect.width;
+  if (width === lastOverlayWidth) return;
+  lastOverlayWidth = width;
+  fitOverlayTitle();
+});
+document.addEventListener("DOMContentLoaded", () => {
+  let content = document.getElementById(OVERLAY_CONTENT_ID);
+  if (content) overlayWidthObserver.observe(content);
+});
 
 /**
  * Get overlay backdrop and overlay container elements.

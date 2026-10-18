@@ -43,7 +43,8 @@
 html, body {
   scroll-behavior: smooth;
   height: 100vh;
-  width: 100vw;
+  /* 100% instead of 100vw, so a vertical scrollbar doesn't add a horizontal one */
+  width: 100%;
   margin: 0;
   box-sizing: border-box;
   display: flex;

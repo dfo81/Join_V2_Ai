@@ -29,6 +29,17 @@ h5 {
   gap: 22px;
 }
 
+/* greeting and name never wrap on their own; summary.module.js stacks them or shrinks the name instead */
+.dashboard-header h2,
+.dashboard-header h1 {
+  white-space: nowrap;
+}
+
+/* set by summary.module.js when greeting and name are wider than the tile box */
+.dashboard-header.greeting-stacked {
+  flex-direction: column;
+}
+
 .dashboard-header h2 {
   font-weight: 700;
   font-size: 64px;

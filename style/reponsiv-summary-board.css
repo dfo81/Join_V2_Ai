@@ -1,10 +1,13 @@
 @media (max-width: 1250px) {
+  /* fills the space next to the sidebar; 100vw would ignore a vertical scrollbar and add a horizontal one */
   .board-wrapper {
+    flex: 1;
+    min-width: 0;
     padding: 0;
   }
-  
+
   .dashboard {
-    width: calc(100vw - 234px);
+    width: 100%;
   }
 
   .task-dashboard-container {
@@ -13,7 +16,6 @@
 
   .dashboard-header {
     transform: scale(0.9);
-    flex-direction: column;
   }
 }
 
@@ -29,7 +31,6 @@
 
 @media (max-width: 1024px) {
   .dashboard {
-    width: calc(100vw - 150px);
     gap: 0;
   }
 }
@@ -48,11 +49,15 @@
     background-color: white;
   }
 
+  /* the dashboard is absolute here, the wrapper must not take space away from the centered mobile tiles */
+  .board-wrapper {
+    flex: none;
+  }
+
   .dashboard-header {
     background: white;
     width: 100%;
     display: flex;
-    flex-direction: column;
   }
 
   .dashboard-header h2 {
@@ -153,5 +158,42 @@
   main {
     margin: 6px 0;
     overflow: auto;
+  }
+
+  /* the fixed sidebar height plus its padding is taller than main here and would add a scrollbar */
+  .sidebar {
+    height: auto;
+    box-sizing: border-box;
+  }
+}
+
+/* short desktop screens (e.g. 1024x600): greeting starts below the header, smaller text and tiles */
+@media (max-height: 700px) and (min-width: 901px) {
+  /* the desktop padding of 268px would push the tiles below the screen */
+  .board-wrapper {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .dashboard {
+    justify-content: flex-start;
+    gap: 24px;
+    padding-top: 32px;
+  }
+
+  .dashboard-header {
+    transform: none;
+  }
+
+  .dashboard-header h2,
+  .dashboard-header h1 {
+    margin: 0;
+    font-size: 44px;
+  }
+
+  /* zoom instead of transform, so the tiles also take less space in the layout */
+  .task-dashboard-container {
+    transform: none;
+    zoom: 0.72;
   }
 }

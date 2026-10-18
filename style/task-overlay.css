@@ -446,6 +446,21 @@ b {
   width: 50px;
 }
 
+/* very narrow phones: the AI badge scales down instead of pushing the content sideways */
+@media (max-width: 400px) {
+  .ai-badge {
+    flex-shrink: 1;
+    min-width: 0;
+    object-fit: contain;
+    object-position: left;
+  }
+
+  .label-exit-box span {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+}
+
 /* mobile: "Creator:" and badge on the first line, name and profile button on the second */
 @media (max-width: 600px) {
   .creator-box {

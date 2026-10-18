@@ -12,6 +12,12 @@
         gap: 10px;
     }
 
+    /* narrower list: smaller text keeps "Add new contact" and the icon on one line */
+    .button-add-new-contact-box {
+        font-size: 19px;
+        white-space: nowrap;
+    }
+
     .overlay-add-contact-cancel-save {
         padding-bottom: 12px;
     }
