@@ -21,6 +21,7 @@
   --progressbar-bg: #F4F4F4;
   --navi-buttons-bg: #D2E3FF;
   --banner-bg: rgba(210, 227, 255, 0.4);
+  --button-inactive-bg: rgba(69, 137, 255, 0.2);
   --card-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.14);
 }
 
@@ -108,6 +109,14 @@ footer {
 .button-blue:active {
   background-color: #fff;
   color: var(--main-color);
+}
+
+/* inactive variant from the Figma button component (e.g. sign up before accepting the privacy policy) */
+.button-blue.button-inactive {
+  background-color: var(--button-inactive-bg);
+  color: #fff;
+  box-shadow: none;
+  cursor: default;
 }
 
 .button-hollow {

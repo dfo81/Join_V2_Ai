@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #4589ff;
+  background-color: var(--main-color);
   transition: background-color 0.3s ease-in-out;
 }
 
