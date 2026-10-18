@@ -1,7 +1,6 @@
-:root {
-  --v2-main-color: #1268ff;
-  --v2-main-color-hover: #0050e0;
-  --v2-text-dark: #2a3647;
+/* the welcome page can grow taller than the viewport on short screens, so the canvas stays blue */
+body:has(.welcome-page) {
+  background-color: var(--main-color);
 }
 
 .welcome-page {
@@ -10,17 +9,19 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: var(--v2-main-color);
+  background-color: var(--main-color);
 }
 
 .welcome-wrapper {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  /* equal outer rows keep the card centered on the page, not between header and footer */
+  grid-template-rows: 1fr auto 1fr;
   width: 100%;
   max-width: 1440px;
-  min-height: min(100vh, 1440px);
+  /* a fixed height lets the outer rows shrink unevenly on short screens instead of growing the page */
+  height: min(100vh, 1440px);
   box-sizing: border-box;
-  padding: 56px 46px 32px 56px;
+  padding: 0 65px 0 77px;
   color: #fff;
   opacity: 0;
   pointer-events: none;
@@ -49,7 +50,7 @@
   z-index: 2;
 }
 
-/* moving logo */
+/* moving logo, ends at 77px / 80px like the Figma frame */
 @keyframes welcomeMoveLogo {
   to {
     top: calc((100vh - min(100vh, 1440px)) / 2 + -20px);
@@ -63,6 +64,8 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  align-self: start;
+  padding-top: 52px;
 }
 
 .welcome-logo {
@@ -70,23 +73,24 @@
   height: auto;
 }
 
-/* reserves the space of the moved logo (bottom edge of logo minus wrapper padding) */
+/* reserves the space of the moved logo (bottom edge of logo minus header padding) */
 .welcome-logo-space {
-  height: 147px;
+  height: 150px;
 }
 
 .welcome-sign-up {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
   font-size: 16px;
+  line-height: 1.2;
 }
 
 .welcome-sign-up a {
   color: #fff;
   font-size: 20px;
+  line-height: 1.2;
   text-decoration: underline;
-  text-underline-offset: 4px;
 }
 
 .welcome-sign-up a:hover {
@@ -96,97 +100,118 @@
 /* main section */
 .welcome-main {
   display: flex;
-  flex: 1;
   justify-content: center;
   align-items: center;
-  padding: 32px 0;
+  /* span the full wrapper width so the asymmetric side padding doesn't shift the card */
+  margin: 0 -65px 0 -77px;
+  padding: 32px 71px;
   overflow: visible;
 }
 
 .welcome-card {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 56px;
   box-sizing: border-box;
-  width: 100%;
-  max-width: 787px;
-  padding: 48px 70px;
+  max-width: 100%;
+  padding: 56px 72px;
   border-radius: 30px;
   background-color: #fff;
-  color: var(--v2-text-dark);
-  box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+  color: var(--text-dark);
+  box-shadow: var(--card-shadow);
+}
+
+.welcome-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 645px;
 }
 
 .welcome-title-box {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   width: fit-content;
 }
 
 .welcome-title {
-  font-size: 40px;
+  margin: 0;
+  font-size: 32px;
   font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-dark);
 }
 
 .welcome-title-border {
   height: 3px;
-  background-color: var(--v2-main-color);
-  border-radius: 2px;
+  background-color: var(--accent-blue);
 }
 
 .welcome-text {
-  margin: 8px 0;
+  margin: 0;
   font-size: 23px;
   line-height: 1.2;
+  color: var(--menu-color);
 }
 
 .welcome-options {
   display: flex;
-  justify-content: space-between;
-  gap: 32px;
+  gap: 64px;
 }
 
 .welcome-option {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 24px;
 }
 
 .welcome-option-label {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--v2-main-color);
+  font-size: 23px;
+  line-height: 1.2;
+  color: var(--light-blue);
 }
 
 .welcome-option-label svg {
   width: 24px;
   height: 24px;
-  fill: var(--v2-main-color);
+  fill: var(--light-blue);
 }
 
+/* V2 buttons, also used on the stakeholder and request page */
 .welcome-button-blue {
-  border: 1px solid var(--v2-main-color);
+  border: none;
+  font-size: 23px;
+  line-height: 1.2;
   color: #fff;
-  background-color: var(--v2-main-color);
+  background-color: var(--main-color);
 }
 
 .welcome-button-blue:hover {
-  background-color: var(--v2-main-color-hover);
+  background-color: var(--main-color-hover);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .welcome-button-hollow {
-  border: 1px solid var(--light-gray);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 48px;
+  padding: 12px 18px;
+  border: 1px solid var(--menu-color);
+  font-size: 19px;
+  line-height: 1.2;
+  color: var(--menu-color);
   background-color: #fff;
-  color: var(--light-gray);
 }
 
 .welcome-button-hollow:hover {
-  color: var(--v2-main-color);
-  border-color: var(--v2-main-color);
+  color: var(--main-color);
+  border-color: var(--main-color);
   box-shadow: 0px 4px 8px #53535333;
 }
 
@@ -194,12 +219,16 @@
 .welcome-footer {
   display: flex;
   justify-content: center;
-  gap: 32px;
+  align-self: end;
+  gap: 8px;
+  padding-bottom: 43px;
 }
 
 .welcome-footer a {
+  padding: 8px;
   color: #fff;
   font-size: 16px;
+  line-height: 1.2;
   text-decoration: none;
 }
 
@@ -229,7 +258,18 @@
 /* mobile */
 @media (max-width: 768px) {
   .welcome-wrapper {
-    padding: 24px 14px;
+    grid-template-rows: auto 1fr auto;
+    height: auto;
+    min-height: 100vh;
+    padding: 0 14px;
+  }
+
+  .welcome-header {
+    padding-top: 24px;
+  }
+
+  .welcome-footer {
+    padding-bottom: 24px;
   }
 
   .welcome-logo-wrapper {
@@ -260,14 +300,20 @@
 
   .welcome-main {
     align-items: flex-start;
+    margin: 0;
     padding: 20px 0 48px;
   }
 
   .welcome-card {
     align-items: center;
-    gap: 32px;
+    width: 100%;
+    gap: 48px;
     padding: 48px 24px;
     text-align: center;
+  }
+
+  .welcome-intro {
+    align-items: center;
   }
 
   .welcome-title-box {

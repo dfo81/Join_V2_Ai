@@ -7,7 +7,7 @@ body {
   min-height: 100vh;
   height: auto;
   background-color: #fff;
-  color: var(--v2-text-dark);
+  color: var(--menu-color);
 }
 
 /* header */
@@ -15,10 +15,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 96px;
-  padding: 0 39px;
-  background-color: var(--v2-main-color);
-  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+  padding: 20px 39px;
+  background-color: var(--main-color);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.stakeholder-header a {
+  display: flex;
 }
 
 .stakeholder-logo {
@@ -33,11 +36,9 @@ body {
 }
 
 .stakeholder-nav p {
+  margin: 0;
   font-size: 19px;
-}
-
-.stakeholder-nav a {
-  display: flex;
+  line-height: 1.2;
 }
 
 .stakeholder-help {
@@ -54,15 +55,15 @@ body {
   flex: 1;
   justify-content: center;
   overflow: visible;
-  padding: 24px 32px;
+  padding: 32px 32px 184px;
 }
 
 .stakeholder-content {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 94px;
   width: 100%;
-  max-width: 1080px;
+  max-width: 1121px;
 }
 
 .stakeholder-top-row {
@@ -73,29 +74,63 @@ body {
 
 .stakeholder-back {
   display: flex;
-  padding: 4px;
   border-radius: 50%;
   transition: background-color 0.2s ease-in-out;
+}
+
+.stakeholder-back img {
+  width: 32px;
+  height: 32px;
 }
 
 .stakeholder-back:hover {
   background-color: #e3f1fe;
 }
 
-.request-counter,
-.request-counter b {
-  font-size: 19px;
-  color: var(--v2-main-color);
+.request-counter {
+  display: flex;
+  gap: 8px;
+  color: var(--light-blue);
 }
 
-.request-counter.limit-reached,
-.request-counter.limit-reached b {
+.request-counter,
+.request-counter * {
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.request-counter.limit-reached {
   color: var(--urgent-color);
 }
 
+/* greeting, info and button; left aligned in the 1121px column like the Figma frame */
+.stakeholder-body {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  align-self: flex-start;
+  max-width: 990px;
+}
+
+/* the limit layout is centered */
+.stakeholder-body.limit-reached {
+  align-self: center;
+  max-width: 950px;
+}
+
 .stakeholder-greeting {
+  margin: 0;
   text-align: center;
-  font-size: 61px;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--menu-color);
+}
+
+.stakeholder-request {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .limit-banner {
@@ -103,67 +138,76 @@ body {
   align-items: center;
   gap: 16px;
   align-self: center;
-  max-width: 560px;
-  padding: 14px 24px;
+  padding: 16px 24px;
   border-radius: 8px;
-  background-color: #e3f1fe;
+  background-color: var(--banner-bg);
 }
 
 .limit-banner p {
+  max-width: 512px;
   margin: 0;
   font-size: 19px;
+  line-height: 1.2;
 }
 
 .stakeholder-info {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 48px;
+  gap: 72px;
 }
 
 .stakeholder-text {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  max-width: 500px;
+  gap: 40px;
+  width: 502px;
+  flex-shrink: 1;
 }
 
 .stakeholder-text p {
-  margin: 0 0 16px;
-  font-size: 16px;
-  line-height: 1.3;
-}
-
-.stakeholder-text .request-email {
-  color: var(--v2-main-color);
-  font-weight: 700;
-  overflow-wrap: anywhere;
+  margin: 0;
+  line-height: 1.2;
 }
 
 .stakeholder-text .stakeholder-lead {
-  margin-bottom: 32px;
-  font-size: 27px;
-  line-height: 1.25;
+  font-size: 28px;
+}
+
+.stakeholder-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stakeholder-copy p {
+  font-size: 19px;
+  text-align: justify;
 }
 
 .stakeholder-illustration {
-  width: 100%;
-  max-width: 440px;
+  flex-shrink: 0;
+  max-width: 100%;
   height: auto;
+  border-radius: 8px;
 }
 
-.stakeholder-mail-button {
+.stakeholder-request-button {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   align-self: flex-start;
+  box-sizing: border-box;
+  height: 60px;
+  padding: 16px 18px;
+  border-radius: 10px;
 }
 
-.stakeholder-mail-button span {
+.stakeholder-request-button span {
   font-size: 23px;
+  line-height: 1.2;
 }
 
-.stakeholder-mail-button svg {
+.stakeholder-request-button svg {
   width: 24px;
   height: 24px;
   fill: #fff;
@@ -171,25 +215,50 @@ body {
 
 /* footer */
 .stakeholder-footer {
-  gap: 32px;
-  padding: 24px 0 40px;
+  gap: 8px;
+  padding-bottom: 41px;
 }
 
 .stakeholder-footer a {
+  padding: 8px;
   font-size: 16px;
-  color: var(--light-gray);
+  line-height: 1.2;
+  color: var(--menu-color);
   text-decoration: none;
 }
 
 .stakeholder-footer a:hover {
-  color: var(--v2-main-color);
+  color: var(--main-color);
 }
 
-/* mobile */
+/* tablet: let text and illustration share the width */
+@media (max-width: 1100px) {
+  .stakeholder-body,
+  .stakeholder-body.limit-reached {
+    align-self: stretch;
+    max-width: none;
+  }
+
+  .stakeholder-info {
+    gap: 40px;
+  }
+
+  .stakeholder-text {
+    flex: 1;
+    width: auto;
+  }
+
+  .stakeholder-illustration {
+    flex-shrink: 1;
+    min-width: 0;
+    width: 40%;
+  }
+}
+
+/* mobile, 428px Figma frame */
 @media (max-width: 768px) {
   .stakeholder-header {
-    min-height: 80px;
-    padding: 0 16px;
+    padding: 16px 19px;
   }
 
   .stakeholder-logo {
@@ -201,21 +270,43 @@ body {
   }
 
   .stakeholder-main {
-    padding: 24px 16px;
+    padding: 32px 19px 48px;
   }
 
+  /* greeting and back arrow share the first row, the counter goes below */
   .stakeholder-content {
-    gap: 24px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "greeting back"
+      "counter counter"
+      "request request";
+    align-items: center;
+    gap: 24px 16px;
   }
 
-  .stakeholder-top-row {
-    flex-direction: row-reverse;
+  .stakeholder-top-row,
+  .stakeholder-body {
+    display: contents;
+  }
+
+  .stakeholder-back {
+    grid-area: back;
+  }
+
+  .request-counter {
+    grid-area: counter;
   }
 
   .stakeholder-greeting {
+    grid-area: greeting;
     text-align: left;
     font-size: 40px;
-    order: -1;
+  }
+
+  .stakeholder-request {
+    grid-area: request;
+    gap: 24px;
   }
 
   .stakeholder-info {
@@ -230,26 +321,28 @@ body {
 
   .stakeholder-text .stakeholder-lead {
     order: -1;
-    margin: 0;
     font-size: 19px;
-    text-align: left;
   }
 
-  .stakeholder-text p {
-    text-align: justify;
+  .stakeholder-copy p {
+    font-size: 16px;
   }
 
   .stakeholder-illustration {
     order: -1;
     align-self: center;
-    max-width: 320px;
+    width: 100%;
+    max-width: 290px;
   }
 
-  .stakeholder-mail-button {
+  .stakeholder-request-button {
     align-self: center;
+    height: auto;
+    padding: 10px 18px;
+    border-radius: 8px;
   }
 
-  .stakeholder-footer a {
-    font-size: 19px;
+  .stakeholder-request-button svg {
+    display: none;
   }
 }

@@ -1,5 +1,9 @@
 :root {
-  --main-color: #4589ff;
+  --main-color: #1268ff;
+  --main-color-hover: #0050e0;
+  --text-dark: #2a3647;
+  --accent-blue: #4589ff;
+  --input-gray: #686868;
   --light-blue: #005dff;
   --dark-blue: #091931;
   --style-color: #D1D1D1;
@@ -16,6 +20,8 @@
   --error-color: #fa2828;
   --progressbar-bg: #F4F4F4;
   --navi-buttons-bg: #D2E3FF;
+  --banner-bg: rgba(210, 227, 255, 0.4);
+  --card-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.14);
 }
 
 @font-face {

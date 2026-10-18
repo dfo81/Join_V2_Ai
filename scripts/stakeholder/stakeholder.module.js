@@ -1,16 +1,7 @@
 import { db, ref, get } from "../firebase.js";
 
-/**
- * Mailbox that receives stakeholder requests (processed by the AI ticket pipeline).
- * @type {string}
- */
-const REQUEST_EMAIL = "foos.muc@gmail.com";
-
 /** Maximum number of AI-generated tickets per day. */
 const DAILY_LIMIT = 10;
-
-/** Subject prefilled in the stakeholder's mail client. */
-const MAIL_SUBJECT = "Feature request";
 
 /**
  * Gets a greeting message based on the current hour.
@@ -50,14 +41,6 @@ async function loadUsedRequests() {
 }
 
 /**
- * Builds the mailto link for a new request.
- * @returns {string}
- */
-function getMailLink() {
-  return `mailto:${REQUEST_EMAIL}?subject=${encodeURIComponent(MAIL_SUBJECT)}`;
-}
-
-/**
  * Renders counter, greeting and the matching page variant.
  * @param {number} used - Requests used today.
  * @returns {void}
@@ -68,23 +51,11 @@ function render(used) {
   document.getElementById("request-count").textContent = Math.min(used, DAILY_LIMIT);
   document.getElementById("request-limit").textContent = DAILY_LIMIT;
   document.getElementById("request-counter").classList.toggle("limit-reached", limitReached);
+  document.getElementById("stakeholder-body").classList.toggle("limit-reached", limitReached);
   document.getElementById("limit-banner").classList.toggle("d-none", !limitReached);
   document.getElementById("info-default").classList.toggle("d-none", limitReached);
   document.getElementById("info-limit").classList.toggle("d-none", !limitReached);
-  document.getElementById("mail-button-text").textContent = limitReached ? "Send an email" : "Create Email Request";
-  document.getElementById("mail-button").href = getMailLink();
-  renderRequestAddress();
-}
-
-/**
- * Writes the request address into every visible address link.
- * @returns {void}
- */
-function renderRequestAddress() {
-  document.querySelectorAll(".request-email").forEach((link) => {
-    link.textContent = REQUEST_EMAIL;
-    link.href = getMailLink();
-  });
+  document.getElementById("request-button-text").textContent = limitReached ? "Send request" : "Create request";
 }
 
 /**

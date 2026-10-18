@@ -19,20 +19,20 @@
 
 ## Über das Projekt
 
-**Join** ist ein Kanban-Board für Teams. Die V2 erweitert das Tool um einen KI-Workflow: Stakeholder schicken ihre Feature-Requests einfach per E-Mail, und eine KI erzeugt daraus automatisch ein Ticket mit Titel, Beschreibung, Deadline und Priorität. Das Ticket landet in der Spalte **Triage**, wo das Team es prüft und einplant. Der Absender bekommt eine Bestätigung und wird später per E-Mail informiert, sobald sich der Status seines Tickets ändert.
+**Join** ist ein Kanban-Board für Teams. Die V2 erweitert das Tool um einen KI-Workflow: Stakeholder schicken ihre Feature-Requests über ein Formular im Browser oder per E-Mail, und eine KI erzeugt daraus automatisch ein Ticket mit Titel, Beschreibung, Deadline und Priorität. Das Ticket landet in der Spalte **Triage**, wo das Team es prüft und einplant. Der Absender bekommt eine Bestätigung und wird später per E-Mail informiert, sobald sich der Status seines Tickets ändert.
 
 ## Demo ausprobieren
 
 **Live:** [joinai.dieter-foos.de](https://joinai.dieter-foos.de)
 
-1. **Als Stakeholder:** Auf der Welcome-Seite *Create request* wählen. Die Stakeholder-Seite zeigt die E-Mail-Adresse und wie viele der 10 Requests heute noch frei sind.
-2. **E-Mail schicken:** Den Wunsch oder Fehler formlos beschreiben, gern mit Deadline („bis Freitag“) oder Dringlichkeit („dringend“). Nach etwa einer Minute kommt eine Bestätigung mit dem angelegten Ticket.
+1. **Als Stakeholder:** Auf der Welcome-Seite *Create request* wählen. Die Stakeholder-Seite zeigt, wie viele der 10 Requests heute noch frei sind.
+2. **Request senden:** Über *Create request* das Formular öffnen, Name, E-Mail und Betreff eintragen und den Wunsch oder Fehler formlos beschreiben, gern mit Deadline („bis Freitag“) oder Dringlichkeit („dringend“). Nach etwa einer Minute kommt eine Bestätigung mit dem angelegten Ticket an die angegebene Adresse.
 3. **Als Team:** Über *Member log in* einloggen, z. B. per **Guest log in**. Auf dem **Board** steht das neue Ticket in **Triage**, mit KI-Badge, Kategorie, Priorität, Deadline und dem Absender als externem Ersteller.
 4. **Status ändern:** Das Ticket in eine andere Spalte ziehen. Der Absender bekommt innerhalb einer Minute eine E-Mail mit dem neuen Status.
 
-> Ist das Tageslimit erreicht, wird kein Ticket erstellt. Der Absender bekommt dann eine automatische Antwort, und die Mail wird vom Team manuell bearbeitet.
+> Ist das Tageslimit erreicht, wird kein Ticket erstellt. Der Absender bekommt dann eine automatische Antwort, und der Request wird vom Team manuell bearbeitet.
 
-> **Betrieb der Live-Demo:** Das Frontend liegt auf [joinai.dieter-foos.de](https://joinai.dieter-foos.de), die Daten in Firebase. Die n8n-Workflows laufen als Docker-Container auf meinem privaten NAS im Heimnetz ([`n8n/docker-compose.yml`](n8n/docker-compose.yml)). n8n braucht keinen offenen Port nach außen: Es fragt Gmail jede Minute ab und schreibt direkt in Firebase. Ist das NAS offline, kommen Mails erst nach dem Neustart an. Nicht verarbeitete Mails bleiben im Posteingang liegen und werden dann nachgeholt.
+> **Betrieb der Live-Demo:** Das Frontend liegt auf [joinai.dieter-foos.de](https://joinai.dieter-foos.de), die Daten in Firebase. Die n8n-Workflows laufen als Docker-Container auf meinem privaten NAS im Heimnetz ([`n8n/docker-compose.yml`](n8n/docker-compose.yml)). n8n braucht keinen offenen Port nach außen: Es fragt Gmail und die Formular-Warteschlange in Firebase jede Minute ab und schreibt direkt in Firebase. Ist das NAS offline, kommen Mails erst nach dem Neustart an. Nicht verarbeitete Mails bleiben im Posteingang liegen und werden dann nachgeholt.
 
 ## Features
 
@@ -58,7 +58,10 @@ Beide Workflows laufen in [n8n](https://n8n.io) und liegen als Export im Ordner 
 ```mermaid
 flowchart LR
     A[📧 Stakeholder<br/>schickt E-Mail] --> B[Gmail Trigger]
+    W[📝 Formular<br/>request.html] --> Q[(Firebase<br/>webRequests)]
+    Q --> T[Every Minute]
     B --> C{Tageslimit<br/>erreicht?}
+    T --> C
     C -- nein --> D[🤖 Claude<br/>extrahiert Task]
     D --> E[(Firebase<br/>Spalte Triage)]
     E --> F[✉️ Bestätigung<br/>Label „erledigt“]
@@ -69,6 +72,7 @@ flowchart LR
 ```
 
 1. **Gmail Trigger** – fragt jede Minute den Posteingang ab (eigene Mails werden ignoriert)
+1. **Every Minute (Web Requests) / Get Web Requests / Split Web Requests** – holt die Anfragen aus dem Formular (`/webRequests` in Firebase) und bringt sie in dieselbe Form wie eine Mail; **Delete Web Request** entfernt sie aus der Warteschlange
 2. **Prepare Email** – liest Absender, Betreff und Text aus und baut die KI-Anfrage
 3. **Get Request Counter / Check Limit / Within Limit?** – prüft das Tageslimit von 10 Requests
 4. **Claude: Extract Task** – bestimmt (Claude Haiku 4.5) Titel, Beschreibung, Kategorie (User Story, Technical task, Bug), Priorität und Deadline; bis zu 5 Versuche bei Überlastung
@@ -77,6 +81,7 @@ flowchart LR
 7. **Reply: Ticket Created → Label: Done** – Bestätigung an den Absender, Mail wird nach „erledigt“ verschoben
 8. **Log Error** – schreibt Fehler der KI oder von Firebase mit Zeit, Schritt, HTTP-Status, Fehlermeldung, Absender und Betreff nach `/errorLog` in Firebase
 9. **Reply: Limit Reached** bzw. bei Fehlern **Reply: Received → Label: Manual Review** – Hinweis an den Absender, Mail wird nach „zu bearbeiten“ verschoben
+10. **From Web Form?** – Formular-Requests haben keine Mail zum Antworten: Sie bekommen eine neue Mail (**Mail: Ticket Created / Limit Reached / Received**), und bei manueller Bearbeitung geht eine Kopie mit Reply-To auf den Absender an das Team-Postfach (**Forward to Team**)
 
 ### Statusänderung → Benachrichtigung ([`status-notification.workflow.json`](n8n/status-notification.workflow.json))
 
@@ -100,6 +105,7 @@ Dieser Weg braucht keinen öffentlich erreichbaren Webhook: n8n kann im Heimnetz
 JoinV2AI/
 ├── index.html              # Welcome-Seite (Rollenwahl)
 ├── stakeholder.html        # Infoseite für Stakeholder
+├── request.html            # Formular „Your Request“ (schreibt nach /webRequests)
 ├── login.html              # Login & Sign-up
 ├── summary-board.html      # Dashboard
 ├── board.html              # Kanban-Board
@@ -110,7 +116,7 @@ JoinV2AI/
 ├── style.css               # Globale Styles
 ├── scripts/
 │   ├── firebase.js         # Firebase-Konfiguration (nicht im Repo)
-│   ├── addtask/  board/  contacts/  login/  stakeholder/  summary/
+│   ├── addtask/  board/  contacts/  login/  request/  stakeholder/  summary/
 │   └── templates.js        # HTML-Templates
 ├── style/                  # Seiten- und Responsive-Styles
 ├── assets/                 # Icons, Bilder, Fonts
