@@ -36,6 +36,7 @@ function updateSignUpBtnState() {
   if (!signUpBtn) return;
   let enabled = !!confirmEl?.classList.contains("checked");
   signUpBtn.style.pointerEvents = enabled ? "" : "none";
+  signUpBtn.classList.toggle("button-inactive", !enabled);
 }
 
 /**

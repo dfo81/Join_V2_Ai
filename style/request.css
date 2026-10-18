@@ -1,0 +1,276 @@
+html,
+body {
+  width: 100%;
+}
+
+body {
+  min-height: 100vh;
+  height: auto;
+  background-color: #fff;
+}
+
+.request-page {
+  position: relative;
+  display: grid;
+  /* equal outer rows keep the card centered on the page, like on the welcome page */
+  grid-template-rows: 1fr auto 1fr;
+  /* without minmax the column grows to the card's 652px and the page scrolls sideways on mobile */
+  grid-template-columns: minmax(0, 1fr);
+  flex: 1;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+/* top row stays free for the logo (logo bottom 202px minus the card's top padding) */
+.request-page::before {
+  content: "";
+  min-height: 154px;
+}
+
+.request-logo {
+  position: absolute;
+  top: 80px;
+  left: 77px;
+  display: flex;
+}
+
+.request-logo img {
+  width: 100px;
+  height: auto;
+}
+
+/* main */
+.request-main {
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+  padding: 48px 16px;
+}
+
+.request-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 39px;
+  box-sizing: border-box;
+  width: 652px;
+  max-width: 100%;
+  padding: 48px 115px;
+  border-radius: 30px;
+  background-color: #fff;
+  box-shadow: var(--card-shadow);
+}
+
+.request-back {
+  position: absolute;
+  top: 64px;
+  left: 48px;
+  display: flex;
+  border-radius: 50%;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.request-back img {
+  width: 32px;
+  height: 32px;
+}
+
+.request-back:hover {
+  background-color: #e3f1fe;
+}
+
+.request-title-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.request-title {
+  margin: 0;
+  font-size: 47px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  color: #000;
+}
+
+.request-title-border {
+  width: 150px;
+  height: 3px;
+  background-color: var(--accent-blue);
+}
+
+/* form */
+.request-form {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  width: 100%;
+}
+
+.request-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.request-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 21px;
+  border-bottom: 1px solid var(--input-gray);
+  transition: border-color 0.2s;
+}
+
+.request-field:hover,
+.request-field:focus-within {
+  border-color: var(--main-color);
+}
+
+.request-field input,
+.request-field textarea {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  font-size: 19px;
+  line-height: 23px;
+  color: var(--text-dark);
+  background: transparent;
+}
+
+/* grows with the text instead of scrolling */
+.request-field textarea {
+  resize: none;
+  field-sizing: content;
+  min-height: 23px;
+  overflow: hidden;
+}
+
+.request-field input::placeholder,
+.request-field textarea::placeholder {
+  color: var(--input-gray);
+}
+
+.request-field.invalid {
+  border-color: var(--error-color);
+}
+
+.request-field img {
+  width: 24px;
+  height: 24px;
+}
+
+.request-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.request-message {
+  flex: 1;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--error-color);
+}
+
+.request-message.success {
+  color: var(--main-color);
+}
+
+.request-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.request-actions button {
+  flex-shrink: 0;
+}
+
+.request-actions button:disabled {
+  opacity: 0.6;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* footer */
+.request-footer {
+  align-self: end;
+  gap: 8px;
+  padding-bottom: 43px;
+}
+
+.request-footer a {
+  padding: 8px;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--menu-color);
+  text-decoration: none;
+}
+
+.request-footer a:hover {
+  color: var(--main-color);
+}
+
+/* mobile, 428px Figma frame */
+@media (max-width: 768px) {
+  .request-logo {
+    top: 38px;
+    left: 38px;
+  }
+
+  .request-logo img {
+    width: 64px;
+  }
+
+  .request-page::before {
+    min-height: 159px;
+  }
+
+  .request-main {
+    padding: 48px 19px;
+  }
+
+  .request-card {
+    gap: 32px;
+    padding: 32px 16px;
+  }
+
+  .request-back {
+    top: 40px;
+    left: 16px;
+  }
+
+  /* keeps room for the back arrow on both sides so the title stays centered */
+  .request-title-box {
+    box-sizing: border-box;
+    padding: 0 36px;
+  }
+
+  .request-title {
+    font-size: clamp(28px, 9vw, 40px);
+  }
+
+  .request-title-border {
+    width: 100px;
+  }
+
+  .request-field {
+    padding: 12px 8px;
+  }
+
+  .request-footer a {
+    font-size: 16px;
+  }
+}

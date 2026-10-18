@@ -104,11 +104,15 @@
   .main-section {
     margin-top: 10px;
   }
-  .logo-wrapper {
-    display: none;
-  }
   .bottom-section {
     height: auto;
+  }
+}
+
+/* short portrait screens: the logo would cover the login box, in landscape it fits beside it */
+@media (max-height: 830px) and (orientation: portrait) {
+  .logo-wrapper {
+    display: none;
   }
 }
 

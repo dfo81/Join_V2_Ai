@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Join App</title>
+  <link rel="shortcut icon" href="./assets/icons/login/logo_blue.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./style/welcome.css" />
+  <link rel="stylesheet" href="./style/request.css" />
+
+  <script src="./scripts/request/request.module.js" type="module"></script>
+</head>
+
+<body>
+  <div class="request-page">
+    <a href="./index.html" class="request-logo">
+      <img src="./assets/icons/login/logo_blue.svg" alt="Logo Join" />
+    </a>
+
+    <main class="request-main">
+      <section class="request-card">
+        <a href="./stakeholder.html" class="request-back" aria-label="Back to stakeholder page">
+          <img src="./assets/general_elements/icons/arrow_left.svg" alt="" />
+        </a>
+
+        <div class="request-title-box">
+          <h1 class="request-title">Your Request</h1>
+          <div class="request-title-border"></div>
+        </div>
+
+        <form class="request-form" id="request-form" novalidate>
+          <div class="request-fields">
+            <label class="request-field">
+              <input type="text" name="name" placeholder="Name" maxlength="100" autocomplete="name" required />
+              <img src="./assets/icons/login/person.svg" alt="" />
+            </label>
+            <label class="request-field">
+              <input type="email" name="email" placeholder="Email" maxlength="200" autocomplete="email" required />
+              <img src="./assets/icons/login/mail.svg" alt="" />
+            </label>
+            <label class="request-field">
+              <input type="text" name="subject" placeholder="Subject" maxlength="150" required />
+            </label>
+            <label class="request-field">
+              <textarea name="message" placeholder="Your Request..." rows="1" maxlength="4000" required></textarea>
+            </label>
+            <!-- honeypot against bots, stays empty for humans -->
+            <input class="request-honeypot" type="text" name="website" tabindex="-1" autocomplete="off"
+              aria-hidden="true" />
+          </div>
+
+          <div class="request-actions">
+            <p class="request-message" id="request-message" role="status"></p>
+            <button type="submit" class="base-button button-small welcome-button-blue" id="request-submit">
+              Send request
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="request-footer">
+      <a href="./privacy-policy.html">Privacy Policy</a>
+      <a href="./legal-notice.html">Legal Notice</a>
+    </footer>
+  </div>
+</body>
+
+</html>

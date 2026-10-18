@@ -207,6 +207,7 @@ function setTitleAndDescription(task) {
   let descEl = document.getElementById("addtask-textarea");
   if (titleEl) (titleEl).value = task.title || "";
   if (descEl) (descEl).value = task.description || "";
+  if (typeof autoGrowDescription === "function") autoGrowDescription(descEl);
 }
 
 /** Set the datepicker value from task.dueDate (supports Date/number/string). */

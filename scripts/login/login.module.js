@@ -101,7 +101,7 @@ function showSignUpSuccessUI() {
     if (layout) layout.style.opacity = "1";
     typeof showLoginForm === "function" && showLoginForm();
     confirmCheckbox?.classList.toggle("checked");
-    if (signUpButton) signUpButton.style.pointerEvents = "";
+    typeof updateSignUpBtnState === "function" && updateSignUpBtnState();
   }, 1200);
 }
 

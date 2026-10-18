@@ -5,6 +5,23 @@
  * resetPrioritySelection, saveEditedSubtask, picker (date picker instance).
  */
 document.addEventListener('addtask:template-ready', bindDatepickerClick);
+document.addEventListener('input', onDescriptionInput);
+
+/**
+ * Grows the description textarea with its text (fallback for browsers without CSS field-sizing).
+ * The min-height from the stylesheet stays the lower limit.
+ * @param {HTMLTextAreaElement|null} el
+ */
+function autoGrowDescription(el){
+  if (!el || CSS.supports('field-sizing', 'content')) return;
+  el.style.height = 'auto';
+  el.style.height = `${el.scrollHeight + el.offsetHeight - el.clientHeight}px`;
+}
+
+/** Resize the description while typing. @param {Event} e */
+function onDescriptionInput(e){
+  if (e.target.id === 'addtask-textarea') autoGrowDescription(e.target);
+}
 
 // --- Module-level element refs ---
 /** @type {HTMLElement|null} */

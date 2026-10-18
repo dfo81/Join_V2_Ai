@@ -306,10 +306,6 @@
         scrollbar-width: thin;
     }
 
-    .subtasks-container {
-        max-height: 60px;
-    }
-
     .task-overlay-content {
         padding: 30px;
     }

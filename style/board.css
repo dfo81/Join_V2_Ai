@@ -372,8 +372,9 @@
   justify-content: center;
 }
 
+/* fits one or two contacts (2 × 40px + 4px gap), scrolls from the third on */
 .members {
-  height: 103px;
+  max-height: 84px;
   scrollbar-width: thin;
 }
 
