@@ -183,8 +183,8 @@ docker compose up -d
 - In `docker-compose.yml` `N8N_HOST` und `WEBHOOK_URL` auf die eigene Adresse anpassen
 - In Gmail die Labels **„erledigt“** und **„zu bearbeiten“** anlegen
 - Beide Workflows importieren (**Workflows → Import from File**)
-- Credentials für **Gmail**, **Claude API** (Header Auth, Header-Name `x-api-key`, Key aus der Claude Console) und **Firebase** (Google Service Account) hinterlegen
-- In den Nodes **„Label: Done“** und **„Label: Manual Review“** das Gmail-Label **„erledigt“** bzw. **„zu bearbeiten“** auswählen
+- Credentials für **Gmail**, **Anthropic** (API-Key aus der Claude Console, im Node **„Claude Haiku 4.5“**) und **Firebase** (Google Service Account) hinterlegen
+- Im Node **„Compose Reply“** die IDs der Gmail-Labels **„erledigt“** und **„zu bearbeiten“** in `LABEL_DONE` bzw. `LABEL_MANUAL_REVIEW` eintragen (die IDs liefert z. B. ein Gmail-Node mit *Label → Get Many*)
 - Die Firebase-URLs in den HTTP-Nodes auf die eigene Datenbank ändern
 - Beide Workflows aktivieren bzw. veröffentlichen
 
