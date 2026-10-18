@@ -272,16 +272,16 @@ function setUsernameElement(name) {
 }
 
 /**
- * Sets the greeting element's text content and styles.
+ * Sets the greeting text. The comma only separates greeting and name, so guests get none.
+ * Size and weight come from the stylesheet (always bold).
  * @param {string} greeting - The greeting text.
+ * @param {boolean} hasName - Whether a username is shown next to the greeting.
  * @returns {void}
  */
-function setGreetingElement(greeting) {
+function setGreetingElement(greeting, hasName) {
   const el = document.getElementById("greeting");
   if (!el) return;
-  el.textContent = greeting + ",";
-  el.style.fontSize = "48px";
-  el.style.fontWeight = "400";
+  el.textContent = hasName ? `${greeting},` : greeting;
 }
 
 /**
@@ -304,7 +304,7 @@ function setInitialsFromUser(user) {
 function updateHeaderForUser(user) {
   const name = getUserName(user);
   setUsernameElement(name);
-  setGreetingElement(getGreeting());
+  setGreetingElement(getGreeting(), name !== "User");
   setInitialsFromUser(user);
 }
 

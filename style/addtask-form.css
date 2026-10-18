@@ -100,7 +100,9 @@
 .addtask-main-content textarea {
   width: 440px;
   resize: vertical;
-  height: 103px;
+  /* grows with the text, the former fixed height is the minimum */
+  field-sizing: content;
+  min-height: 103px;
   padding: 16px;
   box-sizing: border-box;
   outline: none;

@@ -333,6 +333,7 @@ function capitalize(str) {
 function renderAssignedContacts(task) {
   let contacts = resolveContacts(task);
   retryUntilFound(OVERLAY_MEMBERS_ID, (container)=>{
+    container.closest(".assigned-to")?.classList.toggle("d-none", !contacts.length);
     renderContactsTo((container), contacts);
   });
 }
