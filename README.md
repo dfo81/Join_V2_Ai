@@ -62,26 +62,27 @@ flowchart LR
     Q --> T[Every Minute]
     B --> C{Tageslimit<br/>erreicht?}
     T --> C
-    C -- nein --> D[🤖 Claude<br/>extrahiert Task]
+    C -- nein --> D[🤖 Claude<br/>LLM Chain]
     D --> E[(Firebase<br/>Spalte Triage)]
-    E --> F[✉️ Bestätigung<br/>Label „erledigt“]
-    C -- ja --> G[✉️ Limit-Hinweis<br/>Label „zu bearbeiten“]
+    E --> R[✉️ Compose Reply]
+    C -- ja --> R
     D -. Fehler .-> L[(Firebase<br/>errorLog)]
     E -. Fehler .-> L
-    L --> H[✉️ Eingangsbestätigung<br/>Label „zu bearbeiten“]
+    L --> R
+    R --> M[Antwort / Mail<br/>+ Label]
 ```
 
 1. **Gmail Trigger** – fragt jede Minute den Posteingang ab (eigene Mails werden ignoriert)
 1. **Every Minute (Web Requests) / Get Web Requests / Split Web Requests** – holt die Anfragen aus dem Formular (`/webRequests` in Firebase) und bringt sie in dieselbe Form wie eine Mail; **Delete Web Request** entfernt sie aus der Warteschlange
-2. **Prepare Email** – liest Absender, Betreff und Text aus und baut die KI-Anfrage
+2. **Prepare Email** – liest Absender, Betreff und Text aus
 3. **Get Request Counter / Check Limit / Within Limit?** – prüft das Tageslimit von 10 Requests
-4. **Claude: Extract Task** – bestimmt (Claude Haiku 4.5) Titel, Beschreibung, Kategorie (User Story, Technical task, Bug), Priorität und Deadline; bis zu 5 Versuche bei Überlastung
+4. **Extract Task** (Basic LLM Chain mit **Claude Haiku 4.5** und **Task Schema** als Structured Output Parser) – bestimmt Titel, Beschreibung, Kategorie (User Story, Technical task, Bug), Priorität und Deadline; bis zu 5 Versuche bei Überlastung
 5. **Build Task** – prüft die KI-Antwort, ergänzt den Hinweis *„This ticket was AI-generated.“* und setzt den Absender als Ersteller
 6. **Create Task in Firebase / Increment Request Counter** – legt den Task in **Triage** an und zählt den Request
-7. **Reply: Ticket Created → Label: Done** – Bestätigung an den Absender, Mail wird nach „erledigt“ verschoben
-8. **Log Error** – schreibt Fehler der KI oder von Firebase mit Zeit, Schritt, HTTP-Status, Fehlermeldung, Absender und Betreff nach `/errorLog` in Firebase
-9. **Reply: Limit Reached** bzw. bei Fehlern **Reply: Received → Label: Manual Review** – Hinweis an den Absender, Mail wird nach „zu bearbeiten“ verschoben
-10. **From Web Form?** – Formular-Requests haben keine Mail zum Antworten: Sie bekommen eine neue Mail (**Mail: Ticket Created / Limit Reached / Received**), und bei manueller Bearbeitung geht eine Kopie mit Reply-To auf den Absender an das Team-Postfach (**Forward to Team**)
+7. **Log Error** – schreibt Fehler der KI oder von Firebase mit Zeit, Schritt, HTTP-Status, Fehlermeldung, Absender und Betreff nach `/errorLog` in Firebase
+8. **Compose Reply** – baut für alle drei Fälle (Ticket angelegt, Limit erreicht, Fehler) Betreff, Text und Label an einer Stelle
+9. **From Web Form? → Reply to Mail / Send Mail** – Mails werden im Thread beantwortet, Formular-Requests bekommen eine neue Mail mit ihrer Anfrage als Zitat
+10. **Set Label** – setzt in einem Schritt „erledigt“ bzw. „zu bearbeiten“ und nimmt die Mail aus dem Posteingang. Alles, was manuell bearbeitet werden muss, liegt damit unter „zu bearbeiten“ (bei Formular-Requests die gesendete Antwort mit Zitat)
 
 ### Statusänderung → Benachrichtigung ([`status-notification.workflow.json`](n8n/status-notification.workflow.json))
 
@@ -96,7 +97,7 @@ Dieser Weg braucht keinen öffentlich erreichbaren Webhook: n8n kann im Heimnetz
 
 - **Frontend:** Vanilla HTML, CSS und JavaScript (ES-Module), kein Build-Schritt
 - **Backend:** Firebase Authentication und Realtime Database (SDK 10.12 per CDN)
-- **Automatisierung:** n8n (Docker-Container auf einem privaten NAS) mit Gmail- und Claude-API-Anbindung
+- **Automatisierung:** n8n (Docker-Container auf einem privaten NAS) mit Gmail- und Claude-Anbindung (LLM Chain)
 - **Fonts:** Inter und Open Sans (lokal eingebunden)
 
 ## Projektstruktur
